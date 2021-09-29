@@ -2,6 +2,7 @@
 venv/*
 resources/100k_synthea_covid19_csv/*
 
+
 SYM_LIST.txt
 manual_input/*.txt
 !manual_input/.gitkeep
@@ -12,6 +13,7 @@ db.*
 
 # Private configurations #
 config.json
+.vscode/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
