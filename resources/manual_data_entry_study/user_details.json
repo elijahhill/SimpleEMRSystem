@@ -1,0 +1,7 @@
+{
+    "testUser1": {
+        "last_accessed": null,
+        "cases_assigned": ["10000101"],
+        "cases_completed": []
+    }
+}
