@@ -175,7 +175,7 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
     load_dir = os.path.join(dir_resources, study_id)
     dict_case_2_details = json.load(open(os.path.join(load_dir, 'case_details.json'), 'r')) 
     dict_data_layout = json.load(open(os.path.join(load_dir, 'data_layout.json'), 'r')) 
-    dict_med_2_details = json.load(open(os.path.join(load_dir, 'med_details.json'), 'r'))    
+    # dict_med_2_details = json.load(open(os.path.join(load_dir, 'med_details.json'), 'r'))    
     dict_user_2_details = json.load(open(os.path.join(load_dir, 'user_details.json'), 'r'))  
     dict_variable_2_details = json.load(open(os.path.join(load_dir, 'variable_details.json'), 'r'))
  
@@ -202,7 +202,7 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
         'instructions': instructions[dict_case_2_details[case_id][time_step]["instruction_set"]],
         'dict_case_details': dict_case_2_details[case_id],
         'dict_data_layout': dict_data_layout,
-        'dict_med_2_details': dict_med_2_details,
+        # 'dict_med_2_details': dict_med_2_details,
         'dict_user_details': dict_user_2_details[user_id],
         'dict_variable_2_details': dict_variable_2_details,
         'dict_demographics': dict_demographics,
@@ -213,7 +213,7 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
         'list_1_2': [1, 2],
         'list_3_4_5_6': [3, 4, 5, 6]
     }
-    return HttpResponse(template.render(context_dict)) 
+    return HttpResponse(template.render(context_dict))
     
 '''
 def index_synthea(request, user_id=False):

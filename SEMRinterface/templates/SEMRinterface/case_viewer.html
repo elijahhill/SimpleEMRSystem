@@ -95,7 +95,7 @@
         <div class="col-lg-3 vitmedbox scroll-box">
 
             <div class="col-lg-12 half-vitmedbox scroll-box" id="vit_tracking">
-                {% for group in dict_data_layout.physio_panel_groups %}
+                {% for group in dict_data_layout.risk_score_and_vitals %}
 				<div class="lab-group col-md-12" id="{{group}}">
                     <div class="charttitlerow"  onclick="remove_vertical_point(true)">
                         {{group}}
@@ -120,7 +120,7 @@
 		<!-- Med panel -->
 		<div class="col-lg-3 vitmedbox scroll-box">
             <div class="col-lg-12 medbox scroll-box" id="med_tracking">
-				{% for group in dict_data_layout.med_panel_groups %}
+				{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 				<div class="lab-group col-md-12" id="{{group}}">
 					<div class="charttitlerow"  onclick="remove_vertical_point(true)">
 						{{group}}
@@ -131,36 +131,6 @@
             </div>
         </div>
 		<!-- end of Med panel -->
-
-		<!-- Lab panel -->
-        <div class="col-lg-6 labbox scroll-box" id="lab_tracking">
-			{% for group in dict_data_layout.lab_panel_groups %}
-			<div class="lab-group col-md-12" id="{{group}}">
-				<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-					{{group}}
-				</div>
-				<!-- chart rows will be added here via js -->
-			</div>
-			{% endfor %}
-<div> 	
-		{% for ob_code, content in dict_observations.items %}
-			<script>
-			{% autoescape off %}
-			add_observation_chart("{{ob_code}}", {{content}}, {{dict_variable_2_details|keyvalue:ob_code}}, {{ dict_data_layout.physio_panel_groups }})
-			{% endautoescape %}
-			</script>
-		{% endfor %}
-		
-		{% for med_code, content in dict_medications.items %}		
-			<script>
-			{% autoescape off %}
-			add_medication_chart("{{med_code}}", {{content}}, {{dict_med_2_details|keyvalue:med_code}})
-			{% endautoescape %}
-			</script>
-		{% endfor %}
-</div>
-        </div>
-		<!-- end of Lab panel -->
 
 		<!-- Lower time row --> 
 		{% for i in list_1_2 %}
@@ -198,7 +168,7 @@
     <div class="col-lg-4 notetaskbox scroll-box">
         <div class="col-lg-12 notebox scroll-box">
             <ul class="nav nav-tabs nav-tabs-justified">
-			{% for group in dict_data_layout.note_panel_groups %}
+			{% for group in dict_data_layout.chemistry %}
 				{% if group in dict_notes %}
 				<li class="nav-track" id="{{group}}tab">
 				{% else %}
