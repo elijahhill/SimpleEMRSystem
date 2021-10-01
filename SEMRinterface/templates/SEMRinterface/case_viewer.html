@@ -164,6 +164,16 @@
     </div>
 	<!-- end of Physio, Med, and Lab Panels --> 
 
+    <div> 	
+		{% for ob_code, content in dict_observations.items %}
+			<script>
+			{% autoescape off %}
+			add_observation_chart("{{ob_code}}", {{content}}, {{dict_variable_2_details|keyvalue:ob_code}}, {{ dict_data_layout.risk_score_and_vitals }})
+			{% endautoescape %}
+			</script>
+		{% endfor %}
+    </div>
+
 	<!-- Note Panel -->
     <div class="col-lg-4 notetaskbox scroll-box">
         <div class="col-lg-12 notebox scroll-box">
