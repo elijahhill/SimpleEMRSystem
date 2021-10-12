@@ -1,7 +1,7 @@
 {
     "title_bar": ["id", "age", "sex", "height", "weight", "bmi", "race"],
-    "risk_score_and_vitals": ["HR", "RR", "BP", "SAO2", "Temperature"],
+    "risk_score_and_vitals": ["HR", "RR", "BP", "SaO2", "Temperature"],
     "neurology": ["AVPU"],
-    "blood_gas_cbc_lactate": ["NA", "pC02", "HgB", "WBC", "Platlets", "Lactate"],
+    "blood_gas_cbc_lactate": ["Na", "pC02", "HgB", "WBC", "Platelets", "Lactate"],
     "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Gluc_Ser", "Bun", "Bun_Cr_Ratio", "Calcium"]
 }

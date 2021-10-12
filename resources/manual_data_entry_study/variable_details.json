@@ -24,7 +24,7 @@
         "units": ""
     },
     "VTHR": {
-        "display_group": "Vitals",
+        "display_group": "HR",
         "display_name": "HR",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -192,7 +192,7 @@
         "units": ""
     },
     "VTTEMA": {
-        "display_group": "Vitals",
+        "display_group": "Temperature",
         "display_name": "Temperature",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -632,7 +632,7 @@
         "units": ""
     },
     "K": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Potassium",
         "display_name": "Potassium",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -1504,7 +1504,7 @@
         "units": ""
     },
     "HGB": {
-        "display_group": "CBC",
+        "display_group": "HgB",
         "display_name": "Hgb",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -1560,7 +1560,7 @@
         "units": ""
     },
     "VTRR": {
-        "display_group": "Vitals",
+        "display_group": "RR",
         "display_name": "RR",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -2184,8 +2184,8 @@
         "units": ""
     },
     "VTDIAV": {
-        "display_group": "Vitals",
-        "display_name": "Top Left Text",
+        "display_group": "BP",
+        "display_name": "BP",
         "dflt_normal_ranges": "117/91",
         "dflt_y_axis_ranges": [0, 100],
         "original_name": "Diastolic BP",
@@ -2712,7 +2712,7 @@
         "units": ""
     },
     "UNA": {
-        "display_group": "Urinalysis",
+        "display_group": "Sodium",
         "display_name": "Na",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -2848,7 +2848,7 @@
         "units": ""
     },
     "WBC": {
-        "display_group": "CBC",
+        "display_group": "WBC",
         "display_name": "WBC",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -3240,7 +3240,7 @@
         "units": ""
     },
     "LACT": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Lactate",
         "display_name": "Lactate",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -3752,7 +3752,7 @@
         "units": ""
     },
     "BUN": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Bun",
         "display_name": "BUN",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -3776,7 +3776,7 @@
         "units": ""
     },
     "PCO2": {
-        "display_group": "Blood_Gases",
+        "display_group": "pC02",
         "display_name": "\"PCO2, Arterial\"",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -4048,7 +4048,7 @@
         "units": ""
     },
     "PLT": {
-        "display_group": "CBC",
+        "display_group": "Platelets",
         "display_name": "Platelets",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -4160,7 +4160,7 @@
         "units": ""
     },
     "AGAP": {
-        "display_group": "Other_Chemistry",
+        "display_group": "Anion_Gap",
         "display_name": "Anion Gap",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -4288,7 +4288,7 @@
         "units": ""
     },
     "CL": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Chloride",
         "display_name": "Chloride",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -4304,7 +4304,7 @@
         "units": ""
     },
     "CA": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Calcium",
         "display_name": "Calcium",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -5104,7 +5104,7 @@
         "units": ""
     },
     "VTSO2A": {
-        "display_group": "Vitals",
+        "display_group": "SaO2",
         "display_name": "SaO2",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
@@ -5952,7 +5952,7 @@
         "units": ""
     },
     "NA": {
-        "display_group": "Basic_Chemistry",
+        "display_group": "Sodium",
         "display_name": "Sodium",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],

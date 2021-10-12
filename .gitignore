@@ -65,3 +65,30 @@ coverage.xml
 
 # Sphinx documentation
 docs/_build/
+SEMRenv/pyvenv.cfg
+SEMRenv/Scripts/activate
+SEMRenv/Scripts/activate.bat
+SEMRenv/Scripts/Activate.ps1
+SEMRenv/Scripts/autopep8.exe
+SEMRenv/Scripts/deactivate.bat
+SEMRenv/Scripts/easy_install-3.6.exe
+SEMRenv/Scripts/easy_install.exe
+SEMRenv/Scripts/f2py.exe
+SEMRenv/Scripts/pip.exe
+SEMRenv/Scripts/pip3.6.exe
+SEMRenv/Scripts/pip3.exe
+SEMRenv/Scripts/pycodestyle.exe
+SEMRenv/Scripts/python.exe
+SEMRenv/Scripts/python3.dll
+SEMRenv/Scripts/python36.dll
+SEMRenv/Scripts/pythonw.exe
+SEMRenv/Scripts/runxlrd.py
+SEMRenv/Scripts/sqlite3.dll
+SEMRenv/Scripts/tcl86t.dll
+SEMRenv/Scripts/tk86t.dll
+SEMRenv/Scripts/vcruntime140.dll
+SEMRenv/Scripts/conf.exe
+SEMRenv/Scripts/django-admin.exe
+SEMRenv/Scripts/django-admin.py
+SEMRenv/Scripts/pop-seed.exe
+SEMRenv/Scripts/sqlformat.exe
