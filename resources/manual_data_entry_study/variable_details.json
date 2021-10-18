@@ -1,4 +1,36 @@
 {
+    "AVPU": {
+        "display_group": "AVPU",
+        "display_name": "AVPU",
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 0],
+        "original_name": "AVPU",
+        "units": ""
+    },
+    "GLSR": {
+        "display_group": "Gluc_Ser",
+        "display_name": "Glucose Serum",
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 0],
+        "original_name": "Glucose Serum",
+        "units": ""
+    },
+    "BCR": {
+        "display_group": "Bun_Cr_Ratio",
+        "display_name": "BUN-Creatine Ratio",
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 0],
+        "original_name": "BUN-Creatine Ratio",
+        "units": ""
+    },
+    "UNA": {
+        "display_group": "Sodium",
+        "display_name": "Na",
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 0],
+        "original_name": "Na",
+        "units": ""
+    },
     "TRICY": {
         "display_group": "Drug_Levels",
         "display_name": "Tricyclic Antidepressants",
@@ -2709,14 +2741,6 @@
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
         "original_name": "Morphology",
-        "units": ""
-    },
-    "UNA": {
-        "display_group": "Sodium",
-        "display_name": "Na",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "Na",
         "units": ""
     },
     "BETA": {

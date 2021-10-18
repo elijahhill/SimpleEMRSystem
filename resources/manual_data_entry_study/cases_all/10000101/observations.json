@@ -20,6 +20,69 @@
         "units": "mm",
         "discrete_nominal_to_yIndex": []
     },
+    "AVPU": {
+        "display_text": "AVPU",
+        "numeric_lab_data": [{
+            "zones": [{
+                "color": "#000000"
+            }],
+            "marker": {
+                "symbol": "circle"
+            },
+            "data": [
+                [1350893940000.0, 36.0],
+                [1352673000000.0, 27.0],
+                [1352733600000.0, 33.0]
+            ],
+            "name": "numeric_values"
+        }],
+        "discrete_lab_data": [],
+        "y_axis_ranges": [27.0, 68.0],
+        "units": "",
+        "discrete_nominal_to_yIndex": []
+    },
+    "GLSR": {
+        "display_text": "Glucose Serum",
+        "numeric_lab_data": [{
+            "zones": [{
+                "color": "#000000"
+            }],
+            "marker": {
+                "symbol": "circle"
+            },
+            "data": [
+                [1350893940000.0, 36.0],
+                [1352673000000.0, 27.0],
+                [1352733600000.0, 33.0]
+            ],
+            "name": "numeric_values"
+        }],
+        "discrete_lab_data": [],
+        "y_axis_ranges": [27.0, 68.0],
+        "units": "",
+        "discrete_nominal_to_yIndex": []
+    },
+    "BCR": {
+        "display_text": "BUN Creatine Ratio",
+        "numeric_lab_data": [{
+            "zones": [{
+                "color": "#000000"
+            }],
+            "marker": {
+                "symbol": "circle"
+            },
+            "data": [
+                [1350893940000.0, 36.0],
+                [1352673000000.0, 27.0],
+                [1352733600000.0, 33.0]
+            ],
+            "name": "numeric_values"
+        }],
+        "discrete_lab_data": [],
+        "y_axis_ranges": [27.0, 68.0],
+        "units": "",
+        "discrete_nominal_to_yIndex": []
+    },    
     "RBCFLU": {
         "display_text": "RBC",
         "numeric_lab_data": [{
