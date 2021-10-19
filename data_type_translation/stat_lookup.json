@@ -6,7 +6,12 @@
         "internal_name": "VTRR"
     },
     "sbp": {
-        "internal_name": "VTDIAV"
+        "internal_name": "VTDIAV",
+        "index": 0
+    },
+    "dbp": {
+        "internal_name": "VTDIAV",
+        "index": 1
     },
     "o2sat": {
         "internal_name": "VTSO2A"
@@ -21,7 +26,7 @@
         "internal_name": "PCO2V"
     },
     "hb": {
-        "internal_name": "HgB"
+        "internal_name": "HGB"
     },
     "wbc": {
         "internal_name": "WBC"
@@ -47,7 +52,7 @@
     "bun": {
         "internal_name": "BUN"
     },
-    "creatine": {
+    "creatinine": {
         "internal_name": "CREAT"
     },
     "bun_cr_ratio": {
