@@ -10,7 +10,7 @@
 }
 
 .notebox{
-    height: 70.3vh;
+    /* height: 70.3vh; */
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
@@ -25,7 +25,7 @@
 }
 
 .notetaskbox{
-    height: 95.3vh;
+    /* height: 95.3vh; */
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/

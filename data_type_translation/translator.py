@@ -45,7 +45,7 @@ if(translation != None):
 else:
     raise Exception()
 
-one_patient = df[df["patient_id"] == 610044]
+one_patient = df[df["patient_id"] == 781480]
 
 for key in keys:
 
