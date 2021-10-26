@@ -1,4 +1,7 @@
 {
+    "ecart percentile": {
+        "internal_name": "ECART"
+    },
     "hr": {
         "internal_name": "VTHR"
     },

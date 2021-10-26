@@ -7,6 +7,14 @@
         "original_name": "AVPU",
         "units": ""
     },
+    "ECART": {
+        "display_group": "ECART",
+        "display_name": "ECART",
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 0],
+        "original_name": "ECART",
+        "units": ""
+    },
     "GLSR": {
         "display_group": "Gluc_Ser",
         "display_name": "Glucose Serum",
