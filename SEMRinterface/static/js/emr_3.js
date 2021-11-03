@@ -152,11 +152,21 @@ function updateExtremes(){
         }else{
             currentChart.xAxis[0].setExtremes(selectedMin, selectedMax);
             $("div[id='"+currentChart+"']").show();
-            currentChart.update({
-                credits: {
-                    text: get_max_point(currentChart.series[0].data, selectedMax)
-                }
-            });
+            if(currentChart.renderTo.id !== "chartVTDIAV"){
+                currentChart.update({
+                    credits: {
+                        text: get_max_point(currentChart.series[0].data, selectedMax)
+                    }
+                });
+            }
+            else{
+                currentChart.update({
+                    credits: {
+                        text: `${get_max_point(currentChart.series[1].data, selectedMax)} / ${get_max_point(currentChart.series[0].data, selectedMax)}`
+                    }
+                })
+            }
+            
             currentChart.reflow();
         }
     }
