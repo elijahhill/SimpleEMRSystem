@@ -2269,25 +2269,6 @@
         "units": "mg/dL",
         "discrete_nominal_to_yIndex": []
     },
-    "UNA": {
-        "display_text": "Na",
-        "numeric_lab_data": [{
-            "zones": [{
-                "color": "#000000"
-            }],
-            "marker": {
-                "symbol": "circle"
-            },
-            "data": [
-                [1352678100000.0, 35.0]
-            ],
-            "name": "numeric_values"
-        }],
-        "discrete_lab_data": [],
-        "y_axis_ranges": [10.0, 104.0],
-        "units": "mmol/L",
-        "discrete_nominal_to_yIndex": []
-    },
     "BETA": {
         "display_text": "Beta Globulin",
         "numeric_lab_data": [{

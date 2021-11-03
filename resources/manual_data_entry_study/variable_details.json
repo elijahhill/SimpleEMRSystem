@@ -31,14 +31,6 @@
         "original_name": "BUN-Creatine Ratio",
         "units": ""
     },
-    "UNA": {
-        "display_group": "Sodium",
-        "display_name": "Na",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "Na",
-        "units": ""
-    },
     "TRICY": {
         "display_group": "Drug_Levels",
         "display_name": "Tricyclic Antidepressants",
