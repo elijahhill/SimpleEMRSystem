@@ -3,18 +3,33 @@ import pandas as pd
 import json
 from pathlib import Path
 from pandas.core.frame import DataFrame
+from os import path
 import PySimpleGUI as sg
 
-class StudyCreator:
+class PathContainer:
     def __init__(self):
-        self.minimum_time = 1352687400000
-        self.maximum_time = 1352946600000
+        pass
+
+    def add_excel_path(self, excel_path: str):
+        self.excel_path = excel_path
+
+    def add_output_folder(self, output_folder: str):
+        self.output_folder = output_folder
+
+    def get_excel_path(self):
+        return self.excel_path
+
+    def get_output_folder(self):
+        return self.output_folder
+
+    
+class StudyCreator:
 
     def __read_data(self):
 
-        data_path = self.__get_data_path()
+        data_paths = self.__get_data_path()
 
-        df = pd.read_excel(data_path, engine="openpyxl")
+        df = pd.read_excel(data_paths.get_excel_path(), engine="openpyxl")
 
         df["ecart percentile"] = df["ecart percentile"].round(1)
 
@@ -29,23 +44,37 @@ class StudyCreator:
         else:
             raise Exception("Translation file is empty")
 
-    def __get_data_path(self):
-        ret_value = ""
+    def __get_data_path(self) -> PathContainer:
+        dirname = path.dirname(__file__)
+        json_paths = path.join(dirname, "./paths.json")
+        with open(json_paths) as paths_fp:
+            paths = json.load(paths_fp)
+
+        path_container = PathContainer()
         
-        # sg.theme("DarkTeal2")
-        layout = [[sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(),
-                            sg.FileBrowse(key="-IN-")], [sg.Button("Submit")]]
-        window = sg.Window('Locate File', layout, size=(600, 150))
+        layout = [[sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(default_text=paths["excel_path"]),
+                            sg.FileBrowse(key="-ExcelFile-")], 
+                  [sg.T("")], [sg.Text("Choose the output folder "), sg.Input(default_text=paths["output_path"]),
+                               sg.FileBrowse(key="-OutputFolder-")], [sg.Button("Submit")]]
+        window = sg.Window('Locate File', layout)
         
         while True:
             event, values = window.read()
             if event == sg.WIN_CLOSED or event == "Exit":
                 break
             elif event == "Submit":
-                ret_value = values["-IN-"]
+                # TODO: Need to add checks to determine file validity
+                path_container.add_excel_path(values["-ExcelFile-"])
+                path_container.add_output_folder(values["-OutputFolder-"])
+
+                paths["excel_path"] = path_container.get_excel_path()
+                paths["output_path"] = path_container.get_output_folder()
+                with open(json_paths, "w") as paths_fp:
+                    json.dump(paths, paths_fp)
+
                 window.close()
 
-        return ret_value
+        return path_container
     
     def __create_user_details(self, user_names: list, patients: list):
         all_user_details = {}
@@ -58,8 +87,25 @@ class StudyCreator:
             all_user_details[user] = user_details
         return all_user_details
 
-    def __create_case_details(self):
-        pass
+    def __create_case_details(self, case_ids: set, min_time: float=1352687400000.0, max_time: float=135294660000.0):
+        all_case_details = {}
+        for case_id in case_ids:
+            details_list = [
+                {
+                    "min_t": min_time,
+                    "max_t": max_time,
+                    "check_boxes": 0,
+                    "instruction_set": "familiar"
+                }, 
+                {
+                    "min_t": min_time,
+                    "max_t": max_time,
+                    "check_boxes": 1,
+                    "instruction_set": "select"
+                }
+            ]
+            all_case_details[case_id] = details_list
+        return all_case_details
 
     def create_study(self):
         self.__read_data()
@@ -69,7 +115,10 @@ class StudyCreator:
 
         users = ["testuser1"]
         user_details = self.__create_user_details(user_names=users, patients=first_patient)
-        return user_details
+
+        case_ids = set(self.df["patient_id"])
+        case_details = self.__create_case_details(case_ids=case_ids)
+        return case_details
 
 
 
