@@ -118,6 +118,33 @@ class StudyCreator:
             "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Gluc_Ser", "Bun", "Bun_Cr_Ratio", "Calcium"]
         }
 
+    def __add_to_start_time(self, hours: float):
+        minimum_time = 1352687400000
+        # Convert hours to milliseconds
+        ms = hours * 3600000
+        # add to start milliseconds
+        total_ms = ms + minimum_time
+        # Return
+        return total_ms
+
+
+    def __get_new_data(self, key: str, one_patient: DataFrame):
+        hours_and_hr = one_patient[["hours_since_first_vitals", key]]
+
+        hours_and_hr_no_nan = hours_and_hr.dropna(
+            subset=[key]).reset_index(drop=True)
+
+
+        # TODO: What did this originally do?
+        hours_and_hr_no_nan["hours_since_first_vitals"] = hours_and_hr_no_nan["hours_since_first_vitals"].map(
+            self.__add_to_start_time())
+
+        new_data = hours_and_hr_no_nan.values.tolist()
+
+        return new_data
+
+    
+
     def create_study(self):
         print("Fetching data")
         current_path = path.dirname(__file__)
@@ -162,6 +189,32 @@ class StudyCreator:
 
 
 
+        one_patient = df[df["patient_id"] == 610044]
+
+        for key in keys:
+
+            with open(f"{current_path}/observations.json", "r") as fp:
+                observations = json.load(fp)
+
+            observation_key = translation[key]["internal_name"]
+
+            # TODO: Add check to create the folders https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory-in-python
+
+            if observation_key == "VTDIAV":
+                observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
+                    "dbp", one_patient)
+                observations[observation_key]["numeric_lab_data"][1]["data"] = self.__get_new_data(
+                    "sbp", one_patient)
+            else:
+                observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
+                    key, one_patient)
+
+            # TODO: Need to make sure the one_patient folder has been created for each patient
+            with open(f"{output_folder_path}/cases_all/{one_patient}/observations.json", "w") as fp:
+                json.dump(observations, fp)
+
+
+
 user_index = 0
 user_name = f"user{user_index}"
 creator = StudyCreator()
@@ -170,47 +223,4 @@ creator = StudyCreator()
 creator.create_study()
 
 
-# def add_to_start_time(self, hours: float):
-#     # Convert hours to milliseconds
-#     ms = hours * 3600000
-#     # add to start milliseconds
-#     total_ms = ms + minimum_time
-#     # Return
-#     return total_ms
 
-# def get_new_data(self, key: str, one_patient: DataFrame):
-#     hours_and_hr = one_patient[["hours_since_first_vitals", key]]
-
-#     hours_and_hr_no_nan = hours_and_hr.dropna(
-#         subset=[key]).reset_index(drop=True)
-
-#     hours_and_hr_no_nan["hours_since_first_vitals"] = hours_and_hr_no_nan["hours_since_first_vitals"].map(
-#         add_to_start_time)
-
-#     new_data = hours_and_hr_no_nan.values.tolist()
-
-#     return new_data
-
-
-#     one_patient = df[df["patient_id"] == 610044]
-
-#     for key in keys:
-
-#         path = Path(r"C:\Users\Elijah\simpleemr\SimpleEMRSystem\resources\manual_data_entry_study\cases_all\10000101\observations.json")
-
-#         observations = None
-#         with open(path, "r") as fp:
-#             observations = json.load(fp)
-
-#         observation_key = translation[key]["internal_name"]
-
-#         if observation_key == "VTDIAV":
-#             observations[observation_key]["numeric_lab_data"][0]["data"] = get_new_data(
-#                 "dbp", one_patient)
-#             observations[observation_key]["numeric_lab_data"][1]["data"] = get_new_data(
-#                 "sbp", one_patient)
-#         else:
-#             observations[observation_key]["numeric_lab_data"][0]["data"] = get_new_data(key, one_patient)
-
-#         with open(path, "w") as fp:
-#             json.dump(observations, fp)
