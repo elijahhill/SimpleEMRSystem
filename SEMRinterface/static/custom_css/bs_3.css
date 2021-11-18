@@ -1,7 +1,3 @@
-body {
-    padding-top: 49.5px !important;
-}
-
 .container{
     min-width: 100%;
 }
@@ -14,7 +10,7 @@ body {
 }
 
 .notebox{
-    height: 70.3vh;
+    /* height: 70.3vh; */
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
@@ -29,7 +25,7 @@ body {
 }
 
 .notetaskbox{
-    height: 95.3vh;
+    /* height: 95.3vh; */
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
@@ -49,7 +45,7 @@ body {
 }
 
 .half-vitmedbox{
-    height: 70vh;
+    /* height: 70vh; */
     overflow-y: scroll;
     overflow-x: hidden;
     /*padding-top: 35px;*/
@@ -80,14 +76,14 @@ body {
     /*width: 30%;
     margin: 10px;*/
     border-radius: 10px;
-    width: 22%;
+    width: 90%;
     margin: 6px;
     margin-right: 12px;
     letter-spacing: -0.31em;
     float: left;
     background: #dfdfdf;
-    boarder-width: thin;
-    boarder-style: solid;
+    border-width: thin;
+    border-style: solid;
 
 }
 
@@ -99,8 +95,8 @@ body {
     letter-spacing: -0.31em;
     float: left;
     background: #dfdfdf;
-    boarder-width: thin;
-    boarder-style: solid;
+    border-width: thin;
+    border-style: solid;
 }
 
 .scroll-box{

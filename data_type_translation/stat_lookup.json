@@ -1,0 +1,67 @@
+{
+    "ecart percentile": {
+        "internal_name": "ECART"
+    },
+    "hr": {
+        "internal_name": "VTHR"
+    },
+    "rr": {
+        "internal_name": "VTRR"
+    },
+    "sbp": {
+        "internal_name": "VTDIAV",
+        "index": 0
+    },
+    "dbp": {
+        "internal_name": "VTDIAV",
+        "index": 1
+    },
+    "o2sat": {
+        "internal_name": "VTSO2A"
+    },
+    "temp_c": {
+        "internal_name": "VTTEMA"
+    },
+    "avpu": {
+        "internal_name": "AVPU"
+    },
+    "co2": {
+        "internal_name": "PCO2V"
+    },
+    "hb": {
+        "internal_name": "HGB"
+    },
+    "wbc": {
+        "internal_name": "WBC"
+    },
+    "platelet_count": {
+        "internal_name": "PLT"
+    },
+    "sodium": {
+        "internal_name": "NA"
+    },
+    "potassium": {
+        "internal_name": "K"
+    },
+    "chloride": {
+        "internal_name": "CL"
+    },
+    "anion_gap": {
+        "internal_name": "AGAP"
+    },
+    "gluc_ser": {
+        "internal_name": "GLSR"
+    },
+    "bun": {
+        "internal_name": "BUN"
+    },
+    "creatinine": {
+        "internal_name": "CREAT"
+    },
+    "bun_cr_ratio": {
+        "internal_name": "BCR"
+    },
+    "calcium": {
+        "internal_name": "CA"
+    }
+}

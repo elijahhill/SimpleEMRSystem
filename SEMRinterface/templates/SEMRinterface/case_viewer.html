@@ -34,7 +34,7 @@
 
 <!-- Demographics bar -->
 <div class="row">
-	<div class="col-12 navbar-fixed-top navbar-inverse ">
+	<div class="col-12 navbar-absolute-top navbar-inverse ">
 	{{ STATIC_URL }}
 		<ul class="nav navbar-nav">
 			<li><a href="/SEMRinterface/{{study_id}}/{{user_id}}/"><span class="glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span></a></li>
@@ -44,16 +44,16 @@
 			<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:150px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
 			<p class="navbar-text" style="color:#f5f5f5;"> Selector: </p>
 		</ul>
-					<div class="chartcolTS" id="time_selector">
-						<script>
-						{% autoescape off %}
-						set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
-						set_next_step_url();
-						getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
-						{% endautoescape %}
-						</script>
-					</div>
-			<p class="navbar-text" style="color:#f5f5f5;float:right" id="selectedTimes"></p>
+		<div class="chartcolTS" id="time_selector">
+			<script>
+			{% autoescape off %}
+			set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
+			set_next_step_url();
+			getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
+			{% endautoescape %}
+			</script>
+		</div>
+		<p class="navbar-text" style="color:#f5f5f5;float:right" id="selectedTimes"></p>
 	</div>
 </div>
 <!-- end of Demographics bar -->
@@ -62,33 +62,35 @@
 <div class="row">
 	<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
     <div class="col-lg-8 scroll-box">
-		<!-- Upper time row --> 
-		{% for i in list_1_2 %}
-        <div class="timepane col-md-3" >
-            <div class="vit-timerow" id="time">
-                <div class="chartcol3" id="lab-time{{i}}">
-					<script>
-                    {% autoescape off %}
-                    getchartT("div[id='lab-time{ {i}}']");
-                    {% endautoescape %}
-                    </script>
-                </div>
-           </div>
-        </div>
-		{% endfor %}
-		<div class="timepane col-md-6" id="time_bar">
-		{% for i in list_3_4_5_6 %}	
-           <div class="timerow" id="time">
-                <div class="chartcol3" id="lab-time{{i}}">
-                    <script>
-                    {% autoescape off %}
-                    getchartT("div[id='lab-time{{i}}']");
-                    {% endautoescape %}
-                    </script>
-                </div>
-           </div>
-		{% endfor %}
-        </div>
+		<!-- Upper time row -->
+		<!-- <div class="row">
+			{% for i in list_1_2 %}
+			<div class="timepane col-md-3">
+				<div class="vit-timerow" id="time">
+					<div class="chartcol3" id="lab-time{{i}}">
+						<script>
+							{% autoescape off %}
+							getchartT("div[id='lab-time{ {i}}']"); 
+							{% endautoescape %}
+						</script>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			<div class="timepane col-md-6" id="time_bar">
+				{% for i in list_3_4_5_6 %}
+				<div class="timerow" id="time">
+					<div class="chartcol3" id="lab-time{{i}}">
+						<script>
+							{% autoescape off %}
+							getchartT("div[id='lab-time{{i}}']"); 
+							{% endautoescape %}
+						</script>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div> -->
 		<!-- end of Upper time row --> 
 
 		<!-- Risk Score and Vitals Panel -->
@@ -103,11 +105,11 @@
                 </div>
 				{% endfor %}
             </div>
-            <div class="col-lg-12 micro-vitmedbox scroll-box t-border" id="io_tracking">
+            <!-- <div class="col-lg-12 micro-vitmedbox scroll-box t-border" id="io_tracking">
                 <div class="lab-group col-md-12" id="IO">
                     <div class="charttitlerow"  onclick="remove_vertical_point(true)"></div>
                 </div>
-            </div>
+            </div> -->
         </div>
 		<!-- End of Risk Score and Vitals Panel -->
 		
@@ -156,33 +158,35 @@
         </div>
 		<!-- End of Chemistry Panel -->
 
-		<!-- Lower time row --> 
-		{% for i in list_1_2 %}
-        <div class="timepane col-md-3" >
-            <div class="vit-timerow" id="time">
-                <div class="chartcol3" id="lab-time1{{i}}">
-					<script>
-                    {% autoescape off %}
-                    getchartT("div[id='lab-time1{{i}}']");
-                    {% endautoescape %}
-                    </script>
-                </div>
-           </div>
-        </div>
-		{% endfor %}
-		<div class="timepane col-md-6" id="time_bar">
-		{% for i in list_3_4_5_6 %}	
-           <div class="timerow" id="time">
-                <div class="chartcol3" id="lab-time1{{i}}">
-                    <script>
-                    {% autoescape off %}
-                    getchartT("div[id='lab-time1{{i}}']");
-                    {% endautoescape %}
-                    </script>
-                </div>
-           </div>
-		{% endfor %}
-        </div>
+		<!-- Lower time row -->
+		<!-- <div class="row">
+			{% for i in list_1_2 %}
+			<div class="timepane col-md-3">
+				<div class="vit-timerow" id="time">
+					<div class="chartcol3" id="lab-time1{{i}}">
+						<script>
+							{% autoescape off %}
+							getchartT("div[id='lab-time1{{i}}']"); 
+							{% endautoescape %}
+						</script>
+					</div>
+				</div>
+			</div>
+			{% endfor %}
+			<div class="timepane col-md-6" id="time_bar">
+				{% for i in list_3_4_5_6 %}
+				<div class="timerow" id="time">
+					<div class="chartcol3" id="lab-time1{{i}}">
+						<script>
+							{% autoescape off %}
+							getchartT("div[id='lab-time1{{i}}']"); 
+							{% endautoescape %}
+						</script>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+		</div>  -->
 		<!-- end of Lower time row --> 
 
     </div>

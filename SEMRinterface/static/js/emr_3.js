@@ -108,6 +108,13 @@ function get_formatted_date(ms_date){
     return display_date;
 }
 
+// A way to get the maximum x value within the graph data
+function get_max_point(series, selectedMax){
+    const filtered = series.filter(point => (point.x < selectedMax));
+    const finalElement = filtered.length - 1;
+    return filtered[finalElement].y;
+}
+
 // 	Updates the min and max time for each chart on change of the time selector //
 function updateExtremes(){
     //update time axes
@@ -128,10 +135,11 @@ function updateExtremes(){
     }catch(err){}
     // search for charts that do not have points within defined axes.
     for (var i = 0; i < chartsContainers.length; i++) {
+        let currentChart = chartsContainers[i];
         var notPoints = true;
         var currData = [];
         for (var q=0; q < chartsContainers[i].xAxis[0].series.length; q++) {
-            currData = currData.concat(chartsContainers[i].xAxis[0].series[q].xData);
+            currData = currData.concat(currentChart.xAxis[0].series[q].xData);
         }
         for(q=0;q<currData.length;q++){ // Lookes for data point with currently selected time range
             if (currData[q] >= selectedMin && currData[q] <= selectedMax){
@@ -140,11 +148,26 @@ function updateExtremes(){
             }
         }
         if (notPoints){ // Hides charts when no points in selected range
-            $("div[id='"+chartrowids[i]+"']").hide();
+            $("div[id='"+currentChart+"']").hide();
         }else{
-            chartsContainers[i].xAxis[0].setExtremes(selectedMin, selectedMax);
-            $("div[id='"+chartrowids[i]+"']").show();
-            chartsContainers[i].reflow();
+            currentChart.xAxis[0].setExtremes(selectedMin, selectedMax);
+            $("div[id='"+currentChart+"']").show();
+            if(currentChart.renderTo.id !== "chartVTDIAV"){
+                currentChart.update({
+                    credits: {
+                        text: get_max_point(currentChart.series[0].data, selectedMax)
+                    }
+                });
+            }
+            else{
+                currentChart.update({
+                    credits: {
+                        text: `${get_max_point(currentChart.series[1].data, selectedMax)} / ${get_max_point(currentChart.series[0].data, selectedMax)}`
+                    }
+                })
+            }
+            
+            currentChart.reflow();
         }
     }
 }
@@ -344,7 +367,7 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             }
         },
         credits: {
-            text: '<p style="font-size:13px">' + most_recent_val + '</p><br><p style="font-size:8px">' + observation_details.units + '</p>',
+            text: '<p style="font-size:13px">' + "test value" + '</p><br><p style="font-size:8px">' + observation_details.units + '</p>',
             href: "",
             zIndex: 0,
             position: {align: "right", verticalAlign: "bottom", x: -8, y: -66},
