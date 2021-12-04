@@ -3,16 +3,16 @@
         "display_group": "AVPU",
         "display_name": "AVPU",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 100],
         "original_name": "AVPU",
         "units": ""
     },
-    "ECART": {
-        "display_group": "ECART",
-        "display_name": "ECART",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "ECART",
+    "EWS": {
+        "display_group": "EWS",
+        "display_name": "EWS",
+        "dflt_normal_ranges": [0, 70],
+        "dflt_y_axis_ranges": [0, 100],
+        "original_name": "EWS",
         "units": ""
     },
     "GLSR": {

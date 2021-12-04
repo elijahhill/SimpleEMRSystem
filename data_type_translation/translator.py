@@ -62,7 +62,7 @@ class StudyCreator:
 
     def __get_df(self, excel_path: str):
         df = pd.read_excel(excel_path, engine="openpyxl")
-        df["ecart percentile"] = df["ecart percentile"].round(1)
+        df["EWS percentile"] = df["ecart percentile"].round(1)
         return df
 
     def __get_translation(self, current_path: str) -> dict:
@@ -112,7 +112,7 @@ class StudyCreator:
         print("Creating data layout")
         return {
             "title_bar": ["id", "age", "sex", "height", "weight", "bmi", "race"],
-            "risk_score_and_vitals": ["ECART", "HR", "RR", "BP", "SaO2", "Temperature"],
+            "risk_score_and_vitals": ["ews", "HR", "RR", "BP", "SaO2", "Temperature"],
             "neurology": ["AVPU"],
             "blood_gas_cbc_lactate": ["pC02", "HgB", "WBC", "Platelets", "Lactate"],
             "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Gluc_Ser", "Bun", "Bun_Cr_Ratio", "Calcium"]
@@ -191,14 +191,21 @@ class StudyCreator:
 
         one_patient = df[df["patient_id"] == 610044]
 
-        for key in keys:
+        with open(f"{current_path}/observations.json", "r") as fp:
+            observations = json.load(fp)
 
-            with open(f"{current_path}/observations.json", "r") as fp:
-                observations = json.load(fp)
+        try:
+            Path(f"{output_folder_path}/cases_all").mkdir(parents=False, exist_ok=False)
+        except:
+            pass
+
+        for key in keys:
 
             observation_key = translation[key]["internal_name"]
 
             # TODO: Add check to create the folders https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory-in-python
+
+            
 
             if observation_key == "VTDIAV":
                 observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
@@ -214,12 +221,7 @@ class StudyCreator:
                 json.dump(observations, fp)
 
 
-
-user_index = 0
-user_name = f"user{user_index}"
 creator = StudyCreator()
-# print(creator.create_study([user_name]))
-# print(creator.create_study())
 creator.create_study()
 
 

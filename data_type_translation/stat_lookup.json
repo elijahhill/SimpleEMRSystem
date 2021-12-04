@@ -1,6 +1,6 @@
 {
-    "ecart percentile": {
-        "internal_name": "ECART"
+    "ews percentile": {
+        "internal_name": "EWS"
     },
     "hr": {
         "internal_name": "VTHR"
@@ -26,7 +26,7 @@
         "internal_name": "AVPU"
     },
     "co2": {
-        "internal_name": "PCO2V"
+        "internal_name": "CO2V"
     },
     "hb": {
         "internal_name": "HGB"

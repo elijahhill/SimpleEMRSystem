@@ -73,8 +73,8 @@
         "units": "",
         "discrete_nominal_to_yIndex": []
     },
-    "ECART": {
-        "display_text": "AVPU",
+    "EWS": {
+        "display_text": "EWS",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",

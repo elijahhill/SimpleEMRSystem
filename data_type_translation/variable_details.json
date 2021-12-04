@@ -7,12 +7,12 @@
         "original_name": "AVPU",
         "units": ""
     },
-    "ECART": {
-        "display_group": "ECART",
-        "display_name": "ECART",
+    "EWS": {
+        "display_group": "EWS",
+        "display_name": "EWS",
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
-        "original_name": "ECART",
+        "original_name": "EWS",
         "units": ""
     },
     "GLSR": {
