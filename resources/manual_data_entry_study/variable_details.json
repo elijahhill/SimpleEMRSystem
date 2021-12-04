@@ -10,8 +10,8 @@
     "EWS": {
         "display_group": "EWS",
         "display_name": "EWS",
-        "dflt_normal_ranges": [0, 70],
-        "dflt_y_axis_ranges": [0, 100],
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, 100],
         "original_name": "EWS",
         "units": ""
     },
@@ -59,7 +59,7 @@
         "display_group": "HR",
         "display_name": "HR",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 100],
         "original_name": "HR",
         "units": ""
     },
@@ -317,14 +317,6 @@
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
         "original_name": "Volume",
-        "units": ""
-    },
-    "CO2A": {
-        "display_group": "Blood_Gases",
-        "display_name": "\"CO2 Content, Arterial\"",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "\"CO2 Content, Arterial\"",
         "units": ""
     },
     "PLTB": {
@@ -3799,14 +3791,6 @@
         "original_name": "Giardia Antigen - Feces",
         "units": ""
     },
-    "PCO2": {
-        "display_group": "pC02",
-        "display_name": "\"PCO2, Arterial\"",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "\"PCO2, Arterial\"",
-        "units": ""
-    },
     "PTHR": {
         "display_group": "Other",
         "display_name": "PTH-Related Peptide Brine",
@@ -4967,14 +4951,6 @@
         "original_name": "SvO2",
         "units": ""
     },
-    "PCO2V": {
-        "display_group": "Blood_Gases",
-        "display_name": "\"PCO2, Venous\"",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "\"PCO2, Venous\"",
-        "units": ""
-    },
     "INTR9": {
         "display_group": "Other",
         "display_name": "Neoplast Paraneoplastic Interp",
@@ -5845,14 +5821,6 @@
         "dflt_normal_ranges": [0, 0],
         "dflt_y_axis_ranges": [0, 0],
         "original_name": "Acanthocytes",
-        "units": ""
-    },
-    "CO2": {
-        "display_group": "Basic_Chemistry",
-        "display_name": "Bicarbonate",
-        "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
-        "original_name": "Bicarbonate",
         "units": ""
     },
     "UWBC": {

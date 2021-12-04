@@ -1,6 +1,6 @@
 {
-    "PCO2V": {
-        "display_text": "\"PCO2, Venous\"",
+    "CO2V": {
+        "display_text": "\"CO2, Venous\"",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#000000"
@@ -2402,28 +2402,6 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [3.0, 15.0],
         "units": "X10E+09/L",
-        "discrete_nominal_to_yIndex": []
-    },
-    "PCO2": {
-        "display_text": "\"PCO2, Arterial\"",
-        "numeric_lab_data": [{
-            "zones": [{
-                "color": "#000000"
-            }],
-            "marker": {
-                "symbol": "circle"
-            },
-            "data": [
-                [1352685300000.0, 25.0],
-                [1352698200000.0, 26.0],
-                [1352722200000.0, 28.0],
-                [1352747700000.0, 28.0]
-            ],
-            "name": "numeric_values"
-        }],
-        "discrete_lab_data": [],
-        "y_axis_ranges": [25.0, 58.0],
-        "units": "mm",
         "discrete_nominal_to_yIndex": []
     },
     "UCAST": {
