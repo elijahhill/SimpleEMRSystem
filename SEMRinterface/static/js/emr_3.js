@@ -383,9 +383,10 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
                 from: variable_details.dflt_normal_ranges[0],
                 to: variable_details.dflt_normal_ranges[1],
                 color: 'rgba(68, 170, 213, 0.4)'
-            }]//,
-            //min: variable_details.dflt_y_axis_ranges[0],
-            //max: variable_details.dflt_y_axis_ranges[1]
+            }],
+            min: variable_details.dflt_y_axis_ranges[0],
+            // min: null,
+            max: variable_details.dflt_y_axis_ranges[1]
         },
         xAxis: [
             {
@@ -481,7 +482,6 @@ function get_med_chart(chart_container_id, medication_details, med_details) {
         },
         credits: {
             text: '<p style="font-size:13px">' + most_recent_val + '</p>',
-            //text: 'test',
             href: "",
             zIndex: 0,
             position: {align: "right",verticalAlign: "bottom",x: -8,y: -chart_height+14},
@@ -492,9 +492,7 @@ function get_med_chart(chart_container_id, medication_details, med_details) {
         yAxis: {
             labels: {enabled: true},
             title: {text: null},
-            gridLineColor: 'grey'//,
-            //min: post_data[2][0],
-            //max: post_data[2][1]
+            gridLineColor: 'grey'
         },
         xAxis: [
             {
