@@ -384,7 +384,7 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
     const maxTime = minTime + threeDaysToMs;
 
     const filteredData = chart_data[0].data.filter(elem => (elem[0] < maxTime));
-    var sortedData = (filteredData.map(elem => elem[1])).sort();
+    const sortedData = (filteredData.map(elem => elem[1])).sort((a, b) => a - b);
 
     const dataMin = sortedData[0];
     const dataMax = sortedData[sortedData.length - 1];
