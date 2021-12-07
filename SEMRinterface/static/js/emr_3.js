@@ -385,7 +385,8 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
                 color: 'rgba(68, 170, 213, 0.4)'
             }],
             min: variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0],
-            max: variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1]
+            max: variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1],
+            endOnTick: false,
         },
         xAxis: [
             {
