@@ -192,6 +192,17 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
     instructions["familiar"] = "Please use the available information to become familiar with this patient."
     instructions["select"] = "Please select the information you used when preparing to present this case."
 
+    # Translating None to "null" within dict_variable_2_details, as the js call to add_observation_chart
+    # cannot figure out how to deal with None.
+    for key in dict_variable_2_details:
+        min_y = dict_variable_2_details[key]["dflt_y_axis_ranges"][0]
+        max_y = dict_variable_2_details[key]["dflt_y_axis_ranges"][1]
+        if min_y == None:
+            dict_variable_2_details[key]["dflt_y_axis_ranges"][0] = "null"
+        if max_y == None:
+            dict_variable_2_details[key]["dflt_y_axis_ranges"][1] = "null"
+
+
     template = loader.get_template('SEMRinterface/case_viewer.html')
     print (dict_notes)
     context_dict = {
