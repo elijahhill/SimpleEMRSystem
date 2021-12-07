@@ -315,6 +315,34 @@ function add_observation_chart(obs_id, observation_details, variable_details, pa
 	}
 }
 
+function determine_chart_min(inputValue, dataMin){
+    if(inputValue != null){
+        return inputValue;
+    }
+    else {
+        var minVal =  Math.floor(dataMin / 10) * 10;
+        return minVal;
+    }
+}
+
+function determine_chart_max(inputValue, dataMax){
+    if(inputValue != null){
+        return inputValue;
+    }
+    else {
+        var maxVal = Math.ceil(dataMax / 10) * 10;
+        return maxVal;
+    }
+}
+
+function should_sort_elem(elem){
+    if(elem[0] < maxTime) {
+        return elem[1];
+    }
+
+}
+
+
 // Create lab chart //
 function get_lab_chart(chart_container_id, observation_details, variable_details) {
 	// determine if lab is numberic or descrete //
@@ -350,6 +378,20 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
 		}
 	}
 
+    const minTime = chart_data[0].data[0][0];
+    // Can't find where the 3 day limit naturally occurs, so using this as a stand-in.
+    const threeDaysToMs = 259200000;
+    const maxTime = minTime + threeDaysToMs;
+
+    const filteredData = chart_data[0].data.filter(elem => (elem[0] < maxTime));
+    var sortedData = (filteredData.map(elem => elem[1])).sort();
+
+    const dataMin = sortedData[0];
+    const dataMax = sortedData[sortedData.length - 1];
+
+    const yMin = variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0];
+    const yMax = variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1];
+
 	// create and render chart //
     var currChart = new Highcharts.Chart({
         chart: {
@@ -379,14 +421,17 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             labels: {enabled: show_y_axis_labels},
             title: {text: null},
             gridLineColor: 'grey',
+            // gridLineWidth: 0,
             plotBands: [{
                 from: variable_details.dflt_normal_ranges[0],
                 to: variable_details.dflt_normal_ranges[1],
                 color: 'rgba(68, 170, 213, 0.4)'
             }],
-            min: variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0],
-            max: variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1],
-            endOnTick: false,
+            min: yMin,
+            max: yMax,
+            tickPositions: [
+                determine_chart_min(yMin, dataMin), determine_chart_max(yMax, dataMax)
+            ]
         },
         xAxis: [
             {
