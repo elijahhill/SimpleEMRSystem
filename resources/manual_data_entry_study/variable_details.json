@@ -3,7 +3,7 @@
         "display_group": "AVPU",
         "display_name": "AVPU",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 100],
+        "dflt_y_axis_ranges": [0, 4],
         "original_name": "AVPU",
         "units": ""
     },
@@ -19,7 +19,7 @@
         "display_group": "HR",
         "display_name": "HR",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 100],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "HR",
         "units": ""
     },
@@ -27,7 +27,7 @@
         "display_group": "RR",
         "display_name": "RR",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [6, 36],
         "original_name": "RR",
         "units": ""
     },
@@ -35,7 +35,7 @@
         "display_group": "BP",
         "display_name": "BP",
         "dflt_normal_ranges": "117/91",
-        "dflt_y_axis_ranges": [0, 100],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "Diastolic BP",
         "units": ""
     },
@@ -50,8 +50,8 @@
     "VTSO2A": {
         "display_group": "SaO2",
         "display_name": "\"O2 Saturation\"",
-        "dflt_normal_ranges": [95.0, 99.0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_normal_ranges": [0, 0],
+        "dflt_y_axis_ranges": [60, 100],
         "original_name": "\"O2 Saturation\"",
         "units": ""
     },
@@ -59,7 +59,7 @@
         "display_group": "Temperature",
         "display_name": "Temperature",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [33, 40],
         "original_name": "Temperature",
         "units": ""
     },
@@ -67,7 +67,7 @@
         "display_group": "CO2",
         "display_name": "\"CO2\"",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [10, 40],
         "original_name": "\"CO2\"",
         "units": ""
     },
@@ -75,7 +75,7 @@
         "display_group": "HgB",
         "display_name": "Hgb",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [4, 19],
         "original_name": "Hgb",
         "units": ""
     },
@@ -83,7 +83,7 @@
         "display_group": "WBC",
         "display_name": "WBC",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 22],
         "original_name": "WBC",
         "units": ""
     },
@@ -99,7 +99,7 @@
         "display_group": "Lactate",
         "display_name": "Lactate",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 10],
         "original_name": "Lactate",
         "units": ""
     },
@@ -107,7 +107,7 @@
         "display_group": "Sodium",
         "display_name": "Sodium",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [100, 160],
         "original_name": "Sodium",
         "units": ""
     },
@@ -115,7 +115,7 @@
         "display_group": "Potassium",
         "display_name": "Potassium",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [2, 6],
         "original_name": "Potassium",
         "units": ""
     },
@@ -123,7 +123,7 @@
         "display_group": "Chloride",
         "display_name": "Chloride",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [70, 120],
         "original_name": "Chloride",
         "units": ""
     },
@@ -131,7 +131,7 @@
         "display_group": "Anion_Gap",
         "display_name": "Anion Gap",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 32],
         "original_name": "Anion Gap",
         "units": ""
     },
@@ -155,7 +155,7 @@
         "display_group": "Basic_Chemistry",
         "display_name": "Creatinine",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [0, 13],
         "original_name": "Creatinine",
         "units": ""
     },
@@ -171,7 +171,7 @@
         "display_group": "Calcium",
         "display_name": "Calcium",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [6, 11],
         "original_name": "Calcium",
         "units": ""
     }
