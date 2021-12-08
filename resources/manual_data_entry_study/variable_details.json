@@ -43,7 +43,7 @@
         "display_group": "Vitals",
         "display_name": "Systolic BP",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "Systolic BP",
         "units": ""
     },
@@ -91,7 +91,7 @@
         "display_group": "Platelets",
         "display_name": "Platelets",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "Platelets",
         "units": ""
     },
@@ -139,7 +139,7 @@
         "display_group": "Gluc_Ser",
         "display_name": "Glucose",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "Glucose",
         "units": ""
     },
@@ -147,7 +147,7 @@
         "display_group": "Bun",
         "display_name": "BUN",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "BUN",
         "units": ""
     },
@@ -163,7 +163,7 @@
         "display_group": "Bun_Cr_Ratio",
         "display_name": "BUN-Creatine Ratio",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 0],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "BUN-Creatine Ratio",
         "units": ""
     },
