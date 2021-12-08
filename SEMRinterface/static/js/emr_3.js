@@ -315,7 +315,7 @@ function add_observation_chart(obs_id, observation_details, variable_details, pa
 	}
 }
 
-function determine_chart_min(inputValue, dataMin){
+function determine_chart_min(inputValue, dataMin, chart_container_id){
     if(inputValue != null){
         return inputValue;
     }
@@ -325,7 +325,7 @@ function determine_chart_min(inputValue, dataMin){
     }
 }
 
-function determine_chart_max(inputValue, dataMax){
+function determine_chart_max(inputValue, dataMax, chart_container_id){
     if(inputValue != null){
         return inputValue;
     }
@@ -377,20 +377,63 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
 			break;
 		}
 	}
+    
+    var yMax = -1;
+    var yMin = 9999999;
 
-    const minTime = chart_data[0].data[0][0];
-    // Can't find where the 3 day limit naturally occurs, so using this as a stand-in.
-    const threeDaysToMs = 259200000;
-    const maxTime = minTime + threeDaysToMs;
+    var dataMax = -1;
+    var dataMin = 9999999;
 
-    const filteredData = chart_data[0].data.filter(elem => (elem[0] < maxTime));
-    const sortedData = (filteredData.map(elem => elem[1])).sort((a, b) => a - b);
+    if(chart_container_id !== "chartVTDIAV"){
+        const minTime = chart_data[0].data[0][0];
+        // Can't find where the 3 day limit naturally occurs, so using this as a stand-in.
+        const threeDaysToMs = 259200000;
+        const maxTime = minTime + threeDaysToMs;
 
-    const dataMin = sortedData[0];
-    const dataMax = sortedData[sortedData.length - 1];
+        // Getting data that is less than the max time
+        const filteredData = chart_data[0].data.filter(elem => (elem[0] < maxTime));
+        // Even with integers, by default the sort method uses lexographic sorting rather
+        // sorting by value, sorting like this sorts by value.
+        const sortedData = (filteredData.map(elem => elem[1])).sort((a, b) => a - b);
 
-    const yMin = variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0];
-    const yMax = variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1];
+        dataMin = sortedData[0];
+        dataMax = sortedData[sortedData.length - 1];
+
+        // Translating the null string passed from python, as json.load created problems
+        // when trying to use 
+        yMin = variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0];
+        yMax = variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1];
+    }
+    else {
+        // Systolic is contained in index 1
+        // Diastolic is contained in index 0
+
+        // Time doesn't change for systolic or diastolic, as measurements are taken at the same time
+        // So, just using the diastolic time data
+        const minTime = chart_data[0].data[0][0];
+        // Can't find where the 3 day limit naturally occurs, so using this as a stand-in.
+        const threeDaysToMs = 259200000;
+        const maxTime = minTime + threeDaysToMs;
+
+        // Getting data that is less than the max time
+        const filteredDataDiastolic = chart_data[0].data.filter(elem => (elem[0] < maxTime));
+        const filteredDataSystolic = chart_data[1].data.filter(elem => (elem[0] < maxTime));
+
+        // Even with integers, by default the sort method uses lexographic sorting rather
+        // sorting by value, sorting like this sorts by value.
+        const sortedDataDiastolic = (filteredDataDiastolic.map(elem => elem[1])).sort((a, b) => a - b);
+        const sortedDataSystolic = (filteredDataSystolic.map(elem => elem[1])).sort((a, b) => a - b);
+
+        // Minimum diastolic blood pressure should always be lower than minimum systolic blood pressure.
+        // The opposite goes for systolic blood pressure, as the maximum systolic blood pressure should
+        // be greater than the maximum diastolic blood pressure.
+        dataMin = sortedDataDiastolic[0];
+        dataMax = sortedDataSystolic[sortedDataSystolic.length - 1];
+
+        yMin = variable_details.dflt_y_axis_ranges[0] === "null" ? null : variable_details.dflt_y_axis_ranges[0];
+        yMax = variable_details.dflt_y_axis_ranges[1] === "null" ? null : variable_details.dflt_y_axis_ranges[1];
+    }
+    
 
 	// create and render chart //
     var currChart = new Highcharts.Chart({
@@ -430,7 +473,8 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             min: yMin,
             max: yMax,
             tickPositions: [
-                determine_chart_min(yMin, dataMin), determine_chart_max(yMax, dataMax)
+                determine_chart_min(yMin, dataMin, chart_container_id), 
+                determine_chart_max(yMax, dataMax, chart_container_id)
             ]
         },
         xAxis: [
@@ -460,7 +504,6 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             shared: false,
             positioner: function (labelWidth, labelHeight, point) {
                 return {x: currChart.chartWidth / 2 - (labelWidth + 2), y: 0};
-
             },
             formatter: function () {
                 if(this.series.name === 'numeric_values') {
