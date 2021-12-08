@@ -62,37 +62,6 @@
 <div class="row">
 	<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
     <div class="col-lg-8 scroll-box">
-		<!-- Upper time row -->
-		<!-- <div class="row">
-			{% for i in list_1_2 %}
-			<div class="timepane col-md-3">
-				<div class="vit-timerow" id="time">
-					<div class="chartcol3" id="lab-time{{i}}">
-						<script>
-							{% autoescape off %}
-							getchartT("div[id='lab-time{ {i}}']"); 
-							{% endautoescape %}
-						</script>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-			<div class="timepane col-md-6" id="time_bar">
-				{% for i in list_3_4_5_6 %}
-				<div class="timerow" id="time">
-					<div class="chartcol3" id="lab-time{{i}}">
-						<script>
-							{% autoescape off %}
-							getchartT("div[id='lab-time{{i}}']"); 
-							{% endautoescape %}
-						</script>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div> -->
-		<!-- end of Upper time row --> 
-
 		<!-- Risk Score and Vitals Panel -->
         <div class="col-lg-3 vitmedbox scroll-box">
             <div class="col-lg-12 half-vitmedbox scroll-box" id="vit_tracking">
@@ -105,11 +74,6 @@
                 </div>
 				{% endfor %}
             </div>
-            <!-- <div class="col-lg-12 micro-vitmedbox scroll-box t-border" id="io_tracking">
-                <div class="lab-group col-md-12" id="IO">
-                    <div class="charttitlerow"  onclick="remove_vertical_point(true)"></div>
-                </div>
-            </div> -->
         </div>
 		<!-- End of Risk Score and Vitals Panel -->
 		
@@ -157,37 +121,6 @@
             </div>
         </div>
 		<!-- End of Chemistry Panel -->
-
-		<!-- Lower time row -->
-		<!-- <div class="row">
-			{% for i in list_1_2 %}
-			<div class="timepane col-md-3">
-				<div class="vit-timerow" id="time">
-					<div class="chartcol3" id="lab-time1{{i}}">
-						<script>
-							{% autoescape off %}
-							getchartT("div[id='lab-time1{{i}}']"); 
-							{% endautoescape %}
-						</script>
-					</div>
-				</div>
-			</div>
-			{% endfor %}
-			<div class="timepane col-md-6" id="time_bar">
-				{% for i in list_3_4_5_6 %}
-				<div class="timerow" id="time">
-					<div class="chartcol3" id="lab-time1{{i}}">
-						<script>
-							{% autoescape off %}
-							getchartT("div[id='lab-time1{{i}}']"); 
-							{% endautoescape %}
-						</script>
-					</div>
-				</div>
-				{% endfor %}
-			</div>
-		</div>  -->
-		<!-- end of Lower time row --> 
 
     </div>
 	<!-- end of Physio, Med, and Lab Panels --> 
