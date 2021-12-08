@@ -3,5 +3,6 @@
     "risk_score_and_vitals": ["EWS", "HR", "RR", "BP", "SaO2", "Temperature"],
     "neurology": ["AVPU"],
     "blood_gas_cbc_lactate": ["CO2", "HgB", "WBC", "Platelets", "Lactate"],
-    "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Gluc_Ser", "Bun", "Bun_Cr_Ratio", "Calcium"]
+    "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Glucose", "BUN", "Creatinine", "BUN-Creatinine_ratio", "Calcium"],
+    "notes": ["note section 1", "note section 2", "note section 3"]
 }
