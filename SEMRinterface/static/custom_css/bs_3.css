@@ -1,3 +1,7 @@
+#case_body{
+    height: 100vh;
+}
+
 .container{
     min-width: 100%;
 }
@@ -10,7 +14,8 @@
 }
 
 .notebox{
-    /* height: 70.3vh; */
+    /* TODO: The height here is a hack, need to have the taskbox positioned at bottom*/
+    height: 63.1vh;
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
@@ -19,27 +24,25 @@
 .taskbox{
     height: 25vh;
     background: rgba(81, 245, 235, 0.8);
-    /*overflow-y: hidden;*/
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .notetaskbox{
-    /* height: 95.3vh; */
+    height: 95.3vh;
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
 }
 
 .vitmedbox{
-    height: 88.1vh;
+    /* height: 88.1vh; */
     overflow-y: hidden;
     overflow-x: hidden;
     /*padding-top: 35px;*/
 }
 
 .medbox{
-    height: 88.1vh;
+    /* height: 88.1vh; */
     overflow-y: scroll;
     overflow-x: hidden;
 }
