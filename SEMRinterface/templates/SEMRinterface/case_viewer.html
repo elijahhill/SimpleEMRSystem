@@ -22,155 +22,162 @@
 </head>
 <body>
 <div class="glyphicon glyphicon-refresh" id="loading_new_patient"></div> <!-- this glyphicon blurrs the screen on loading -->
-<div class="container">
-<!-- Introduction popup -->
+<div class="container" id="case_body">
+	<!-- Introduction popup -->
 	<div id="directions" class="center-div"><h4>Patient: {{ case_id }}.
 	</h4><h4>{% date_line dict_case_details time_step %}
 	</h4><h4> '{{ instructions }}'
 	</h4>
 		<input id="directions_button" type="button"  value="Okay" onclick="remove_directions()" disabled>
 	</div>
-<!-- end of Introduction popup -->
+	<!-- end of Introduction popup -->
 
-<!-- Demographics bar -->
-<div class="row">
-	<div class="col-12 navbar-absolute-top navbar-inverse ">
-	{{ STATIC_URL }}
-		<ul class="nav navbar-nav">
-			<li><a href="/SEMRinterface/{{study_id}}/{{user_id}}/"><span class="glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span></a></li>
-			{% for item in dict_data_layout.title_bar %}
-				<p class="navbar-text" style="color:#f5f5f5;">{{ item }}: {{ dict_demographics|keyvalue:item }}</p>
-			{% endfor %}
-			<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:150px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
-			<p class="navbar-text" style="color:#f5f5f5;"> Selector: </p>
-		</ul>
-		<div class="chartcolTS" id="time_selector">
-			<script>
-			{% autoescape off %}
-			set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
-			set_next_step_url();
-			getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
-			{% endautoescape %}
-			</script>
+	<!-- Demographics bar -->
+	<div class="row">
+		<div class="col-md-12 navbar-absolute-top navbar-inverse ">
+		{{ STATIC_URL }}
+			<div class="container">
+				<div class="col-md-12">
+					<ul class="nav navbar-nav">
+						<li><a href="/SEMRinterface/{{study_id}}/{{user_id}}/"><span class="glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span></a></li>
+						{% for item in dict_data_layout.title_bar %}
+							<p class="navbar-text" style="color:#f5f5f5;">{{ item }}: {{ dict_demographics|keyvalue:item }}</p>
+						{% endfor %}
+						<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:150px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
+					</ul>
+				</div>
+				<div class="col-md-12">
+					<p class="navbar-text" style="color:#f5f5f5;"> Selector: </p>
+					<div class="chartcolTS" id="time_selector">
+						<script>
+						{% autoescape off %}
+						set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
+						set_next_step_url();
+						getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
+						{% endautoescape %}
+						</script>
+					</div>
+					<p class="navbar-text" style="color:#f5f5f5;float:right" id="selectedTimes"></p>
+				</div>
+			</div>
+			
 		</div>
-		<p class="navbar-text" style="color:#f5f5f5;float:right" id="selectedTimes"></p>
 	</div>
-</div>
-<!-- end of Demographics bar -->
+	<!-- end of Demographics bar -->
 
-<!-- All Panels -->
-<div class="row">
-	<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
-    <div class="col-lg-8 scroll-box">
-		<!-- Risk Score and Vitals Panel -->
-        <div class="col-lg-3 vitmedbox scroll-box">
-            <div class="col-lg-12 half-vitmedbox scroll-box" id="vit_tracking">
-                {% for group in dict_data_layout.risk_score_and_vitals %}
-				<div class="lab-group col-md-12" id="{{group}}">
-                    <div class="charttitlerow"  onclick="remove_vertical_point(true)">
-                        {{group}}
-                    </div>
-					<!-- chart rows will be added here via js -->
-                </div>
-				{% endfor %}
-            </div>
-        </div>
-		<!-- End of Risk Score and Vitals Panel -->
-		
-		<!-- Neurology Panel -->
-		<div class="col-lg-3 vitmedbox scroll-box">
-            <div class="col-lg-12 medbox scroll-box" id="med_tracking">
-				{% for group in dict_data_layout.neurology %}
-				<div class="lab-group col-md-12" id="{{group}}">
-					<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-						{{group}}
+	<!-- All Panels -->
+	<div class="row">
+		<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
+		<div class="col-lg-8 scroll-box">
+			<!-- Risk Score and Vitals Panel -->
+			<div class="col-lg-3 vitmedbox scroll-box">
+				<div class="col-lg-12 half-vitmedbox scroll-box" id="vit_tracking">
+					{% for group in dict_data_layout.risk_score_and_vitals %}
+					<div class="lab-group col-md-12" id="{{group}}">
+						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
+							{{group}}
+						</div>
+						<!-- chart rows will be added here via js -->
 					</div>
-					<!-- chart rows will be added here via js -->
+					{% endfor %}
 				</div>
-				{% endfor %}
-            </div>
-        </div>
-		<!-- End of Neurology Panel -->
-
-		<!-- Blood Gas CBC Lactate Panel -->
-		<div class="col-lg-3 vitmedbox scroll-box">
-            <div class="col-lg-12 medbox scroll-box" id="med_tracking">
-				{% for group in dict_data_layout.blood_gas_cbc_lactate %}
-				<div class="lab-group col-md-12" id="{{group}}">
-					<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-						{{group}}
+			</div>
+			<!-- End of Risk Score and Vitals Panel -->
+			
+			<!-- Neurology Panel -->
+			<div class="col-lg-3 vitmedbox scroll-box">
+				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+					{% for group in dict_data_layout.neurology %}
+					<div class="lab-group col-md-12" id="{{group}}">
+						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
+							{{group}}
+						</div>
+						<!-- chart rows will be added here via js -->
 					</div>
-					<!-- chart rows will be added here via js -->
+					{% endfor %}
 				</div>
-				{% endfor %}
-            </div>
-        </div>
-		<!-- End of Blood Gas CBC Lactate Panel -->
+			</div>
+			<!-- End of Neurology Panel -->
 
-		<!-- Chemistry Panel -->
-		<div class="col-lg-3 vitmedbox scroll-box">
-            <div class="col-lg-12 medbox scroll-box" id="med_tracking">
-				{% for group in dict_data_layout.chemistry %}
-				<div class="lab-group col-md-12" id="{{group}}">
-					<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-						{{group}}
+			<!-- Blood Gas CBC Lactate Panel -->
+			<div class="col-lg-3 vitmedbox scroll-box">
+				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
+					<div class="lab-group col-md-12" id="{{group}}">
+						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
+							{{group}}
+						</div>
+						<!-- chart rows will be added here via js -->
 					</div>
-					<!-- chart rows will be added here via js -->
+					{% endfor %}
 				</div>
-				{% endfor %}
-            </div>
-        </div>
-		<!-- End of Chemistry Panel -->
+			</div>
+			<!-- End of Blood Gas CBC Lactate Panel -->
 
-    </div>
-	<!-- end of Physio, Med, and Lab Panels --> 
+			<!-- Chemistry Panel -->
+			<div class="col-lg-3 vitmedbox scroll-box">
+				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+					{% for group in dict_data_layout.chemistry %}
+					<div class="lab-group col-md-12" id="{{group}}">
+						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
+							{{group}}
+						</div>
+						<!-- chart rows will be added here via js -->
+					</div>
+					{% endfor %}
+				</div>
+			</div>
+			<!-- End of Chemistry Panel -->
 
-    <div> 	
-		{% for ob_code, content in dict_observations.items %}
-			<script>
-			{% autoescape off %}
-			add_observation_chart("{{ob_code}}", {{content}}, {{dict_variable_2_details|keyvalue:ob_code}}, {{ dict_data_layout.risk_score_and_vitals }})
-			{% endautoescape %}
-			</script>
-		{% endfor %}
-    </div>
+		</div>
+		<!-- end of Physio, Med, and Lab Panels --> 
 
-	<!-- Note Panel -->
-    <div class="col-lg-4 notetaskbox scroll-box">
-        <div class="col-lg-12 notebox scroll-box">
-            <ul class="nav nav-tabs nav-tabs-justified">
-			{% for group in dict_data_layout.chemistry %}
-				{% if group in dict_notes %}
-				<li class="nav-track" id="{{group}}tab">
-				{% else %}
-				<li class="nav-track disabled" id="{{group}}tab">
-				{% endif %}
-					<a href="#{{group}}" data-toggle="tab"  onclick="remove_vertical_point(true);" class="even-less-pad">{{ group|truncatechars:7 }} <span class="badge">{% note_count dict_notes group %}</span></a>
-				</li>
-                
+		<div> 	
+			{% for ob_code, content in dict_observations.items %}
+				<script>
+				{% autoescape off %}
+				add_observation_chart("{{ob_code}}", {{content}}, {{dict_variable_2_details|keyvalue:ob_code}}, {{ dict_data_layout.risk_score_and_vitals }})
+				{% endautoescape %}
+				</script>
 			{% endfor %}
-            </ul>
+		</div>
 
-            <div class="contentArea tab-content">
+		<!-- Note Panel -->
+		<div class="col-lg-4 notetaskbox scroll-box">
+			<div class="col-lg-12 notebox scroll-box">
+				<ul class="nav nav-tabs nav-tabs-justified">
+				{% for group in dict_data_layout.chemistry %}
+					{% if group in dict_notes %}
+					<li class="nav-track" id="{{group}}tab">
+					{% else %}
+					<li class="nav-track disabled" id="{{group}}tab">
+					{% endif %}
+						<a href="#{{group}}" data-toggle="tab"  onclick="remove_vertical_point(true);" class="even-less-pad">{{ group|truncatechars:7 }} <span class="badge">{% note_count dict_notes group %}</span></a>
+					</li>
+					
+				{% endfor %}
+				</ul>
 
-			{% for group in dict_notes %} 
-            {% include "SEMRinterface/report_template.html" with report_dict=dict_notes|keyvalue:group div_id=group %}
-            {% endfor %}
-            
-            </div>
+				<div class="contentArea tab-content">
 
-        </div>
-		<div class="col-lg-12 taskbox scroll-box t-border">
+				{% for group in dict_notes %} 
+				{% include "SEMRinterface/report_template.html" with report_dict=dict_notes|keyvalue:group div_id=group %}
+				{% endfor %}
+				
+				</div>
 
-			<div id="task" class="note task"><br>
-			{{ instructions }}
-				<hr>Then click
-				<input id='next_screen_button' type="button" value="continue" onclick="link_advance();"></input>
+			</div>
+			<div class="col-lg-12 taskbox scroll-box t-border">
+
+				<div id="task" class="note task"><br>
+				{{ instructions }}
+					<hr>Then click
+					<input id='next_screen_button' type="button" value="continue" onclick="link_advance();"></input>
+				</div>
 			</div>
 		</div>
+		<!-- end of Note Panel -->
 	</div>
-	<!-- end of Note Panel -->
-</div>
 <!-- end of All Panels -->
 
 </div>
