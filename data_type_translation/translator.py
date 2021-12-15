@@ -18,6 +18,12 @@ class PathContainer:
     def add_output_path(self, output_path: str):
         self.output_path = output_path
 
+    def add_hospitalrisk_demo(self, hospitalrisk_demo: str):
+        self.hospitalrisk_demo = hospitalrisk_demo
+
+    def get_hospitalrisk_demo(self):
+        return self.hospitalrisk_demo
+
     def get_excel_path(self):
         return self.excel_path
 
@@ -33,10 +39,12 @@ class StudyCreator:
 
         path_container = PathContainer()
 
-        layout = [[sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(default_text=paths["excel_path"]),
-                               sg.FileBrowse(key="-ExcelFile-")],
-                  [sg.T("")], [sg.Text("Choose the output path (as a folder) "), sg.Input(default_text=paths["output_path"]),
+        layout = [[sg.T("")], [sg.Text("Choose the output path (as a folder) "), sg.Input(default_text=paths["output_path"]),
                                sg.FolderBrowse(key="-OutputFolder-")],
+                  [sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(default_text=paths["excel_path"]),
+                               sg.FileBrowse(key="-ExcelFile-")],
+                  [sg.T("")], [sg.Text("Choose labeled hospitalrisk_demo"), sg.Input(default_text=paths["hospitalrisk_demo"]),
+                               sg.FileBrowse(key="-HospitalriskDemo-")],
                   [sg.Button("Submit")]]
         window = sg.Window('Locate File', layout)
 
@@ -48,11 +56,14 @@ class StudyCreator:
                 # TODO: Need to add checks to determine file validity
 
                 # Using indexes because the keys don't take into account pre-entered file paths
-                path_container.add_excel_path(values[0])
-                path_container.add_output_path(values[1])
+                path_container.add_output_path(values[0])
+                path_container.add_excel_path(values[1])
+                path_container.add_hospitalrisk_demo(values[2])
 
-                paths["excel_path"] = path_container.get_excel_path()
                 paths["output_path"] = path_container.get_output_path()
+                paths["excel_path"] = path_container.get_excel_path()
+                paths["hospitalrisk_demo"] = path_container.get_hospitalrisk_demo()
+
                 with open(json_paths, "w") as paths_fp:
                     json.dump(obj=paths, fp=paths_fp, indent=4)
 
@@ -127,13 +138,11 @@ class StudyCreator:
         # Return
         return total_ms
 
-
     def __get_new_data(self, key: str, one_patient: DataFrame):
         hours_and_hr = one_patient[["hours_since_first_vitals", key]]
 
         hours_and_hr_no_nan = hours_and_hr.dropna(
             subset=[key]).reset_index(drop=True)
-
 
         # TODO: What did this originally do?
         hours_and_hr_no_nan["hours_since_first_vitals"] = hours_and_hr_no_nan["hours_since_first_vitals"].map(
@@ -143,8 +152,6 @@ class StudyCreator:
 
         return new_data
 
-    
-
     def create_study(self):
         print("Fetching data")
         current_path = path.dirname(__file__)
@@ -153,7 +160,6 @@ class StudyCreator:
         output_folder_path = data_paths.get_output_path()
 
         df = self.__get_df(excel_path=excel_path)
-        translation = self.__get_translation(current_path=current_path)
 
         # patients = set(df["patient_id"])
 
@@ -187,25 +193,61 @@ class StudyCreator:
         with open(f"{output_folder_path}/variable_details.json", "w+") as fp:
             json.dump(obj=variable_details, fp=fp, indent=4)
 
-
-
         one_patient = df[df["patient_id"] == 610044]
 
         with open(f"{current_path}/observations.json", "r") as fp:
             observations = json.load(fp)
 
         try:
-            Path(f"{output_folder_path}/cases_all").mkdir(parents=False, exist_ok=False)
+            cases_path = Path(f"{output_folder_path}/cases_all")
+            cases_path.mkdir(parents=False, exist_ok=False)
         except:
             pass
 
+        hospitalrisk_path = data_paths.get_hospitalrisk_demo()
+        hospitalrisk_df = pd.read_csv(hospitalrisk_path)
+
+        keys = set(hospitalrisk_df["patient_id"])
+        translation = self.__get_translation(current_path=current_path)
+
+        # Need to grab all of the potential user id's, those will be the keys
         for key in keys:
+            # Create id folder
+            try:
+                patient_path = cases_path / str(key)
+                patient_path.mkdir(parents=False, exist_ok=False)
+            except:
+                pass
 
-            observation_key = translation[key]["internal_name"]
+            # Will need to create demographics for each user
+            demographics_info = hospitalrisk_df[hospitalrisk_df["patient_id"] == key]
+            # TODO: Need - Weight, Height, and BMI
+            # Getting iloc[0] as not doing so returns a series with the index and value
+            demographics_dict = {
+                "weight": 0,
+                "age": int(demographics_info["age"].iloc[0]),
+                "bmi": 0,
+                "sex": demographics_info["sex"].iloc[0],
+                "race": demographics_info["race"].iloc[0],
+                "height": 0,
+                "id": key
+            }
 
-            # TODO: Add check to create the folders https://stackoverflow.com/questions/273192/how-can-i-safely-create-a-nested-directory-in-python
+            try:
+                demographics_path = patient_path / "demographics.json"
+                demographics_path.touch(exist_ok=True)
+            except PermissionError:
+                raise PermissionError("Permission denied when creating demograhpics file")
 
-            
+            with open(demographics_path, "w+") as fp:
+                json.dump(obj=demographics_dict, fp=fp, indent=4)
+
+            # Need to create a note panel
+
+            # Need to create an observations file by modifying the observations.json template created
+
+            # TODO: Need to use the observation key versus the patient_id key
+            observation_key = translation[hospitalrisk_key]["internal_name"]
 
             if observation_key == "VTDIAV":
                 observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
@@ -217,12 +259,9 @@ class StudyCreator:
                     key, one_patient)
 
             # TODO: Need to make sure the one_patient folder has been created for each patient
-            with open(f"{output_folder_path}/cases_all/{one_patient}/observations.json", "w") as fp:
+            with open(f"{patient_path}/observations.json", "w") as fp:
                 json.dump(observations, fp)
 
 
 creator = StudyCreator()
 creator.create_study()
-
-
-
