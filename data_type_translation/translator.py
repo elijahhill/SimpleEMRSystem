@@ -138,15 +138,18 @@ class StudyCreator:
         # Return
         return total_ms
 
-    def __get_new_data(self, key: str, one_patient: DataFrame):
-        hours_and_hr = one_patient[["hours_since_first_vitals", key]]
+    def __get_new_data(self, hospitalrisk_key: str, one_patient: DataFrame):
+        # TODO : Make this method work correctly time wise. 
+        hours_and_hr = one_patient[[
+            "hours_since_first_vitals", hospitalrisk_key]]
 
         hours_and_hr_no_nan = hours_and_hr.dropna(
-            subset=[key]).reset_index(drop=True)
+            subset=[hospitalrisk_key]).reset_index(drop=True)
 
-        # TODO: What did this originally do?
-        hours_and_hr_no_nan["hours_since_first_vitals"] = hours_and_hr_no_nan["hours_since_first_vitals"].map(
-            self.__add_to_start_time())
+        # Converts js to unix time
+        hours_and_hr_no_nan["hours_since_first_vitals"] = list(map(
+            lambda hours: self.__add_to_start_time(hours), hours_and_hr_no_nan["hours_since_first_vitals"]
+        ))
 
         new_data = hours_and_hr_no_nan.values.tolist()
 
@@ -193,11 +196,7 @@ class StudyCreator:
         with open(f"{output_folder_path}/variable_details.json", "w+") as fp:
             json.dump(obj=variable_details, fp=fp, indent=4)
 
-        one_patient = df[df["patient_id"] == 610044]
-
-        with open(f"{current_path}/observations.json", "r") as fp:
-            observations = json.load(fp)
-
+        
         try:
             cases_path = Path(f"{output_folder_path}/cases_all")
             cases_path.mkdir(parents=False, exist_ok=False)
@@ -242,25 +241,30 @@ class StudyCreator:
             with open(demographics_path, "w+") as fp:
                 json.dump(obj=demographics_dict, fp=fp, indent=4)
 
-            # Need to create a note panel
+            # TODO: Need to create a note panel
 
-            # Need to create an observations file by modifying the observations.json template created
+            # Creating an observations file by modifying the observations.json template created
 
-            # TODO: Need to use the observation key versus the patient_id key
-            observation_key = translation[hospitalrisk_key]["internal_name"]
+            hospitalrisk_keys = translation.keys()
+            one_patient = df[df["patient_id"] == key]
 
-            if observation_key == "VTDIAV":
-                observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
-                    "dbp", one_patient)
-                observations[observation_key]["numeric_lab_data"][1]["data"] = self.__get_new_data(
-                    "sbp", one_patient)
-            else:
-                observations[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
-                    key, one_patient)
+            with open(f"{current_path}/observations.json", "r") as fp:
+                observations_template = json.load(fp)
 
-            # TODO: Need to make sure the one_patient folder has been created for each patient
+            for hospitalrisk_key in hospitalrisk_keys:
+                observation_key = translation[hospitalrisk_key]["internal_name"]
+
+                if observation_key == "VTDIAV":
+                    observations_template[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
+                        "dbp", one_patient)
+                    observations_template[observation_key]["numeric_lab_data"][1]["data"] = self.__get_new_data(
+                        "sbp", one_patient)
+                else:
+                    observations_template[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
+                        hospitalrisk_key, one_patient)
+
             with open(f"{patient_path}/observations.json", "w") as fp:
-                json.dump(observations, fp)
+                json.dump(observations_template, fp, indent=4)
 
 
 creator = StudyCreator()

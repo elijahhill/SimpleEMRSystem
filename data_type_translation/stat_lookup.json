@@ -1,5 +1,5 @@
 {
-    "ews percentile": {
+    "ecart percentile": {
         "internal_name": "EWS"
     },
     "hr": {
@@ -26,7 +26,7 @@
         "internal_name": "AVPU"
     },
     "co2": {
-        "internal_name": "CO2V"
+        "internal_name": "CO2"
     },
     "hb": {
         "internal_name": "HGB"
@@ -50,7 +50,7 @@
         "internal_name": "AGAP"
     },
     "gluc_ser": {
-        "internal_name": "GLSR"
+        "internal_name": "GLU"
     },
     "bun": {
         "internal_name": "BUN"
