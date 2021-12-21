@@ -1,4 +1,5 @@
 from typing import Dict
+from numpy.core import numeric
 from numpy.core.numeric import NaN
 import pandas as pd
 import json
@@ -164,12 +165,11 @@ class StudyCreator:
 
         df = self.__get_df(excel_path=excel_path)
 
-        # patients = set(df["patient_id"])
+        df.dropna(subset=["patient_id"], inplace=True)
 
-        # Make sure all of these elements are strings
-        # first_patient = [str(patients.pop())]
+        numeric_ids = pd.to_numeric(arg=df["patient_id"], errors='raise', downcast='integer')
 
-        case_ids = set(df["patient_id"])
+        case_ids = set(numeric_ids)
 
         case_ids_str_list = list(map(lambda elem: str(elem), case_ids))
 
@@ -180,7 +180,7 @@ class StudyCreator:
             json.dump(obj=user_details['testuser1'], fp=fp, indent=4)
 
         case_ids = set(df["patient_id"])
-        case_details = self.__create_case_details(case_ids=case_ids)
+        case_details = self.__create_case_details(case_ids=case_ids_str_list)
         with open(f"{output_folder_path}/case_details.json", "w+") as fp:
             json.dump(obj=case_details, fp=fp, indent=4)
 
