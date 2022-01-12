@@ -86,7 +86,6 @@ def select_case(request, study_id, user_id):
 
 def case_reset(request):
     print(request.path_info)
-    from urllib.parse import urlparse
     
     #if request.is_ajax():
     message = " in case_reset "
@@ -119,7 +118,6 @@ def case_reset(request):
 
 def mark_complete(request):
     print(request.path_info)
-    from urllib.parse import urlparse
     
     #if request.is_ajax():
     message = " in mark_complete "
@@ -151,7 +149,6 @@ def mark_complete(request):
 
 def mark_complete_url(request, study_id, user_id, case_id):
     print(request.path_info)
-    from urllib.parse import urlparse
 
     dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
     with open(dir_study_user_details) as f:
