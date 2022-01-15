@@ -99,7 +99,7 @@ class StudyCreator:
             all_user_details[user] = user_details
         return all_user_details
 
-    def __create_case_details(self, case_ids: set, min_time: float = 1352687400000.0, max_time: float = 135294660000.0) -> Dict:
+    def __create_case_details(self, case_ids: set, min_time: float = 1352687400000.0, max_time: float = 1352946600000.0) -> Dict:
         print("Creating case details")
         all_case_details = {}
         for case_id in case_ids:
@@ -124,10 +124,11 @@ class StudyCreator:
         print("Creating data layout")
         return {
             "title_bar": ["id", "age", "sex", "height", "weight", "bmi", "race"],
-            "risk_score_and_vitals": ["ews", "HR", "RR", "BP", "SaO2", "Temperature"],
+            "risk_score_and_vitals": ["EWS", "HR", "RR", "BP", "SaO2", "Temperature"],
             "neurology": ["AVPU"],
-            "blood_gas_cbc_lactate": ["pC02", "HgB", "WBC", "Platelets", "Lactate"],
-            "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Gluc_Ser", "Bun", "Bun_Cr_Ratio", "Calcium"]
+            "blood_gas_cbc_lactate": ["CO2", "HgB", "WBC", "Platelets", "Lactate"],
+            "chemistry": ["Sodium", "Potassium", "Chloride", "Anion_Gap", "Glucose", "BUN", "Creatinine", "BUN-Creatinine_ratio", "Calcium"],
+            "notes": ["note section 1", "note section 2", "note section 3"]
         }
 
     def __add_to_start_time(self, hours: float):
@@ -140,7 +141,7 @@ class StudyCreator:
         return total_ms
 
     def __get_new_data(self, hospitalrisk_key: str, one_patient: DataFrame):
-        # TODO : Make this method work correctly time wise. 
+        # TODO : Make this method work correctly time wise.
         hours_and_hr = one_patient[[
             "hours_since_first_vitals", hospitalrisk_key]]
 
@@ -149,7 +150,8 @@ class StudyCreator:
 
         # Converts js to unix time
         hours_and_hr_no_nan["hours_since_first_vitals"] = list(map(
-            lambda hours: self.__add_to_start_time(hours), hours_and_hr_no_nan["hours_since_first_vitals"]
+            lambda hours: self.__add_to_start_time(
+                hours), hours_and_hr_no_nan["hours_since_first_vitals"]
         ))
 
         new_data = hours_and_hr_no_nan.values.tolist()
@@ -167,7 +169,8 @@ class StudyCreator:
 
         df.dropna(subset=["patient_id"], inplace=True)
 
-        numeric_ids = pd.to_numeric(arg=df["patient_id"], errors='raise', downcast='integer')
+        numeric_ids = pd.to_numeric(
+            arg=df["patient_id"], errors='raise', downcast='integer')
 
         case_ids = set(numeric_ids)
 
@@ -177,7 +180,7 @@ class StudyCreator:
         user_details = self.__create_user_details(
             user_names=users, patients=case_ids_str_list)
         with open(f"{output_folder_path}/user_details.json", "w+") as fp:
-            json.dump(obj=user_details['testuser1'], fp=fp, indent=4)
+            json.dump(obj=user_details, fp=fp, indent=4)
 
         case_ids = set(df["patient_id"])
         case_details = self.__create_case_details(case_ids=case_ids_str_list)
@@ -196,7 +199,6 @@ class StudyCreator:
         with open(f"{output_folder_path}/variable_details.json", "w+") as fp:
             json.dump(obj=variable_details, fp=fp, indent=4)
 
-        
         try:
             cases_path = Path(f"{output_folder_path}/cases_all")
             cases_path.mkdir(parents=False, exist_ok=False)
@@ -211,6 +213,7 @@ class StudyCreator:
 
         # Need to grab all of the potential user id's, those will be the keys
         for key in keys:
+            print(f"Creating case: {key}")
             # Create id folder
             try:
                 patient_path = cases_path / str(key)
@@ -236,12 +239,44 @@ class StudyCreator:
                 demographics_path = patient_path / "demographics.json"
                 demographics_path.touch(exist_ok=True)
             except PermissionError:
-                raise PermissionError("Permission denied when creating demograhpics file")
+                raise PermissionError(
+                    "Permission denied when creating demograhpics file")
 
             with open(demographics_path, "w+") as fp:
                 json.dump(obj=demographics_dict, fp=fp, indent=4)
 
             # TODO: Need to create a note panel
+
+            # note_headers = data_layout["notes"]
+            all_notes_dict = {}
+
+            note_date = "11/11"
+            note_text = "This is text for a note"
+            note_time = 1352687800000.0
+            note_headers = data_layout["notes"]
+
+            for note_header in note_headers:
+                all_notes_dict[note_header] = []
+
+            note_dict = {
+                "date": note_date,
+                "text": note_text,
+                "js_time": note_time,
+                "upk": 0,
+                "type": note_headers[0]
+            }
+
+            all_notes_dict[note_dict["type"]].append(note_dict)
+
+            try:
+                note_panel_path = patient_path / "note_panel_data.json"
+                note_panel_path.touch(exist_ok=True)
+            except PermissionError:
+                raise PermissionError(
+                    "Permission denied when creating notes file")
+
+            with open(note_panel_path, "w+") as fp:
+                json.dump(obj=all_notes_dict, fp=fp, indent=4)
 
             # Creating an observations file by modifying the observations.json template created
 
