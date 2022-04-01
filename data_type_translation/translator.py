@@ -1,6 +1,4 @@
 from typing import Dict
-from numpy.core import numeric
-from numpy.core.numeric import NaN
 import pandas as pd
 import json
 from pathlib import Path
@@ -13,23 +11,23 @@ class PathContainer:
     def __init__(self):
         pass
 
-    def add_excel_path(self, excel_path: str):
-        self.excel_path = excel_path
+    def add_hospitalrisk_path(self, hospitalrisk_path: str):
+        self.hospitalrisk_path = hospitalrisk_path
+
+    def get_hospitalrisk_path(self):
+        return self.hospitalrisk_path
 
     def add_output_path(self, output_path: str):
         self.output_path = output_path
+
+    def get_output_path(self):
+        return self.output_path
 
     def add_hospitalrisk_demo(self, hospitalrisk_demo: str):
         self.hospitalrisk_demo = hospitalrisk_demo
 
     def get_hospitalrisk_demo(self):
         return self.hospitalrisk_demo
-
-    def get_excel_path(self):
-        return self.excel_path
-
-    def get_output_path(self):
-        return self.output_path
 
 
 class StudyCreator:
@@ -42,9 +40,9 @@ class StudyCreator:
 
         layout = [[sg.T("")], [sg.Text("Choose the output path (as a folder) "), sg.Input(default_text=paths["output_path"]),
                                sg.FolderBrowse(key="-OutputFolder-")],
-                  [sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(default_text=paths["excel_path"]),
+                  [sg.T("")], [sg.Text("Choose the excel data file: "), sg.Input(default_text=paths["hospitalrisk_path"]),
                                sg.FileBrowse(key="-ExcelFile-")],
-                  [sg.T("")], [sg.Text("Choose labeled hospitalrisk_demo"), sg.Input(default_text=paths["hospitalrisk_demo"]),
+                  [sg.T("")], [sg.Text("Choose labeled hospitalrisk_demo"), sg.Input(default_text=paths["hospitalrisk_demo_path"]),
                                sg.FileBrowse(key="-HospitalriskDemo-")],
                   [sg.Button("Submit")]]
         window = sg.Window('Locate File', layout)
@@ -58,12 +56,12 @@ class StudyCreator:
 
                 # Using indexes because the keys don't take into account pre-entered file paths
                 path_container.add_output_path(values[0])
-                path_container.add_excel_path(values[1])
+                path_container.add_hospitalrisk_path(values[1])
                 path_container.add_hospitalrisk_demo(values[2])
 
                 paths["output_path"] = path_container.get_output_path()
-                paths["excel_path"] = path_container.get_excel_path()
-                paths["hospitalrisk_demo"] = path_container.get_hospitalrisk_demo()
+                paths["hospitalrisk_path"] = path_container.get_hospitalrisk_path()
+                paths["hospitalrisk_demo_path"] = path_container.get_hospitalrisk_demo()
 
                 with open(json_paths, "w") as paths_fp:
                     json.dump(obj=paths, fp=paths_fp, indent=4)
@@ -72,7 +70,7 @@ class StudyCreator:
 
         return path_container
 
-    def __get_df(self, excel_path: str):
+    def __get_hospitalrisk_df(self, excel_path: str):
         df = pd.read_excel(excel_path, engine="openpyxl")
         df["EWS percentile"] = df["ecart percentile"].round(1)
         return df
@@ -99,10 +97,11 @@ class StudyCreator:
             all_user_details[user] = user_details
         return all_user_details
 
-    def __create_case_details(self, case_ids: set, min_time: float = 1352687400000.0, max_time: float = 1352946600000.0) -> Dict:
+    def __create_case_details(self, hospitalrisk_df: DataFrame, case_ids: set, min_time: float = 1352687400000.0, max_time: float = 1352946600000.0) -> Dict:
         print("Creating case details")
         all_case_details = {}
         for case_id in case_ids:
+            
             details_list = [
                 {
                     "min_t": min_time,
@@ -133,7 +132,7 @@ class StudyCreator:
 
     def __add_to_start_time(self, hours: float):
         minimum_time = 1352687400000
-        # Convert hours to milliseconds
+        # Convert hours to milliseconds, 3600000 milliseconds being 1 hour
         ms = hours * 3600000
         # add to start milliseconds
         total_ms = ms + minimum_time
@@ -158,19 +157,23 @@ class StudyCreator:
 
         return new_data
 
+
     def create_study(self):
+        '''
+        Creates a study
+        '''
         print("Fetching data")
         current_path = path.dirname(__file__)
         data_paths = self.__get_data_paths(current_path=current_path)
-        excel_path = data_paths.get_excel_path()
+        hospitalrisk_path = data_paths.get_hospitalrisk_path()
         output_folder_path = data_paths.get_output_path()
 
-        df = self.__get_df(excel_path=excel_path)
+        hospitalrisk_df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
 
-        df.dropna(subset=["patient_id"], inplace=True)
+        hospitalrisk_df.dropna(subset=["patient_id"], inplace=True)
 
         numeric_ids = pd.to_numeric(
-            arg=df["patient_id"], errors='raise', downcast='integer')
+            arg=hospitalrisk_df["patient_id"], errors='raise', downcast='integer')
 
         case_ids = set(numeric_ids)
 
@@ -182,8 +185,8 @@ class StudyCreator:
         with open(f"{output_folder_path}/user_details.json", "w+") as fp:
             json.dump(obj=user_details, fp=fp, indent=4)
 
-        case_ids = set(df["patient_id"])
-        case_details = self.__create_case_details(case_ids=case_ids_str_list)
+        case_ids = set(hospitalrisk_df["patient_id"])
+        case_details = self.__create_case_details(hospitalrisk_df=hospitalrisk_df, case_ids=case_ids_str_list)
         with open(f"{output_folder_path}/case_details.json", "w+") as fp:
             json.dump(obj=case_details, fp=fp, indent=4)
 
@@ -281,7 +284,7 @@ class StudyCreator:
             # Creating an observations file by modifying the observations.json template created
 
             hospitalrisk_keys = translation.keys()
-            one_patient = df[df["patient_id"] == key]
+            one_patient = hospitalrisk_df[hospitalrisk_df["patient_id"] == key]
 
             with open(f"{current_path}/observations.json", "r") as fp:
                 observations_template = json.load(fp)
