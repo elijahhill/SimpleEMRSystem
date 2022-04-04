@@ -147,19 +147,19 @@ class StudyCreator:
 
     def __get_new_data(self, hospitalrisk_key: str, one_patient: DataFrame):
         # TODO : Make this method work correctly time wise.
-        hours_and_hr = one_patient[[
+        hours_and_other = one_patient[[
             "hours_since_first_vitals", hospitalrisk_key]]
 
-        hours_and_hr_no_nan = hours_and_hr.dropna(
+        hours_and_other_no_nan = hours_and_other.dropna(
             subset=[hospitalrisk_key]).reset_index(drop=True)
 
         # Converts js to unix time
-        hours_and_hr_no_nan["hours_since_first_vitals"] = list(map(
+        hours_and_other_no_nan["hours_since_first_vitals"] = list(map(
             lambda hours: self.__add_to_start_time(
-                hours), hours_and_hr_no_nan["hours_since_first_vitals"]
+                hours), hours_and_other_no_nan["hours_since_first_vitals"]
         ))
 
-        new_data = hours_and_hr_no_nan.values.tolist()
+        new_data = hours_and_other_no_nan.values.tolist()
 
         return new_data
 
@@ -174,12 +174,12 @@ class StudyCreator:
         hospitalrisk_path = data_paths.get_hospitalrisk_path()
         output_folder_path = data_paths.get_output_path()
 
-        hospitalrisk_df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
+        df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
 
-        hospitalrisk_df.dropna(subset=["patient_id"], inplace=True)
+        df.dropna(subset=["patient_id"], inplace=True)
 
         numeric_ids = pd.to_numeric(
-            arg=hospitalrisk_df["patient_id"], errors='raise', downcast='integer')
+            arg=df["patient_id"], errors='raise', downcast='integer')
 
         case_ids = set(numeric_ids)
 
@@ -191,8 +191,8 @@ class StudyCreator:
         with open(f"{output_folder_path}/user_details.json", "w+") as fp:
             json.dump(obj=user_details, fp=fp, indent=4)
 
-        case_ids = set(hospitalrisk_df["patient_id"])
-        case_details = self.__create_case_details(hospitalrisk_df=hospitalrisk_df, case_ids=case_ids_str_list)
+        case_ids = set(df["patient_id"])
+        case_details = self.__create_case_details(hospitalrisk_df=df, case_ids=case_ids_str_list)
         with open(f"{output_folder_path}/case_details.json", "w+") as fp:
             json.dump(obj=case_details, fp=fp, indent=4)
 
@@ -290,7 +290,7 @@ class StudyCreator:
             # Creating an observations file by modifying the observations.json template created
 
             hospitalrisk_keys = translation.keys()
-            one_patient = hospitalrisk_df[hospitalrisk_df["patient_id"] == key]
+            one_patient = df[df["patient_id"] == key]
 
             with open(f"{current_path}/observations.json", "r") as fp:
                 observations_template = json.load(fp)
