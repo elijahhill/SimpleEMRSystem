@@ -24,6 +24,9 @@ along with LEMRinterface.  If not, see <https://www.gnu.org/licenses/>.
 """
 
 from django.conf.urls import include, url
+from django.shortcuts import redirect
+from django.urls import path
+from .views import redirect_view
 
 # Uncomment the next two lines to enable the admin:
 # from django.contrib import admin
@@ -32,6 +35,7 @@ from django.conf.urls import include, url
 app_name = "SEMRinterface"
 
 urlpatterns = [
+    path(r'', redirect_view),
     url(r'^SEMRinterface/', include('SEMRinterface.urls'))
     ]
 
