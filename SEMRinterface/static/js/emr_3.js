@@ -155,7 +155,7 @@ function updateExtremes(){
             if(currentChart.renderTo.id !== "chartVTDIAV"){
                 currentChart.update({
                     credits: {
-                        text: get_max_point(currentChart.series[0].data, selectedMax)
+                        text: Math.round(get_max_point(currentChart.series[0].data, selectedMax))
                     }
                 });
             }
@@ -315,7 +315,7 @@ function add_observation_chart(obs_id, observation_details, variable_details, pa
 	}
 }
 
-function determine_chart_min(inputValue, dataMin, chart_container_id){
+function determine_chart_min(inputValue, dataMin){
     if(inputValue != null){
         return inputValue;
     }
@@ -325,7 +325,7 @@ function determine_chart_min(inputValue, dataMin, chart_container_id){
     }
 }
 
-function determine_chart_max(inputValue, dataMax, chart_container_id){
+function determine_chart_max(inputValue, dataMax){
     if(inputValue != null){
         return inputValue;
     }
@@ -444,38 +444,51 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             spacingBottom: 6,
             spacingTop: 6,
             spacingRight: 6,
-            type: 'scatter',
+            type: "scatter",
             events: {
                 click: function () {
                     this.tooltip.hide();
-                }
-            }
+                },
+            },
         },
         credits: {
-            text: '<p style="font-size:13px">' + "test value" + '</p><br><p style="font-size:8px">' + observation_details.units + '</p>',
+            text: "test value",
             href: "",
             zIndex: 0,
-            position: {align: "right", verticalAlign: "bottom", x: -8, y: -66},
-            style: {"fontSize": "14px", "color": "black", "cursor": "default"}
+            position: {
+                align: "right",
+                verticalAlign: "bottom",
+                x: -8,
+                y: -66,
+            },
+            style: { fontSize: "14px", color: "black", cursor: "default" },
         },
-        title: {text: variable_details.display_name, margin: 5, style: {"fontSize": "12px"}, align: "left", x: title_x_spacing},
-        legend: {enabled: false},
+        title: {
+            text: variable_details.display_name,
+            margin: 5,
+            style: { fontSize: "12px" },
+            align: "left",
+            x: title_x_spacing,
+        },
+        legend: { enabled: false },
         yAxis: {
-            labels: {enabled: show_y_axis_labels},
-            title: {text: null},
-            gridLineColor: 'grey',
+            labels: { enabled: show_y_axis_labels },
+            title: { text: null },
+            gridLineColor: "grey",
             // gridLineWidth: 0,
-            plotBands: [{
-                from: variable_details.dflt_normal_ranges[0],
-                to: variable_details.dflt_normal_ranges[1],
-                color: 'rgba(68, 170, 213, 0.4)'
-            }],
+            plotBands: [
+                {
+                    from: variable_details.dflt_normal_ranges[0],
+                    to: variable_details.dflt_normal_ranges[1],
+                    color: "rgba(68, 170, 213, 0.4)",
+                },
+            ],
             min: yMin,
             max: yMax,
             tickPositions: [
-                determine_chart_min(yMin, dataMin, chart_container_id), 
-                determine_chart_max(yMax, dataMax, chart_container_id)
-            ]
+                determine_chart_min(yMin, dataMin),
+                determine_chart_max(yMax, dataMax),
+            ],
         },
         xAxis: [
             {
@@ -483,42 +496,67 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
                 labels: {
                     enabled: false,
                     formatter: function () {
-                        return Highcharts.dateFormat('%b %e %H:%M:%S', this.value);
-                    }
+                        return Highcharts.dateFormat(
+                            "%b %e %H:%M:%S",
+                            this.value
+                        );
+                    },
                 },
                 min: selectedMin,
                 max: selectedMax,
                 lineWidth: 0,
-                plotBands: [{
-                    from: displayed_max_t-86400000,
-                    to: displayed_max_t,
-                    color: '#fce1c9',
-                    id: 'plot-line-1'
-                }]
-            }
+                plotBands: [
+                    {
+                        from: displayed_max_t - 86400000,
+                        to: displayed_max_t,
+                        color: "#fce1c9",
+                        id: "plot-line-1",
+                    },
+                ],
+            },
         ],
         series: chart_data,
         plotOptions: {
-            series: { point: { events: { click: function () { add_vertical_point(this.x); }}}}
-        }, tooltip: {
+            series: {
+                point: {
+                    events: {
+                        click: function () {
+                            add_vertical_point(this.x);
+                        },
+                    },
+                },
+            },
+        },
+        tooltip: {
             shared: false,
             positioner: function (labelWidth, labelHeight, point) {
-                return {x: currChart.chartWidth / 2 - (labelWidth + 2), y: 0};
+                return { x: currChart.chartWidth / 2 - (labelWidth + 2), y: 0 };
             },
             formatter: function () {
-                if(this.series.name === 'numeric_values') {
-                    return '<p style="font-size:12px">' + this.y + '</p>'
-                }else if(this.series.name === 'dias' || this.series.name === 'syst'){
-					index = this.point.series.xData.indexOf(this.point.x);
-                    return chart_data[1].data[index][1] + '/' + chart_data[0].data[index][1];
-				}else{
-                    return '<p style="font-size:12px">' + observation_details.discrete_nominal_to_yIndex[this.y] + '</p>'
+                if (this.series.name === "numeric_values") {
+                    return '<p style="font-size:12px">' + this.y + "</p>";
+                } else if (
+                    this.series.name === "dias" ||
+                    this.series.name === "syst"
+                ) {
+                    index = this.point.series.xData.indexOf(this.point.x);
+                    return (
+                        chart_data[1].data[index][1] +
+                        "/" +
+                        chart_data[0].data[index][1]
+                    );
+                } else {
+                    return (
+                        '<p style="font-size:12px">' +
+                        observation_details.discrete_nominal_to_yIndex[this.y] +
+                        "</p>"
+                    );
                 }
             },
             backgroundColor: "rgba(256,256,256,1)",
             padding: 4,
-            crosshairs: [false, false]
-        }
+            crosshairs: [false, false],
+        },
     });
     chartsContainers.push(currChart);
     chartrowids.push(chart_container_id);
@@ -543,7 +581,7 @@ function get_med_chart(chart_container_id, medication_details, med_details) {
     var chart_height = 60 + 15*Math.floor(med_details.display_name.length/30);
 	var chart_data = medication_details.med_data;
 	
-	// find most recent value that is < displayed_max_t //
+	// find most recent value that is < displayed_max_t (within the time that is displayed on the chart)
 	var most_recent_val = '';
 	for (var i = chart_data[0].data.length - 1; i >= 0; i--) {
 		if(chart_data[0].data[i][0] <= displayed_max_t){
@@ -569,7 +607,7 @@ function get_med_chart(chart_container_id, medication_details, med_details) {
                 }
         },
         credits: {
-            text: '<p style="font-size:13px">' + most_recent_val + '</p>',
+            text: '<p style="font-size:13px">' + math.round(most_recent_val) + '</p>',
             href: "",
             zIndex: 0,
             position: {align: "right",verticalAlign: "bottom",x: -8,y: -chart_height+14},
