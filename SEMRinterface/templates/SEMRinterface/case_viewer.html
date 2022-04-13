@@ -169,8 +169,8 @@
                     {% endfor %}
                 <ul>
                 <div class="contentArea tab-content">
-                    {% for key, val in dict_notes %}
-                        <div class="tab-pane fade" id="{{ key|slice:"-1:" }}" role="tabpanel">{{ val }}</div>
+                    {% for key, val in dict_notes.items %}
+                        <div class="tab-pane fade" id="{{ key|slice:"-1:" }}" role="tabpanel">{{ val.0.text }}</div>
                     {% endfor %}
                 </div>
 
