@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en" xml:lang="en">
 <head>
-    <meta name="generator" content="HTML Tidy for Windows (vers 14 February 2006), see www.w3.org">
+    <meta name="CaseViewer" content="A simple way to view patient cases">
     <title>SEMR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="/static/css/bootstrap.css" rel="stylesheet">
@@ -142,33 +142,59 @@
 			{% endfor %}
 		</div>
 
+        
+
 		<!-- Note Panel -->
 		<div class="col-lg-4 notetaskbox scroll-box">
 			<div class="col-lg-12 notebox scroll-box">
-				<ul class="nav nav-tabs nav-tabs-justified">
-				{% for group in dict_data_layout.notes %}
-					{% if group in dict_notes %}
-					<li class="nav-track" id="{{group}}tab">
-					{% else %}
-					<li class="nav-track disabled" id="{{group}}tab">
-					{% endif %}
-						<a href="#{{group}}" data-toggle="tab"  onclick="remove_vertical_point(true);" class="even-less-pad">{{ group|truncatechars:7 }} <span class="badge">{% note_count dict_notes group %}</span></a>
-					</li>
-					
-				{% endfor %}
-				</ul>
+				<!-- <ul class="nav  nav-tabs">
+                    {% for group in dict_data_layout.notes %}
+                        <li class="nav-track">
+                    {% endfor %}
+                </ul>
 
 				<div class="contentArea tab-content">
+                    {% for group in dict_notes %}
+                        <div class="tab-content">
+                            <div class="tab-pane fade" role="tabpanel">{{ group }}</div>
+                        </div>
+                    {% endfor %}
+				</div> -->
+                {{ dict_notes }}
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    {% for group in dict_notes %}
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#{{ group|slice:"-1:" }} "role="tab">{{ group }}</a>
+                        </li>
+                    {% endfor %}
+                <ul>
+                <div class="contentArea tab-content">
+                    {% for key, val in dict_notes %}
+                        <div class="tab-pane fade" id="{{ key|slice:"-1:" }}" role="tabpanel">{{ val }}</div>
+                    {% endfor %}
+                </div>
 
-				{% for group in dict_notes %} 
-				{% include "SEMRinterface/report_template.html" with report_dict=dict_notes|keyvalue:group div_id=group %}
-				{% endfor %}
-				
-				</div>
+                <!-- <ul class="nav nav-tabs" id="myTab" role="tablist">
+                    <li class="nav-item">
+                        <a class="nav-link active" data-toggle="tab" href="#home" role="tab"
+                            aria-controls="home" aria-selected="true">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#profile" role="tab"
+                            aria-controls="profile" aria-selected="false">Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#contact" role="tab">Contact</a>
+                    </li>
+                </ul>
+                <div class="tab-content" id="myTabContent">
+                    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">This is tab 1</div>
+                    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">This is tab 2</div>
+                    <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">This is tab 3</div>
+                </div>
+			</div> -->
 
-			</div>
 			<div class="col-lg-12 taskbox scroll-box t-border">
-
 				<div id="task" class="note task"><br>
 				{{ instructions }}
 					<hr>Then click
@@ -178,12 +204,12 @@
 		</div>
 		<!-- end of Note Panel -->
 	</div>
-<!-- end of All Panels -->
-
 </div>
-    <script>
-        show_loading();
-    </script>
+<!-- end of All Panels -->
+<script>
+    show_loading();
+</script>
 
 </body>
 </html>
+
