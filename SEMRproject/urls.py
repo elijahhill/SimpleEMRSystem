@@ -23,8 +23,8 @@ You should have received a copy of the GNU General Public License
 along with LEMRinterface.  If not, see <https://www.gnu.org/licenses/>.
 """
 
-from django.conf.urls import include, url
-from django.shortcuts import redirect
+from django.conf.urls import include
+from django.urls import re_path
 from django.urls import path
 from .views import redirect_view
 
@@ -36,7 +36,7 @@ app_name = "SEMRinterface"
 
 urlpatterns = [
     path(r'', redirect_view),
-    url(r'^SEMRinterface/', include('SEMRinterface.urls'))
+    re_path(r'^SEMRinterface/', include('SEMRinterface.urls'))
     ]
 
 

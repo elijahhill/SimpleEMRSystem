@@ -22,7 +22,7 @@ GNU General Public License for more details.
 You should have received a copy of the GNU General Public License
 along with SimpleEMRSystem.  If not, see <https://www.gnu.org/licenses/>.
 """
-from django.conf.urls import url
+from django.urls import re_path
 from . import views
 
 # nothing is for home screen
@@ -37,14 +37,14 @@ from . import views
 # \load_cases\ is used to load the cases.
 
 urlpatterns = [
-    url(r'^$', views.select_study, name='select_study'),
-    url(r'^casereset/$', views.case_reset, name='case_reset'),
-    url(r'^markcomplete/$', views.mark_complete, name='mark_complete'),
-    url(r'^markcompleteurl/(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/$', views.mark_complete_url, name='mark_complete_url'),
-    url(r'^(?P<study_id>\w+)/$', views.select_user, name='select_user'),
-    url(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/$', views.select_case, name='select_case'),
-    url(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/$', views.case_viewer, name='case_viewer'),
-    url(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/(?P<time_step>\d)/$', views.case_viewer, name='case_viewer')
+    re_path(r'^$', views.select_study, name='select_study'),
+    re_path(r'^casereset/$', views.case_reset, name='case_reset'),
+    re_path(r'^markcomplete/$', views.mark_complete, name='mark_complete'),
+    re_path(r'^markcompleteurl/(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/$', views.mark_complete_url, name='mark_complete_url'),
+    re_path(r'^(?P<study_id>\w+)/$', views.select_user, name='select_user'),
+    re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/$', views.select_case, name='select_case'),
+    re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/$', views.case_viewer, name='case_viewer'),
+    re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/(?P<time_step>\d)/$', views.case_viewer, name='case_viewer')
 
     ]
 # The .* catches all the special cases for lab names
