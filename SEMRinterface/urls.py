@@ -45,20 +45,4 @@ urlpatterns = [
     re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/$', views.select_case, name='select_case'),
     re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/$', views.case_viewer, name='case_viewer'),
     re_path(r'^(?P<study_id>\w+)/(?P<user_id>\w+)/(?P<case_id>[a-zA-Z0-9_\-]+)/(?P<time_step>\d)/$', views.case_viewer, name='case_viewer')
-
-    ]
-# The .* catches all the special cases for lab names
-
-''',
-url(r'^(?P<patient_id>\d+)/$', views.detail, name='detail'),
-url(r'^home/(?P<user_id>\w+)/$', views.index, name='index'),
-url(r'^(?P<patient_id>\d+)/(?P<user_id>\w+)/$', views.detail, name='detail'),
-url(r'^(?P<patient_id>\d+)/(?P<user_id>\w+)/(?P<time_cutoff>\d+)/$', views.detail, name='detail'),
-url(r'^(?P<patient_id>\d+)/(?P<user_id>\w+)/(?P<time_cutoff>\d+)/(?P<previous_patient_id>\d+)/$',views.detail, name='detail'),
-url(r'^save_input/$', views.save_input, name='save_input'),
-url(r'^end/(?P<user_id>\w+)/1/$', views.end_of_study, name='end_of_study'),
-url(r'^load_cases/$', views.loadcasedata, name='load_cases'),
-url(r'^case_reset/$', views.case_reset, name='case_reset'),
-url(r'^SyntheaViewer$', views.index_synthea, name='index_synthea'),
-url(r'^SyntheaViewer/(?P<encounter_id>[a-zA-Z0-9\-]+)$', views.detail_synthea, name='detail_synthea')
-'''
+]
