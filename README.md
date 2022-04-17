@@ -8,7 +8,7 @@ First, have a look in the screenshots directory to become familiar with the inte
 
 ### Prerequisites
 
-Python 3 or Docker Compose
+Python 3 or Docker
 
 ### Installing
 
@@ -24,12 +24,11 @@ Python 3 or Docker Compose
 1. Clone repository 
 
 #### Python installation notes
-It is strongly recommended that you use a virtual environment. Recommended to use python 3.6.
-1. if you do not have virtualenv, enter "pip install virtualenv"
-2. enter "python -m venv __name_of_environment__"
-3. enter "__name_of_environment__/Scripts/activate"
-4. then follow the Python installation instructions shown above
-5. to terminate the virtual environment, enter "deactivate"
+It is strongly recommended that you use a virtual environment. Recommended to use python 3.10
+1. enter "python -m venv __name_of_environment__"
+2. enter "__name_of_environment__/Scripts/activate"
+3. then follow the Python installation instructions shown above
+4. to terminate the virtual environment, enter "deactivate"
 
 ### Deployment
 
@@ -37,13 +36,13 @@ It is strongly recommended that you use a virtual environment. Recommended to us
 
 1. cd into project directory
 2. enter "python manage.py runserver"
-3. open web browser to http://127.0.0.1:8000/SEMRinterface/
+3. open web browser to http://127.0.0.1:8000/SEMRinterface/ or http://127.0.0.1:8000/ (which redirects to the SEMRinterface endpoint)
 4. terminate using ctrl+c
 
 #### Docker
 1. cd into project directory 
 2. enter "docker-compose up"
-3. open web browser to http://127.0.0.1:8000/SEMRinterface/
+3. open web browser to http://127.0.0.1:8000/SEMRinterface/ or http://127.0.0.1:8000/ (which redirects to the SEMRinterface endpoint)
 4. terminate using ctrl+c
 
 ### Notes
