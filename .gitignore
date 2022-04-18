@@ -102,3 +102,10 @@ SEMRenv/Scripts/psgver.exe
 
 
 
+SEMRenv/Scripts/fonttools.exe
+SEMRenv/Scripts/pip-review.exe
+SEMRenv/Scripts/pyftmerge.exe
+SEMRenv/Scripts/pyftsubset.exe
+SEMRenv/Scripts/rend.exe
+SEMRenv/Scripts/ttx.exe
+SEMRenv/share/man/man1/ttx.1
