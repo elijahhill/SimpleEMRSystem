@@ -2,50 +2,133 @@
 
 This code can be used for Electronic Medical Record Research.
 
-## Getting Started
+## Inital environment setup - all
+If you already have a development environment set up that includes git, python 3.10, and an IDE of choice 
 
-First, have a look in the screenshots directory to become familiar with the interface design. 
+skip to [Setting up the project](#setting-up-the-project)
 
-### Prerequisites
+Otherwise -
 
-Python 3 or Docker
+- If installing on a Windows machine skip to [Initial environment setup - Windows](#initial-environment-setup---windows)
 
-### Installing
+- If installing on a Mac, skip to [Initial environment setup - Mac](#initial-environment-setup---mac)
 
+Linux is not supported for use, as the full dataset requires Box, and Box support for Linux was dropped in 2018.
 
-#### Python 
+However, it is possible to run the demo information on Linux.
 
-1. Clone repository
-2. cd into project directory
-3. enter "pip install -r requirements.txt"
+## Initial environment setup - Windows
 
-#### Docker
+### Git
+Fetch git from https://git-scm.com/download/win
 
-1. Clone repository 
+Download and install 64-bit Git for Windows Setup.
 
-#### Python installation notes
-It is strongly recommended that you use a virtual environment. Recommended to use python 3.10
-1. enter "python -m venv __name_of_environment__"
-2. enter "__name_of_environment__/Scripts/activate"
-3. then follow the Python installation instructions shown above
-4. to terminate the virtual environment, enter "deactivate"
+The default settings for the installer will work for what we need
 
-### Deployment
+### Python
+Install the latest version of python 3.10 (3.10.4 at the time of writing)
 
-##### Python 
+https://www.python.org/downloads/release/python-3104/
 
-1. cd into project directory
-2. enter "python manage.py runserver"
-3. open web browser to http://127.0.0.1:8000/SEMRinterface/ or http://127.0.0.1:8000/ (which redirects to the SEMRinterface endpoint)
-4. terminate using ctrl+c
+Use the windows installer (64-bit)
 
-#### Docker
-1. cd into project directory 
-2. enter "docker-compose up"
-3. open web browser to http://127.0.0.1:8000/SEMRinterface/ or http://127.0.0.1:8000/ (which redirects to the SEMRinterface endpoint)
-4. terminate using ctrl+c
+Within the installer, check the box for "Add python 3.10 to PATH"
 
-### Notes
+Otherwise default options are correct
+
+### IDE (VsCode)
+Install VsCode from https://code.visualstudio.com/
+
+You're free to install the IDE of your choice, but VsCode is both light, and works well as an IDE.
+
+After VsCode is installed, skip to [Setting up the project](#setting-up-the-project).
+
+## Initial environment setup - Mac
+Note that I wasn't able to test this section, as I don't have a mac, nor a mac environment to test the installation instructions
+
+### Homebrew
+Installing development tools on a mac tends to require homebrew. Thus, we'll install it first.
+
+Copy and paste the command below into a terminal 
+
+command + c to copy
+
+command + v to paste
+
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)`
+
+Then press enter to run the command
+
+### Git
+Similar to how you previously used the terminal, run the below command as well:
+
+`brew install git`
+
+### Python
+Install python with:
+
+`brew install python@3.10`
+
+### IDE (VsCode)
+One last installation: 
+
+`brew install --cask visual-studio-code`
+
+Continue onto [Setting up the project](#setting-up-the-project)
+
+## Setting up the project
+Now that the environment is set up, we can move onto setting up and running the app.
+### Getting the webapp
+Using VsCode, open up the folder you want to copy SEMR into (using file > open folder)
+
+If the terminal at the bottom of VsCode does not pop up, press shift plus back tick (the tick to the left of the number 1 on most keyboards)
+
+> shift + `
+
+Once that folder is opened, from the terminal within VsCode, run -
+
+`git clone https://github.com/elijahhill/SimpleEMRSystem`
+
+After it has finished copying, open the newly created folder in VsCode (the same way you did the first instruction in this section)
+
+### Setting up virtual environment
+From the inbuilt terminal in the newly created folder, run
+
+`python -m venv SEMRenv`
+
+After this completes, VsCode will ask you if you want to set this as the default workspace, select yes
+
+If you were able to select it, skip to [Installing dependencies](#installing-dependencies)
+
+<!-- TODO: Need to test this path a bit more thoroughly -->
+
+If not, then hit 
+>ctrl + shift + p
+
+And then go to Python: select interpreter.
+
+Then from the dropdown list, select Python 3.10.4 ('SEMRenv': venv)
+
+### Installing dependencies
+`python -m pip install -r requirements.txt`
+
+### Setting up run command
+Once your depdencies have installed, run the following command - 
+
+`python manage.py runserver`
+
+### Opening the webapp
+After a few seconds, you'll get output that says 
+
+>Starting development server at http://127.0.0.1:8000/
+
+Hold alt + left click to follow the link. This will open the webapp. 
+
+At this point, you should be able to access the demo cases that came with the webapp!
+
+# Additional Notes
+More detailed notes on how to get the additional data coming soon!
 
 The SEMRinterface in meant to run in full screen mode on a 1920 x 1080 resolution monitor. Responsive html is not
 currently supported. 
