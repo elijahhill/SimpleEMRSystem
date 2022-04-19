@@ -2,6 +2,8 @@
 
 This code can be used for Electronic Medical Record Research.
 
+Coming soon - More screenshots and additional formatting
+
 ## Inital environment setup - all
 If you already have a development environment set up that includes git, python 3.10, and an IDE of choice 
 
