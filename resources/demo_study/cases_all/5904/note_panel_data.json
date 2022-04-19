@@ -1,13 +1,29 @@
 {
-    "Note Section 1": [
+    "Nurse Notes": [
         {
             "date": "11/11",
-            "text": "This is text for a note",
+            "text": "A nurse wrote this note",
             "js_time": 1352687800000.0,
             "upk": 0,
-            "type": "Note Section 1"
+            "type": "Nurse Notes"
         }
     ],
-    "Note Section 2": [],
-    "Note Section 3": []
+    "Physican Notes": [
+        {
+            "date": "11/11",
+            "text": "A physican wrote this note",
+            "js_time": 1352687800000.0,
+            "upk": 0,
+            "type": "Physican Notes"
+        }
+    ],
+    "Chicken Notes": [
+        {
+            "date": "11/11",
+            "text": "How do chickens write...we think English?",
+            "js_time": 1352687800000.0,
+            "upk": 0,
+            "type": "Other Notes"
+        }
+    ]
 }

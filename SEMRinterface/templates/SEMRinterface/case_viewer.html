@@ -150,13 +150,13 @@
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     {% for group in dict_notes %}
                         <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#{{ group|slice:"-1:" }} "role="tab">{{ group }}</a>
+                            <a class="nav-link" data-toggle="tab" href="#tab{{forloop.counter}}"role="tab">{{ group }}</a>
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="contentArea tab-content">
                     {% for key, val in dict_notes.items %}
-                        <div class="tab-pane fade" id="{{ key|slice:"-1:" }}" role="tabpanel">{{ val.0.text }}</div>
+                        <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">{{ val.0.text }}</div>
                     {% endfor %}
                 </div>
 			</div>
