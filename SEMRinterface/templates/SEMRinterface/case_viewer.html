@@ -34,20 +34,23 @@
 
 	<!-- Demographics bar -->
 	<div class="row">
-		<div class="col-md-12 navbar-absolute-top navbar-inverse ">
+		<!-- <nav class="collapse navbar-collapse navbar-inverse ">
 		{{ STATIC_URL }}
-			<div class="container">
-				<div class="col-md-12">
-					<ul class="nav navbar-nav">
-						<li><a href="/SEMRinterface/{{study_id}}/{{user_id}}/"><span class="glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span></a></li>
+				<div class="col-md-6">
+					<ul class="navbar-nav mr-auto">
+						<li>
+                            <a href="/SEMRinterface/{{study_id}}/{{user_id}}/">
+                                <span class="navbar-brand glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span>
+                            </a>
+                        </li>
 						{% for item in dict_data_layout.title_bar %}
-							<p class="navbar-text" style="color:#f5f5f5;">{{ item }}: {{ dict_demographics|keyvalue:item }}</p>
+							<p class="navbar-item" style="color:#f5f5f5;">{{ item }}: {{ dict_demographics|keyvalue:item }}</p>
 						{% endfor %}
-						<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:150px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
+						<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:300px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
 					</ul>
 				</div>
-				<div class="col-md-12">
-					<p class="navbar-text" style="color:#f5f5f5;"> Selector: </p>
+				<div class="col-md-6">
+					<p class="navbar-item" style="color:#f5f5f5;"> Selector: </p>
 					<div class="chartcolTS" id="time_selector">
 						<script>
 						{% autoescape off %}
@@ -57,11 +60,40 @@
 						{% endautoescape %}
 						</script>
 					</div>
-					<p class="navbar-text" style="color:#f5f5f5;float:right" id="selectedTimes"></p>
-				</div>
+                <p class="navbar-item" style="color:#f5f5f5" id="selectedTimes"></p>
 			</div>
 			
-		</div>
+		</nav> -->
+
+        <nav class="navbar navbar-dark" id="top-nav">
+            <ul class="navbar-nav un-bulleted">
+                <li>
+                    <a href="/SEMRinterface/{{study_id}}/{{user_id}}/">
+                        <span class="navbar-brand glyphicon glyphicon-home" aria-hidden="false" id="home-button"></span>
+                    </a>
+                </li>
+                <!-- <li class="navbar-text">This is text</li> -->
+                {% for item in dict_data_layout.title_bar %}
+                    <li class="navbar-text">{{ item }}: {{ dict_demographics|keyvalue:item }}</li>
+                {% endfor %}
+            </ul>
+            <div class="separator"> </div>
+            <ul class="navbar-nav un-bulleted">
+                <li class="navbar-text">Selector: </li>
+            </ul>
+            <div class="chartcolTS" id="time_selector">
+                <script>
+                {% autoescape off %}
+                set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
+                set_next_step_url();
+                getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
+                {% endautoescape %}
+                </script>
+            </div>
+            <ul class="navbar-nav un-bulleted">
+                <li class="navbar-text" id="selectedTimes"></li>
+            </ul>
+        </nav>
 	</div>
 	<!-- end of Demographics bar -->
 

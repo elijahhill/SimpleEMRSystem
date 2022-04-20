@@ -232,8 +232,7 @@ a:active {
     margin-top: 5px;
     margin-bottom: 5px;
     margin-left: 5px;
-    width: 15%;
-    /*z-index: 10px;*/
+    width: 25%;
 }
 
 .n-button{
@@ -308,6 +307,22 @@ textarea {
 
 .navbar-nav > li {
     font-weight: bold;
+}
+
+.un-bulleted > li {
+    list-style-type: none;
+    color: white;
+}
+
+/* Overriding user-agent stylesheet */
+ul {
+    padding: 0;
+}
+
+#top-nav {
+    background-color: #222222;
+    margin-left: 0;
+    margin-left: 0;
 }
 
 .lab_groupings{

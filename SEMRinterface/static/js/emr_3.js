@@ -798,6 +798,7 @@ function getchartTS(id,case_details,time_step=0) {
     $(id).highcharts('StockChart', {
             chart: {
                 height:35,
+                width: 200,
                 spacingLeft:5,
                 spacingBottom:2,
                 spacingTop:2,
