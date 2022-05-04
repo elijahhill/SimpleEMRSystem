@@ -65,34 +65,41 @@
 			
 		</nav> -->
 
-        <nav class="navbar navbar-dark" id="top-nav">
-            <ul class="navbar-nav un-bulleted">
+        <nav class="navbar navbar-dark col-md-12" id="top-nav">
+            <ul class="navbar-nav un-bulleted"> 
                 <li>
                     <a href="/SEMRinterface/{{study_id}}/{{user_id}}/">
-                        <span class="navbar-brand glyphicon glyphicon-home" aria-hidden="false" id="home-button"></span>
+                        <span class="navbar-brand glyphicon glyphicon-home" aria-hidden="false"
+                            id="home-button"></span>
                     </a>
                 </li>
-                <!-- <li class="navbar-text">This is text</li> -->
                 {% for item in dict_data_layout.title_bar %}
-                    <li class="navbar-text">{{ item }}: {{ dict_demographics|keyvalue:item }}</li>
+                <li class="bootstrap_margin_override navbar-text">{{ item }}: {{ dict_demographics|keyvalue:item }}</li>
                 {% endfor %}
-            </ul>
+            </ul> 
+            
             <div class="separator"> </div>
+
+            <!-- TODO: Shift the displayed times to the right -->
+            <div>
+                <ul class="navbar-nav un-bulleted">
+                    <li class="navbar-text" id="selectedTimes"></li>
+                </ul>
+            </div>
             <ul class="navbar-nav un-bulleted">
                 <li class="navbar-text">Selector: </li>
             </ul>
             <div class="chartcolTS" id="time_selector">
                 <script>
                 {% autoescape off %}
+                var width = document.getElementById("time_selector").offsetWidth;
+                console.log(width);
                 set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
                 set_next_step_url();
-                getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
+                getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}}, width);
                 {% endautoescape %}
                 </script>
             </div>
-            <ul class="navbar-nav un-bulleted">
-                <li class="navbar-text" id="selectedTimes"></li>
-            </ul>
         </nav>
 	</div>
 	<!-- end of Demographics bar -->

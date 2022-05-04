@@ -794,11 +794,11 @@ function getchartT(id) {
 }
 
 // Creates the time selector chart //
-function getchartTS(id,case_details,time_step=0) {
+function getchartTS(id,case_details,time_step=0, width) {
     $(id).highcharts('StockChart', {
             chart: {
                 height:35,
-                width: 200,
+                width: width,
                 spacingLeft:5,
                 spacingBottom:2,
                 spacingTop:2,

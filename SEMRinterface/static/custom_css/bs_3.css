@@ -1,5 +1,65 @@
+/* Overriding user-agent stylesheet within case_viewer*/
+ul {
+    padding: 0;
+}
+
+.bootstrap_margin_override {
+    margin-right: 0;
+}
+
+.separator {
+    width: 5px;
+    height: 1px;
+}
+
+#selectedTimes {
+    margin-left: 20px;
+}
+
+#time_selector {
+    display: inline-block; 
+     /*
+    vertical-align: middle;
+    border: 0 solid black;
+    padding: 0;
+    margin: 0;
+    letter-spacing: normal;
+    font-size: 12pt;
+    overflow: hidden;
+    */
+    margin-left: 5px; 
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 25%;
+}
+
 #case_body{
     height: 100vh;
+}
+
+#home-button {
+    color: greenyellow;
+    padding-right: 5px;
+}
+
+#top-nav {
+    background-color: #222222;
+    margin-right: 0 !important;
+    padding: 0;
+    margin-bottom: 0;
+}
+
+#loading_new_patient {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(192, 192, 192, 0.5);
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .container{
@@ -180,12 +240,12 @@ a:active {
     background: #e8e8e8;
     font-weight: bold;
     letter-spacing: normal;
-    /*text-indent:50px;*/
+    text-indent:50px;
     float:left;
     text-align: center;
 }
 
-.chartcol1, .chartcol2, .chartcol3, .chartcolfull, .chartcolTS{
+.chartcol1, .chartcol2, .chartcol3, .chartcolfull {
     display: inline-block;
     vertical-align: middle;
     border: 0 solid black;
@@ -226,13 +286,6 @@ a:active {
     margin-right: 10px;
     text-align: center;
     background: white;
-}
-
-.chartcolTS{
-    margin-top: 5px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    width: 25%;
 }
 
 .n-button{
@@ -314,17 +367,6 @@ textarea {
     color: white;
 }
 
-/* Overriding user-agent stylesheet */
-ul {
-    padding: 0;
-}
-
-#top-nav {
-    background-color: #222222;
-    margin-left: 0;
-    margin-left: 0;
-}
-
 .lab_groupings{
     margin-left: 5px;
     border-right: solid;
@@ -354,18 +396,7 @@ ul {
     display: none;
 }
 
-#loading_new_patient {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 100;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(192, 192, 192, 0.5);
-    background-repeat: no-repeat;
-    background-position: center;
-}
+
 
 .highcharts-container{width:100% !important; height:100% !important;}
 
