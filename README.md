@@ -76,7 +76,7 @@ Install python with:
 One last installation: 
 
 `brew install --cask visual-studio-code`
--
+
 Continue onto [Setting up the project](#setting-up-the-project)
 
 ## Setting up the project
