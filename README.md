@@ -58,7 +58,7 @@ command + c to copy
 
 command + v to paste
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"`
 
 Then press enter to run the command
 
@@ -115,7 +115,7 @@ And then go to Python: select interpreter.
 Then from the dropdown list, select Python 3.10.4 ('SEMRenv': venv)
 
 ### Activating the virtual environment
-When activating the environment, there may be a problem where you cannot run activate the environment. It will say something similar to "running scripts on this system id is disabled"
+For Windows, when activating the environment, there may be a problem where you cannot run activate the environment. It will say something similar to "running scripts on this system id is disabled"
 
 To solve this, run - 
 
@@ -124,6 +124,10 @@ To solve this, run -
 Then activate the environment by running - 
 
 `./SEMRenv/Scripts/activate`
+
+For MAC, it will be 
+
+`source ./SEMRenv/Scripts/activate`
 
 ### Installing dependencies
 `python -m pip install -r requirements.txt`
