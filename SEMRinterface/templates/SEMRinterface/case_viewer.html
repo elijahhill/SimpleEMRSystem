@@ -194,8 +194,31 @@
                     {% endfor %}
                 </ul>
                 <div class="contentArea tab-content">
-                    {% for key, val in dict_notes.items %}
+                    <!-- A note type can contain multiple notes within it -->
+                    <!-- {% for key, val in dict_notes.items %}
+                        <div>{{ key }}</div>
+                        <div>{{ val }}</div>
                         <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">{{ val.0.text }}</div>
+                    {% endfor %} -->
+
+                    {% for key, val in dict_notes.items %}
+                        <!-- TODO: Need to filter the note based on the category, somehow need to assign numbers to the notes dictionary, same order as in the for loop -->
+                        <!-- Check whether the info pulled from dictionary matches the tab clicked on-->
+                        <!-- <div>{{ key }}</div>
+                        <div>{{ val }}</div> -->
+
+                        {% with count=forloop.counter %}
+                        
+                        <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">
+                            <div>blah{{ forloop.counter }}</div>
+                            {% comment %}
+                            <!-- <div>test</div> -->
+                            {{ count }}
+                            {{dict_enumerated_note_headers[count]}}
+                            
+                            {% endcomment %}
+                        </div>
+                        {% endwith %}
                     {% endfor %}
                 </div>
 			</div>
@@ -208,6 +231,16 @@
 				</div>
 			</div>
 		</div>
+
+        {% comment %}
+            {% for elem in val %}
+
+
+            {% endfor %}
+            {{ % if  == val.type %}}
+            {{ elem.text }}
+            {{ % endif %}}
+        {% endcomment %}
 		<!-- end of Note Panel -->
 	</div>
 </div>

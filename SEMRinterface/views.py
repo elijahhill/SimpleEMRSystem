@@ -4,14 +4,14 @@ version 3.0
 package github.com/ajk77/SimpleEMRSystem
 Modified by AndrewJKing.com|@andrewsjourney
 
-This is the view processing file. 
+This is the view processing file.
 
 ---LICENSE---
 This file is part of SimpleEMRSystem
 
 SimpleEMRSystem is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or 
+the Free Software Foundation, either version 3 of the License, or
 any later version.
 
 SimpleEMRSystem is distributed in the hope that it will be useful,
@@ -37,43 +37,47 @@ dir_resources = os.path.join(dir_local, "resources")
 def select_study(request):
     print(request.path_info)
     from SEMRinterface.utils import get_list_study_id
-    
+
     list_study_id = get_list_study_id(dir_resources)
 
-    template = loader.get_template(os.path.join('SEMRinterface', 'study_selection_screen.html'))
+    template = loader.get_template(os.path.join(
+        'SEMRinterface', 'study_selection_screen.html'))
     context_dict = {
         'list_study_id': list_study_id,
         'test': 'test'
     }
     return HttpResponse(template.render(context_dict))
-    
+
 
 def select_user(request, study_id):
     print(request.path_info)
 
-    dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
+    dir_study_user_details = os.path.join(
+        dir_resources, study_id, 'user_details.json')
     with open(dir_study_user_details) as f:
         dict_user_2_details = json.load(f)
-    
-    template = loader.get_template(os.path.join('SEMRinterface', 'user_selection_screen.html'))
+
+    template = loader.get_template(os.path.join(
+        'SEMRinterface', 'user_selection_screen.html'))
     context_dict = {
         'dict_user_2_details': dict_user_2_details,
         'study_id': study_id,
         'test': 'test'
     }
-    return HttpResponse(template.render(context_dict)) 
-    
+    return HttpResponse(template.render(context_dict))
+
+
 def select_case(request, study_id, user_id):
     print(request.path_info)
-    
-    dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
+
+    dir_study_user_details = os.path.join(
+        dir_resources, study_id, 'user_details.json')
     with open(dir_study_user_details) as f:
         dict_user_2_details = json.load(f)
-        
+
     list_cases_assigned = dict_user_2_details[user_id]['cases_assigned']
     list_cases_completed = dict_user_2_details[user_id]['cases_completed']
-    
-    
+
     template = loader.get_template('SEMRinterface/case_selection_screen.html')
     context_dict = {
         'list_cases_assigned': list_cases_assigned,
@@ -82,12 +86,13 @@ def select_case(request, study_id, user_id):
         'study_id': study_id,
         'test': 'test'
     }
-    return HttpResponse(template.render(context_dict)) 
+    return HttpResponse(template.render(context_dict))
+
 
 def case_reset(request):
     print(request.path_info)
-    
-    #if request.is_ajax():
+
+    # if request.is_ajax():
     message = " in case_reset "
     if request.method == 'GET':
 
@@ -97,29 +102,30 @@ def case_reset(request):
         case_id = request.GET['case_id']
 
         # load user details #
-        dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
+        dir_study_user_details = os.path.join(
+            dir_resources, study_id, 'user_details.json')
         with open(dir_study_user_details) as f:
             dict_user_2_details = json.load(f)
-        
+
         # remove case from completed list #
         dict_user_2_details[user_id]['cases_completed'].remove(case_id)
-        
+
         # save user details #
         with open(dir_study_user_details, 'w') as f:
             json.dump(dict_user_2_details, f)
-        
+
         message = "case_reset = SUCCESS"
 
     else:
         message = "not a GET. No action performed."
 
-    return HttpResponse(message)  
-    
+    return HttpResponse(message)
+
 
 def mark_complete(request):
     print(request.path_info)
-    
-    #if request.is_ajax():
+
+    # if request.is_ajax():
     message = " in mark_complete "
     if request.method == 'GET':
 
@@ -129,81 +135,97 @@ def mark_complete(request):
         case_id = request.GET['case_id']
 
         # load user details #
-        dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
+        dir_study_user_details = os.path.join(
+            dir_resources, study_id, 'user_details.json')
         with open(dir_study_user_details) as f:
             dict_user_2_details = json.load(f)
-        
+
         # remove case from completed list #
         dict_user_2_details[user_id]['cases_completed'].append(case_id)
-        
+
         # save user details #
         with open(dir_study_user_details, 'w') as f:
             json.dump(dict_user_2_details, f)
-        
+
         message = "mark_complete = SUCCESS"
 
     else:
         message = "not a GET. No action performed."
 
-    return HttpResponse(message)  
+    return HttpResponse(message)
+
 
 def mark_complete_url(request, study_id, user_id, case_id):
     print(request.path_info)
 
-    dir_study_user_details = os.path.join(dir_resources, study_id, 'user_details.json')   
+    dir_study_user_details = os.path.join(
+        dir_resources, study_id, 'user_details.json')
     with open(dir_study_user_details) as f:
         dict_user_2_details = json.load(f)
-    
+
     # remove case from completed list #
     dict_user_2_details[user_id]['cases_completed'].append(case_id)
-    
+
     # save user details #
     with open(dir_study_user_details, 'w') as f:
         json.dump(dict_user_2_details, f)
 
-    return select_case(request, study_id, user_id)  
+    return select_case(request, study_id, user_id)
+
+
 '''
 @api_view(['POST'])
 def save_selected_items(request, study_id, user_id, case_id):
     if request.method == 'POST':
         tutorial_data = JSONParser().parse(request)
         print(tutorial_data)
-        return JsonResponse('good', status=status.HTTP_201_CREATED) 
+        return JsonResponse('good', status=status.HTTP_201_CREATED)
         return JsonResponse('bad', status=status.HTTP_400_BAD_REQUEST)
-    
+
 
 '''
+
+
 def save_selected_items(request, study_id, user_id, case_id):
     if request.is_ajax():
         message = "Yes, AJAX!"
         if request.method == 'POST':
             selected_ids = json.loads(request.POST.get("selected_ids"))
-            dir_study_stored_results = os.path.join(dir_resources, study_id, 'stored_results.txt')  
+            dir_study_stored_results = os.path.join(
+                dir_resources, study_id, 'stored_results.txt')
             with open(dir_study_stored_results, 'a+') as f:
-                f.write(json.dumps({"user_id": user_id, "case_id": case_id, "selected_ids": selected_ids}) +'\n')
+                f.write(json.dumps(
+                    {"user_id": user_id, "case_id": case_id, "selected_ids": selected_ids}) + '\n')
     else:
         message = "Not Ajax"
-    
+
     return HttpResponse(message)
 
-@ensure_csrf_cookie    
+
+@ensure_csrf_cookie
 def case_viewer(request, study_id, user_id, case_id, time_step=0):
     print(request.path_info)
     time_step = int(time_step)
 
     ## load global files ##
     load_dir = os.path.join(dir_resources, study_id)
-    dict_case_2_details = json.load(open(os.path.join(load_dir, 'case_details.json'), 'r')) 
-    dict_data_layout = json.load(open(os.path.join(load_dir, 'data_layout.json'), 'r'))  
-    dict_user_2_details = json.load(open(os.path.join(load_dir, 'user_details.json'), 'r'))  
-    dict_variable_2_details = json.load(open(os.path.join(load_dir, 'variable_details.json'), 'r'))
- 
+    dict_case_2_details = json.load(
+        open(os.path.join(load_dir, 'case_details.json'), 'r'))
+    dict_data_layout = json.load(
+        open(os.path.join(load_dir, 'data_layout.json'), 'r'))
+    dict_user_2_details = json.load(
+        open(os.path.join(load_dir, 'user_details.json'), 'r'))
+    dict_variable_2_details = json.load(
+        open(os.path.join(load_dir, 'variable_details.json'), 'r'))
+
     ## load case specific files ##
     load_dir = os.path.join(dir_resources, study_id, 'cases_all', case_id)
-    dict_demographics = json.load(open(os.path.join(load_dir, 'demographics.json'), 'r'))
-    dict_notes = json.load(open(os.path.join(load_dir, 'note_panel_data.json'), 'r'))
-    dict_observations = json.load(open(os.path.join(load_dir, 'observations.json'), 'r'))
-
+    dict_demographics = json.load(
+        open(os.path.join(load_dir, 'demographics.json'), 'r'))
+    dict_notes = json.load(
+        open(os.path.join(load_dir, 'note_panel_data.json'), 'r'))
+    dict_observations = json.load(
+        open(os.path.join(load_dir, 'observations.json'), 'r'))
 
     ## define user instructions dict ##
     instructions = {}
@@ -220,6 +242,14 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
         if max_y == None:
             dict_variable_2_details[key]["dflt_y_axis_ranges"][1] = "null"
 
+    # This provides a way to associate the notes  with the tab they're in 
+    foo = list(dict_notes.keys())
+
+    enumerated_note_headers = {}
+    i = 0
+    while i < len(foo):
+        enumerated_note_headers[i] = foo[i - 1]
+        i += 1
 
     template = loader.get_template('SEMRinterface/case_viewer.html')
     context_dict = {
@@ -234,6 +264,7 @@ def case_viewer(request, study_id, user_id, case_id, time_step=0):
         'dict_user_details': dict_user_2_details[user_id],
         'dict_variable_2_details': dict_variable_2_details,
         'dict_demographics': dict_demographics,
+        'dict_enumerated_note_headers': foo,
         'dict_notes': dict_notes,
         'dict_observations': dict_observations,
         'test': 'test',
