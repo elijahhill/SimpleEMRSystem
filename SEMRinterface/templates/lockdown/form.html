@@ -1,0 +1,16 @@
+{% extends "lockdown/base.html" %}
+
+{% block content %}
+<div id="lockdown">
+
+    <p>Please enter the password to continue</p>
+
+    {% if form %}
+    <form action="" method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <p><input type="submit" value="Preview" /></p>
+    </form>
+    {% endif %}
+
+</div>
+{% endblock %}
