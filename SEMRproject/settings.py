@@ -160,13 +160,14 @@ TEMPLATES = [
             'context_processors': [
                 # Insert your TEMPLATE_CONTEXT_PROCESSORS here or use this
                 # list if you haven't customized them:
+                'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.i18n',
                 'django.template.context_processors.media',
                 'django.template.context_processors.static',
                 'django.template.context_processors.tz',
-                'django.contrib.messages.context_processors.messages',
             ]
         },
     },
@@ -180,9 +181,9 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'SEMRinterface',
-    'lockdown'
+    'lockdown',
     # Uncomment the next line to enable the admin:
-    # 'django.contrib.admin',
+    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
 )
@@ -219,3 +220,7 @@ LOGGING = {
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
+
+LOCKDOWN_PASSWORDS = ('letmein')
+
+LOCKDOWN_USERNAME = ('user')
