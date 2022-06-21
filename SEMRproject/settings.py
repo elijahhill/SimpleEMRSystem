@@ -185,7 +185,7 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
-    # 'django.contrib.admindocs',
+    'django.contrib.admindocs',
 )
 
 # A sample logging configuration. The only tangible logging
@@ -221,6 +221,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 
-LOCKDOWN_PASSWORDS = ('letmein')
-
-LOCKDOWN_USERNAME = ('user')
+LOCKDOWN_AUTHFORM_STAFF_ONLY = False

@@ -27,24 +27,21 @@ from django.conf.urls import include
 from django.urls import re_path
 from django.urls import path
 from .views import redirect_view
-from django.contrib import admin
 
 # Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+from django.contrib import admin
+admin.autodiscover()
 
 app_name = "SEMRinterface"
 
 urlpatterns = [
     path(r'', redirect_view),
     re_path(r'^SEMRinterface/', include('SEMRinterface.urls')),
-    re_path(r'admin/', admin.site.urls) 
+
+    # Uncomment the admin/doc line below to enable admin documentation:
+    re_path(r'admin/doc/', include('django.contrib.admindocs.urls')),
+
+    # Uncomment the next line to enable the admin:
+    re_path (r'admin/', admin.site.urls)
 ]
-
-
-# Uncomment the admin/doc line below to enable admin documentation:
-# url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-# Uncomment the next line to enable the admin:
-# url(r'^admin/', include(admin.site.urls)),
 

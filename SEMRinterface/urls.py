@@ -24,6 +24,7 @@ along with SimpleEMRSystem.  If not, see <https://www.gnu.org/licenses/>.
 """
 from django.urls import re_path
 from . import views
+from django.conf.urls import include
 
 # nothing is for home screen
 # \NUM\ is a patient id in demo mode
