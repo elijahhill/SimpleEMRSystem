@@ -37,7 +37,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ^ if using, you must undate the DATABASES content below. 
 # config = json.loads(json.load(open("SEMRproject/config.json", 'r')))
 
-DEBUG = True
+DEBUG = False
 
 ADMINS = (
     # ('Your Name', 'your_email@example.com'),
@@ -51,28 +51,10 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-'''
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': config['default_NAME'],  # Or path to database file if using sqlite3.
-        'USER': config['default_USER'],  # Not used with sqlite3.
-        'PASSWORD': config['default_PASSWORD'],  # Not used with sqlite3.
-        'HOST': config['default_HOST'],  # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': config['default_PORT'],  # Set to empty string for default. Not used with sqlite3.
-    },
-    'remote': {
-        'ENGINE': 'django.db.backends.mysql',   # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': config['remote_NAME'],          # Or path to database file if using sqlite3.
-        'USER': config['remote_USER'],          # Not used with sqlite3.
-        'PASSWORD': config['remote_PASSWORD'],  # Not used with sqlite3.
-        'HOST': config['remote_HOST'],          # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': config['remote_PORT'],          # Set to empty string for default. Not used with sqlite3.
-    }
-'''
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -110,7 +92,13 @@ MEDIA_URL = ''
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
+# STATIC_ROOT = BASE_DIR.child('static')
+
 STATIC_ROOT = ''
+
+# STATICFILES_DIRS = (
+#     BASE_DIR.child('myapp').child('static'),
+# )
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
