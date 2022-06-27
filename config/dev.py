@@ -1,7 +1,7 @@
 """Gunicorn *development* config file"""
 
 # Django WSGI application path in pattern MODULE_NAME:VARIABLE_NAME
-wsgi_app = "SEMRinterface.wsgi:application"
+wsgi_app = "SEMRproject.wsgi:application"
 # The granularity of Error log outputs
 loglevel = "debug"
 # The number of worker processes for handling requests
