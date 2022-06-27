@@ -100,16 +100,4 @@ SEMRenv/Scripts/psgsettings.exe
 SEMRenv/Scripts/psgupgrade.exe
 SEMRenv/Scripts/psgver.exe
 
-
-
-SEMRenv/Scripts/fonttools.exe
-SEMRenv/Scripts/pip-review.exe
-SEMRenv/Scripts/pyftmerge.exe
-SEMRenv/Scripts/pyftsubset.exe
-SEMRenv/Scripts/rend.exe
-SEMRenv/Scripts/ttx.exe
-SEMRenv/share/man/man1/ttx.1
-SEMRenv/Scripts/pip3.10.exe
-
 SEMRenv/*
-SEMRenv/Scripts/pip3.10.exe
