@@ -49,7 +49,7 @@
 	</p>
 	<table width="50%" border="1"><tr><th>Study</th></tr>
     {% for study_id in list_study_id %}
-            <tr><th><a href="http://127.0.0.1:8000/SEMRinterface/{{ study_id }}/"><button>{{ study_id }}</button></a> </th></tr>
+            <tr><th><a href="{{ study_id }}/"><button>{{ study_id }}</button></a> </th></tr>
     {% endfor %}
     </table>
 
