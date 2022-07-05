@@ -1,3 +1,4 @@
+{% load static %}
 {% load custom_tags %}
 <!DOCTYPE html>
 <html lang="en" xml:lang="en">
@@ -5,20 +6,19 @@
     <meta name="CaseViewer" content="A simple way to view patient cases">
     <title>SEMR</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/custom_css/bs_3.css" rel="stylesheet">
-	<link rel="icon" href="/static/S.ico" type="image/x-icon" />
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+    <link href="{% static 'custom_css/bs_3.css' %}" rel="stylesheet">
+    <link rel="icon" href="{% static 'S.ico' %}" type="image/x-icon">
+
 
     <!-- Collect the nav links, forms, and other content for toggling -->
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <!-- Scrips for when you have an internet connetion
-    <script src="https://code.jquery.com/jquery.js" type="text/javascript"></script>
-    <script src="http://code.highcharts.com/stock/highstock.js"  type="text/javascript"></script>
     Otherwise load local versions below-->
-    <script src="/static/jcode/jquery.js"></script>
-    <script src="/static/jcode//highstock.js"></script>
-    <script src="/static/js/bootstrap.min.js"></script>
-    <script src="/static/js/emr_3.js"></script>
+    <script src="{% static 'jcode/jquery.js' %}"></script>
+    <script src="{% static 'jcode/highstock.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/emr_3.js' %}"></script>
 </head>
 <body>
 <div class="glyphicon glyphicon-refresh" id="loading_new_patient"></div> <!-- this glyphicon blurrs the screen on loading -->
@@ -34,37 +34,6 @@
 
 	<!-- Demographics bar -->
 	<div class="row">
-		<!-- <nav class="collapse navbar-collapse navbar-inverse ">
-		{{ STATIC_URL }}
-				<div class="col-md-6">
-					<ul class="navbar-nav mr-auto">
-						<li>
-                            <a href="/SEMRinterface/{{study_id}}/{{user_id}}/">
-                                <span class="navbar-brand glyphicon glyphicon-home" aria-hidden="false" style="color:greenyellow"></span>
-                            </a>
-                        </li>
-						{% for item in dict_data_layout.title_bar %}
-							<p class="navbar-item" style="color:#f5f5f5;">{{ item }}: {{ dict_demographics|keyvalue:item }}</p>
-						{% endfor %}
-						<p class="navbar-text" style="color:#f5f5f5;background-color:#222222;width:300px;" id="selectedP">&nbsp;<span id="selectedTime" class="glyphicon glyphicon-option-vertical" aria-hidden="true" style="color:black"></span></p>
-					</ul>
-				</div>
-				<div class="col-md-6">
-					<p class="navbar-item" style="color:#f5f5f5;"> Selector: </p>
-					<div class="chartcolTS" id="time_selector">
-						<script>
-						{% autoescape off %}
-						set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
-						set_next_step_url();
-						getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
-						{% endautoescape %}
-						</script>
-					</div>
-                <p class="navbar-item" style="color:#f5f5f5" id="selectedTimes"></p>
-			</div>
-			
-		</nav> -->
-
         <nav class="navbar navbar-dark col-md-12" id="top-nav">
             <ul class="navbar-nav un-bulleted"> 
                 <li>

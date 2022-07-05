@@ -37,13 +37,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # ^ if using, you must undate the DATABASES content below. 
 # config = json.loads(json.load(open("SEMRproject/config.json", 'r')))
 
-DEBUG = False
-
-ADMINS = (
-    # ('Your Name', 'your_email@example.com'),
-)
-
-MANAGERS = ADMINS
+try:
+    environment_debug = os.environ["DJANGO_DEBUG"]
+    DEBUG = (environment_debug == "True")
+except KeyError as e:
+    raise RuntimeError("Could not find a DJANGO_DEBUG in environment") from e
 
 DATABASES = {
         'default': {
@@ -94,7 +92,7 @@ MEDIA_URL = ''
 # Example: "/home/media/media.lawrence.com/static/"
 # STATIC_ROOT = BASE_DIR.child('static')
 
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 # STATICFILES_DIRS = (
 #     BASE_DIR.child('myapp').child('static'),
@@ -109,6 +107,7 @@ STATICFILES_DIRS = (
     # Put strings here, like "/home/html/static" or "C:/www/django/static".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
+    os.path.join(BASE_DIR, 'SEMRinterface/static/'),
 )
 
 # List of finder classes that know how to find static files in

@@ -3,27 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-   	<link rel="icon" href="/static/S.ico" type="image/x-icon" />
+     <link rel="icon" href="{% static 'S.ico' %}" type="image/x-icon">
+    <link href="{% static 'custom_css/bs_3.css' %}" rel="stylesheet">
 
-    <style type="text/css">
-        .info-div {
-            padding-left: 10px;
-            padding-right: 10px;
-            width: 1200px;
-            background-color: #DCDCDC;
-            text-align: left;
-            border-radius: 3px;
-        }
-        </style>
-
-    <script src="/static/jcode/jquery.js"></script>
-	<script>	
-	   /* function caseReset(caseId, url) {
-			console.log(url);
-			$.get(url, function(){$(this).attr('disabled', true);$('#select'+caseId).attr('disabled', false);});
-			console.log('bbbbbb');
-		}*/
-		
+    <script src="{% static 'jcode/jquery.js' %}"></script>
+	<script>			
 		function caseReset(caseId, url) {
 		  var xhttp = new XMLHttpRequest();
 		  xhttp.onreadystatechange = function() {
@@ -89,7 +73,7 @@
 	<table width="50%" border="1"><tr><th>Case Id</th><th>Case Completed</th><th>Actions</tr>
     {% for case_id in list_cases_assigned %}
             {% if case_id in list_cases_completed %}
-				<tr><th><a href="http://127.0.0.1:8000/SEMRinterface/{{ study_id }}/{{ user_id }}/{{ case_id }}/">
+				<tr><th><a href="{{ case_id }}/">
 					<button id="select{{ case_id }}" disabled>{{ case_id }}</button></a> </th>
 				<th>Yes</th>
 				<th> 				
@@ -98,13 +82,13 @@
 					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'http://127.0.0.1:8000/SEMRinterface/markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Mark Complete</button> 
 				</th>	
 			{% else %}
-				<tr><th><a href="http://127.0.0.1:8000/SEMRinterface/{{ study_id }}/{{ user_id }}/{{ case_id }}/">
+				<tr><th><a href="{{ case_id }}/">
 					<button id="select{{ case_id }}">{{ case_id }}</button></a> </th>
 				<th>No</th>
 				<th> 
-					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'http://127.0.0.1:8000/SEMRinterface/markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Mark Complete</button> 
+					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Mark Complete</button> 
 					
-					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'http://127.0.0.1:8000/SEMRinterface/casereset/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Reset</button> 				
+					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'casereset/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Reset</button> 				
 					
 				</th>	
 			{% endif %}
@@ -112,7 +96,7 @@
     {% endfor %}
     </table>
 	<p> 
-		<a href="http://127.0.0.1:8000/SEMRinterface/{{ study_id }}/"><button>Return to User Selection</button></a>
+		<a href="{ study_id }}/"><button>Return to User Selection</button></a>
 	</p>
 
 </div>

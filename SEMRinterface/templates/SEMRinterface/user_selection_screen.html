@@ -3,20 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="icon" href="/static/S.ico" type="image/x-icon" />
+    <link rel="icon" href="{% static 'S.ico' %}" type="image/x-icon">
+    <link href="{% static 'custom_css/bs_3.css' %}" rel="stylesheet">
 
-    <style type="text/css">
-        .info-div {
-            padding-left: 10px;
-            padding-right: 10px;
-            width: 1200px;
-            background-color: #DCDCDC;
-            text-align: left;
-            border-radius: 3px;
-        }
-        </style>
-
-    <script src="/static/jcode/jquery.js"></script>
+    <script src="{% static 'jcode/jquery.js' %}"></script>
     <script>
     $(document).ready(function(){
         is_full_screen();
