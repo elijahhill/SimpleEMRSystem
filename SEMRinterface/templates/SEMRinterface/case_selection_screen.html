@@ -78,9 +78,8 @@
 					<button id="select{{ case_id }}" disabled>{{ case_id }}</button></a> </th>
 				<th>Yes</th>
 				<th> 				
-					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'http://127.0.0.1:8000/SEMRinterface/casereset/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Reset</button> 
-					
-					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'http://127.0.0.1:8000/SEMRinterface/markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Mark Complete</button> 
+					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Reset</button> 
+					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Mark Complete</button> 
 				</th>	
 			{% else %}
 				<tr><th><a href="{{ case_id }}/">
@@ -96,9 +95,6 @@
 			</tr>
     {% endfor %}
     </table>
-	<p> 
-		<a href="{ study_id }}/"><button>Return to User Selection</button></a>
-	</p>
 
 </div>
 
