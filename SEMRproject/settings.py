@@ -214,5 +214,5 @@ LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
 CSRF_TRUSTED_ORGINS = [
-    'https://www.simplifiedsemr.com'
+    'https://*.simplifiedsemr.com'
 ]
