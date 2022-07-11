@@ -211,10 +211,12 @@ LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
 CSRF_TRUSTED_ORGINS = [
     'www.simplifiedsemr.com', 
+    'https://www.simplifiedsemr.com'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'www.simplifiedsemr.com',
+    'https://www.simplifiedsemr.com'
 ]
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
