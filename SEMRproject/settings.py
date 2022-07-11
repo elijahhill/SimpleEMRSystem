@@ -213,14 +213,16 @@ CSRF_TRUSTED_ORGINS = [
     'simplifiedsemr.com',
     'https://simplifiedsemr.com',
     'www.simplifiedsemr.com', 
-    'https://www.simplifiedsemr.com'
+    'https://www.simplifiedsemr.com',
+    'https://*.simplifiedsemr.com'
 ]
 
 CORS_ORIGIN_WHITELIST = [
     'simplifiedsemr.com',
     'https://simplifiedsemr.com',
     'www.simplifiedsemr.com',
-    'https://www.simplifiedsemr.com'
+    'https://www.simplifiedsemr.com',
+    'https://*.simplifiedsemr.com'
 ]
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
@@ -229,5 +231,6 @@ ALLOWED_HOSTS = [
     'simplifiedsemr.com',
     'https://simplifiedsemr.com',
     'www.simplifiedsemr.com',
-    'https://www.simplifiedsemr.com'
+    'https://www.simplifiedsemr.com',
+    'https://*.simplifiedsemr.com'
 ]
