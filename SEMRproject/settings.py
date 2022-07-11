@@ -50,10 +50,6 @@ DATABASES = {
     }
 }
 
-# Hosts/domain names that are valid for this site; required if DEBUG is False
-# See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
-
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.
@@ -215,5 +211,17 @@ LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
 CSRF_TRUSTED_ORGINS = [
     'https://*.simplifiedsemr.com', 
+    'https://*.127.0.0.1'
+]
+
+CORS_ORIGIN_WHITELIST = [
+    'https://*.simplifiedsemr.com',
+    'https://*.127.0.0.1'
+]
+
+# Hosts/domain names that are valid for this site; required if DEBUG is False
+# See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
+ALLOWED_HOSTS = [
+    'https://*.simplifiedsemr.com',
     'https://*.127.0.0.1'
 ]
