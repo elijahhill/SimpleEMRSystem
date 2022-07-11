@@ -209,16 +209,15 @@ LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 
 LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
-# CSRF_TRUSTED_ORIGINS = [
-#     'https://*.simplifiedsemr.com',
-#     'simplifiedsemr.com',
-#     'https://simplifiedsemr.com',
-#     'www.simplifiedsemr.com', 
-#     'https://www.simplifiedsemr.com',
-    
-# ]
+CSRF_TRUSTED_ORIGINS = [
+    'https://*.simplifiedsemr.com',
+    'simplifiedsemr.com',
+    'https://simplifiedsemr.com',
+    'www.simplifiedsemr.com', 
+    'https://www.simplifiedsemr.com',
+]
 
-CSRF_TRUSTED_ORIGINS = ["*"]
+# CSRF_TRUSTED_ORIGINS = ["*"]
 
 # CORS_ORIGIN_WHITELIST = [
 #     'https://*.simplifiedsemr.com',
