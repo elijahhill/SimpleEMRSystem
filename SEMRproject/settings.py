@@ -210,11 +210,7 @@ LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://*.simplifiedsemr.com',
-    'simplifiedsemr.com',
-    'https://simplifiedsemr.com',
-    'www.simplifiedsemr.com', 
-    'https://www.simplifiedsemr.com',
+    'https://*.simplifiedsemr.com'
 ]
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
