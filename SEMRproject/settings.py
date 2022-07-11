@@ -209,28 +209,33 @@ LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 
 LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
-CSRF_TRUSTED_ORGINS = [
-    'simplifiedsemr.com',
-    'https://simplifiedsemr.com',
-    'www.simplifiedsemr.com', 
-    'https://www.simplifiedsemr.com',
-    'https://*.simplifiedsemr.com'
-]
+# CSRF_TRUSTED_ORIGINS = [
+#     'https://*.simplifiedsemr.com',
+#     'simplifiedsemr.com',
+#     'https://simplifiedsemr.com',
+#     'www.simplifiedsemr.com', 
+#     'https://www.simplifiedsemr.com',
+    
+# ]
 
-CORS_ORIGIN_WHITELIST = [
-    'simplifiedsemr.com',
-    'https://simplifiedsemr.com',
-    'www.simplifiedsemr.com',
-    'https://www.simplifiedsemr.com',
-    'https://*.simplifiedsemr.com'
-]
+CSRF_TRUSTED_ORIGINS = ["*"]
+
+# CORS_ORIGIN_WHITELIST = [
+#     'https://*.simplifiedsemr.com',
+#     'simplifiedsemr.com',
+#     'https://simplifiedsemr.com',
+#     'www.simplifiedsemr.com',
+#     'https://www.simplifiedsemr.com'
+# ]
+
+CORS_ORIGIN_ALLOW_ALL = True
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
+    'https://*.simplifiedsemr.com',
     'simplifiedsemr.com',
     'https://simplifiedsemr.com',
     'www.simplifiedsemr.com',
-    'https://www.simplifiedsemr.com',
-    'https://*.simplifiedsemr.com'
+    'https://www.simplifiedsemr.com'
 ]
