@@ -210,18 +210,15 @@ LOCKDOWN_FORM = 'lockdown.forms.AuthForm'
 LOCKDOWN_AUTHFORM_STAFF_ONLY = False
 
 CSRF_TRUSTED_ORGINS = [
-    'https://*.simplifiedsemr.com', 
-    'https://*.127.0.0.1'
+    'https://www.simplifiedsemr.com', 
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    'https://*.simplifiedsemr.com',
-    'https://*.127.0.0.1'
+    'https://www.simplifiedsemr.com',
 ]
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'https://*.simplifiedsemr.com',
-    'https://*.127.0.0.1'
+    'https://www.simplifiedsemr.com',
 ]
