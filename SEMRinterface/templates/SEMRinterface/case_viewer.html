@@ -76,10 +76,10 @@
 	<!-- All Panels -->
 	<div class="row">
 		<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
-		<div class="col-lg-8 scroll-box">
+		<div class="col-lg-8 no-pad scroll-box">
 			<!-- Risk Score and Vitals Panel -->
-			<div class="col-lg-3 vitmedbox scroll-box">
-				<div class="col-lg-12 half-vitmedbox scroll-box" id="vit_tracking">
+			<div class="col-lg-3 vitmedbox no-pad">
+				<div class="col-lg-12 half-vitmedbox no-pad" id="vit_tracking">
 					{% for group in dict_data_layout.risk_score_and_vitals %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -93,8 +93,8 @@
 			<!-- End of Risk Score and Vitals Panel -->
 			
 			<!-- Neurology Panel -->
-			<div class="col-lg-3 vitmedbox scroll-box">
-				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+			<div class="col-lg-3 vitmedbox no-pad">
+				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.neurology %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -108,8 +108,8 @@
 			<!-- End of Neurology Panel -->
 
 			<!-- Blood Gas CBC Lactate Panel -->
-			<div class="col-lg-3 vitmedbox scroll-box">
-				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+			<div class="col-lg-3 vitmedbox no-pad">
+				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -123,8 +123,8 @@
 			<!-- End of Blood Gas CBC Lactate Panel -->
 
 			<!-- Chemistry Panel -->
-			<div class="col-lg-3 vitmedbox scroll-box">
-				<div class="col-lg-12 medbox scroll-box" id="med_tracking">
+			<div class="col-lg-3 vitmedbox no-pad">
+				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.chemistry %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -153,8 +153,8 @@
         
 
 		<!-- Note Panel -->
-		<div class="col-lg-4 notetaskbox scroll-box">
-			<div class="col-lg-12 notebox scroll-box">
+		<div class="col-lg-4 notetaskbox no-pad">
+			<div class="col-lg-12 notebox no-pad">
                 <ul class="nav nav-tabs" id="myTab" role="tablist">
                     {% for group in dict_notes %}
                         <li class="nav-item">
@@ -163,30 +163,15 @@
                     {% endfor %}
                 </ul>
                 <div class="contentArea tab-content">
-                    <!-- A note type can contain multiple notes within it -->
-                    <!-- {% for key, val in dict_notes.items %}
-                        <div>{{ key }}</div>
-                        <div>{{ val }}</div>
-                        <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">{{ val.0.text }}</div>
-                    {% endfor %} -->
-
                     {% for key, val in dict_notes.items %}
-                        <!-- TODO: Need to filter the note based on the category, somehow need to assign numbers to the notes dictionary, same order as in the for loop -->
-                        <!-- Check whether the info pulled from dictionary matches the tab clicked on-->
-                        <!-- <div>{{ key }}</div>
-                        <div>{{ val }}</div> -->
-
-                        {% with count=forloop.counter %}
-                        
                         <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">
-                            <div>{{ val.text|linebreaks }}</div>
+                            <div class="scroll-box">{{ val.text|linebreaks }}</div>
                         </div>
-                        {% endwith %}
                     {% endfor %}
                 </div>
 			</div>
 
-			<div class="col-lg-12 taskbox scroll-box t-border">
+			<div class="col-lg-12 taskbox no-pad t-border">
 				<div id="task" class="note task"><br>
 				{{ instructions }}
 					<hr>Then click
@@ -194,16 +179,6 @@
 				</div>
 			</div>
 		</div>
-
-        {% comment %}
-            {% for elem in val %}
-
-
-            {% endfor %}
-            {{ % if  == val.type %}}
-            {{ elem.text }}
-            {{ % endif %}}
-        {% endcomment %}
 		<!-- end of Note Panel -->
 	</div>
 </div>

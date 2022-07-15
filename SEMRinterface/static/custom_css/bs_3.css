@@ -66,19 +66,8 @@ ul {
     min-width: 100%;
 }
 
-.labbox{
-    height: 88.1vh;
+.scroll-box{
     overflow-y: scroll;
-    overflow-x: hidden;
-    /*padding-top: 35px;*/
-}
-
-.notebox{
-    /* TODO: The height here is a hack, need to have the taskbox positioned at bottom*/
-    height: 63.1vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .taskbox{
@@ -88,37 +77,27 @@ ul {
 }
 
 .notetaskbox{
-    height: 95.3vh;
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .vitmedbox{
-    /* height: 88.1vh; */
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .medbox{
-    /* height: 88.1vh; */
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .half-vitmedbox{
-    /* height: 70vh; */
-    overflow-y: scroll;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .micro-vitmedbox{
     height: 18vh;
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .t-border{
@@ -130,7 +109,6 @@ ul {
     border-width:1px;
     border-color: #888888;
     background: #fbfbfb;
-    /*display: none;  this might be a temporary change */
     padding-right: 0;
     padding-left: 0;
 }
@@ -162,7 +140,7 @@ ul {
     border-style: solid;
 }
 
-.scroll-box{
+.no-pad{
     padding-right:0;
     padding-left:0;
 }
@@ -240,7 +218,6 @@ a:active {
     background: #e8e8e8;
     font-weight: bold;
     letter-spacing: normal;
-    text-indent:50px;
     float:left;
     text-align: center;
 }
