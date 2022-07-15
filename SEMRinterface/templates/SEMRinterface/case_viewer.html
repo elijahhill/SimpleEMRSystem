@@ -179,13 +179,7 @@
                         {% with count=forloop.counter %}
                         
                         <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">
-                            <div>blah{{ forloop.counter }}</div>
-                            {% comment %}
-                            <!-- <div>test</div> -->
-                            {{ count }}
-                            {{dict_enumerated_note_headers[count]}}
-                            
-                            {% endcomment %}
+                            <div>{{ val.text|linebreaks }}</div>
                         </div>
                         {% endwith %}
                     {% endfor %}
