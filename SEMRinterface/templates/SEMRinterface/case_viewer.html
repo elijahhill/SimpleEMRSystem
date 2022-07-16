@@ -62,7 +62,6 @@
                 <script>
                 {% autoescape off %}
                 var width = document.getElementById("time_selector").offsetWidth;
-                console.log(width);
                 set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
                 set_next_step_url();
                 getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}}, width);
@@ -155,8 +154,14 @@
 			<div class="col-lg-12 notebox no-pad">
                 <ul class="nav nav-tabs" id="notes-tab" role="tablist">
                     {% for group in dict_notes %}
-                        <li class="nav-item">
-                            <a class="nav-link" data-toggle="tab" href="#tab{{forloop.counter}}"role="tab">{{ group }}</a>
+                        <li class="nav-item" tabindex="{{forloop.counter}}">
+                            <a 
+                                class="nav-link" 
+                                data-toggle="tab" 
+                                href="#tab{{forloop.counter}}" 
+                                role="tab"
+                                id="#nav-tab{{forloop.counter}}"
+                            >{{ group }}</a>
                         </li>
                     {% endfor %}
                 </ul>
