@@ -38,8 +38,24 @@ $(document).ready(function () {
 
     $('#directions_button').removeAttr("disabled");
     $('#break_button').removeAttr("disabled");
-
+    setDivHeights();
 });
+
+$(window).resize(
+    setDivHeights()
+);
+
+function setDivHeights() {
+    var totalHeight = $(document).height();
+    var topNavHeight = $("#top-nav").outerHeight();
+    var notesTabHeight = $("#notes-tab").outerHeight();
+    var continueAreaHeight = $("#continue-area").outerHeight();
+
+    $("#graphs-box").height(totalHeight - topNavHeight);
+    $(".note-content").outerHeight(
+        totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
+    );
+}
 
 function getCookie(name) {
     let cookieValue = null;

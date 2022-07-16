@@ -33,7 +33,7 @@
 	<!-- end of Introduction popup -->
 
 	<!-- Demographics bar -->
-	<div class="row">
+	<div class="row h-8">
         <nav class="navbar navbar-dark col-md-12" id="top-nav">
             <ul class="navbar-nav un-bulleted"> 
                 <li>
@@ -74,9 +74,9 @@
 	<!-- end of Demographics bar -->
 
 	<!-- All Panels -->
-	<div class="row">
+	<div class="row" id="panels-container">
 		<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
-		<div class="col-lg-8 no-pad scroll-box">
+		<div class="col-lg-8 no-pad scroll-box" id="graphs-box">
 			<!-- Risk Score and Vitals Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 half-vitmedbox no-pad" id="vit_tracking">
@@ -150,12 +150,10 @@
 			{% endfor %}
 		</div>
 
-        
-
-		<!-- Note Panel -->
+        <!-- Note Panel -->
 		<div class="col-lg-4 notetaskbox no-pad">
 			<div class="col-lg-12 notebox no-pad">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-tabs" id="notes-tab" role="tablist">
                     {% for group in dict_notes %}
                         <li class="nav-item">
                             <a class="nav-link" data-toggle="tab" href="#tab{{forloop.counter}}"role="tab">{{ group }}</a>
@@ -164,22 +162,24 @@
                 </ul>
                 <div class="contentArea tab-content">
                     {% for key, val in dict_notes.items %}
-                        <div class="tab-pane fade" id="tab{{forloop.counter}}" role="tabpanel">
-                            <div class="scroll-box">{{ val.text|linebreaks }}</div>
+                        <div class="tab-pane fade scroll-box note-content" id="tab{{forloop.counter}}" role="tabpanel">
+                            <div>{{ val.text|linebreaks }}</div>
                         </div>
                     {% endfor %}
                 </div>
 			</div>
 
-			<div class="col-lg-12 taskbox no-pad t-border">
-				<div id="task" class="note task"><br>
-				{{ instructions }}
-					<hr>Then click
-					<input id='next_screen_button' type="button" value="continue" onclick="link_advance();"></input>
+			<div class="col-lg-12 taskbox no-pad t-border" id="continue-area">
+				<p class="continue-margin">{{ instructions }}</p>
+                <hr>
+                <p class="continue-margin">Then click
+                    <input id='next_screen_button' type="button" value="continue" onclick="link_advance();"></input>
+                </p>
 				</div>
 			</div>
 		</div>
 		<!-- end of Note Panel -->
+
 	</div>
 </div>
 <!-- end of All Panels -->
