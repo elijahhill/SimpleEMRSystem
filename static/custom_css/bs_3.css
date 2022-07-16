@@ -35,6 +35,11 @@ ul {
 
 #case_body{
     height: 100vh;
+    overflow-y: auto;
+}
+
+#graphs-box {
+    height: 92vh;
 }
 
 #home-button {
@@ -47,6 +52,7 @@ ul {
     margin-right: 0 !important;
     padding: 0;
     margin-bottom: 0;
+    border-radius: 0;
 }
 
 #loading_new_patient {
@@ -62,63 +68,48 @@ ul {
     background-position: center;
 }
 
+.continue-margin {
+    margin-left: 15px;
+    margin-right: 15px;
+    margin-top: 15px;
+}
+
 .container{
     min-width: 100%;
 }
 
-.labbox{
-    height: 88.1vh;
+.scroll-box{
     overflow-y: scroll;
-    overflow-x: hidden;
-    /*padding-top: 35px;*/
-}
-
-.notebox{
-    /* TODO: The height here is a hack, need to have the taskbox positioned at bottom*/
-    height: 63.1vh;
-    overflow-y: hidden;
-    overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .taskbox{
-    height: 25vh;
+    height: 20vh;
     background: rgba(81, 245, 235, 0.8);
     overflow-x: hidden;
 }
 
 .notetaskbox{
-    height: 95.3vh;
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .vitmedbox{
-    /* height: 88.1vh; */
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .medbox{
-    /* height: 88.1vh; */
-    overflow-y: scroll;
     overflow-x: hidden;
 }
 
 .half-vitmedbox{
-    /* height: 70vh; */
-    overflow-y: scroll;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .micro-vitmedbox{
     height: 18vh;
     overflow-y: hidden;
     overflow-x: hidden;
-    /*padding-top: 35px;*/
 }
 
 .t-border{
@@ -130,7 +121,6 @@ ul {
     border-width:1px;
     border-color: #888888;
     background: #fbfbfb;
-    /*display: none;  this might be a temporary change */
     padding-right: 0;
     padding-left: 0;
 }
@@ -162,7 +152,7 @@ ul {
     border-style: solid;
 }
 
-.scroll-box{
+.no-pad{
     padding-right:0;
     padding-left:0;
 }
@@ -240,7 +230,6 @@ a:active {
     background: #e8e8e8;
     font-weight: bold;
     letter-spacing: normal;
-    text-indent:50px;
     float:left;
     text-align: center;
 }
@@ -333,11 +322,7 @@ a:active {
     overflow: auto;
 }
 
-.note{
-    margin: 15px;
-}
-
-.task {
+#continue-area {
     font-size: 16px;
 }
 
