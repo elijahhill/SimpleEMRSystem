@@ -31,15 +31,31 @@ $(document).ready(function () {
         $(window).trigger('resize')
     });
 
-    $("#progress-notes").addClass('active');
-
     // Update extremes which hides items that do not have data within current time selection
     updateExtremes();
 
     $('#directions_button').removeAttr("disabled");
     $('#break_button').removeAttr("disabled");
+    setDivHeights();
 
+    $('#nav-tab1').trigger('click');
 });
+
+$(window).resize(
+    setDivHeights()
+);
+
+function setDivHeights() {
+    var totalHeight = $(document).height();
+    var topNavHeight = $("#top-nav").outerHeight();
+    var notesTabHeight = $("#notes-tab").outerHeight();
+    var continueAreaHeight = $("#continue-area").outerHeight();
+
+    $("#graphs-box").height(totalHeight - topNavHeight);
+    $(".note-content").outerHeight(
+        totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
+    );
+}
 
 function getCookie(name) {
     let cookieValue = null;
