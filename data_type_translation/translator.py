@@ -132,11 +132,15 @@ class StudyCreator:
             all_user_details[user] = user_details
         return all_user_details
 
-    def __create_case_details(self, case_ids: set, min_time: float = 1352687400000.0, max_time: float = 1352946600000.0) -> Dict:
+    def __create_case_details(self, case_ids: set, case_times: DataFrame, min_time: float = 1352687400000.0, max_time: float = 1352946600000.0) -> Dict:
         print("Creating case details")
         all_case_details = {}
         for case_id in case_ids:
-
+            patient_case_times = case_times[case_times["patient_id"] == int(case_id)]
+            hours_list = patient_case_times["hours_since_first_vitals"].reset_index(drop=True)
+            min_time = self.__add_to_start_time(float(hours_list[0]))
+            max_time = self.__add_to_start_time(
+                float(hours_list[len(hours_list) - 1]))
             details_list = [
                 {
                     "min_t": min_time,
@@ -219,10 +223,29 @@ class StudyCreator:
 
         df.dropna(subset=["patient_id"], inplace=True)
 
-        numeric_ids = pd.to_numeric(
-            arg=df["patient_id"], errors='raise', downcast='integer')
-
-        case_ids = set(numeric_ids)
+        case_ids = set([
+            1065120,
+            864861,
+            162271,
+            2799629,
+            2359711,
+            741698,
+            104203,
+            1801961,
+            68584,
+            104203,
+            2259947,
+            3090951,
+            922438,
+            922438,
+            2821216,
+            1802864,
+            182065,
+            2132184,
+            2062750,
+            104203,
+            97759
+        ])
 
         case_ids_str_list = list(map(lambda elem: str(elem), case_ids))
 
@@ -232,9 +255,9 @@ class StudyCreator:
         with open(f"{output_folder_path}/user_details.json", "w+") as fp:
             json.dump(obj=user_details, fp=fp, indent=4)
 
-        case_ids = set(df["patient_id"])
+        # case_ids = set(df["patient_id"])
         case_details = self.__create_case_details(
-            hospitalrisk_df=df, case_ids=case_ids_str_list)
+            case_ids=case_ids_str_list, case_times=df[["patient_id", "hours_since_first_vitals"]])
         with open(f"{output_folder_path}/case_details.json", "w+") as fp:
             json.dump(obj=case_details, fp=fp, indent=4)
 
@@ -259,21 +282,20 @@ class StudyCreator:
         hospitalrisk_path = data_paths.get_hospitalrisk_demo()
         hospitalrisk_df = pd.read_csv(hospitalrisk_path)
 
-        keys = set(hospitalrisk_df["patient_id"])
         translation = self.__get_translation(current_path=current_path)
 
         # Need to grab all of the potential user id's, those will be the keys
-        for key in keys:
-            print(f"Creating case: {key}")
+        for case_id in case_ids:
+            print(f"Creating case: {case_id}")
             # Create id folder
             try:
-                patient_path = cases_path / str(key)
+                patient_path = cases_path / str(case_id)
                 patient_path.mkdir(parents=False, exist_ok=False)
             except:
                 pass
 
             # Will need to create demographics for each user
-            demographics_info = hospitalrisk_df[hospitalrisk_df["patient_id"] == key]
+            demographics_info = hospitalrisk_df[hospitalrisk_df["patient_id"] == case_id]
             # TODO: Need - Weight, Height, and BMI
             # Getting iloc[0] as not doing so returns a series with the index and value
             demographics_dict = {
@@ -283,7 +305,7 @@ class StudyCreator:
                 "sex": demographics_info["sex"].iloc[0],
                 "race": demographics_info["race"].iloc[0],
                 "height": 0,
-                "id": key
+                "id": case_id
             }
 
             try:
@@ -334,7 +356,7 @@ class StudyCreator:
             # Creating an observations file by modifying the observations.json template created
 
             hospitalrisk_keys = translation.keys()
-            one_patient = df[df["patient_id"] == key]
+            one_patient = df[df["patient_id"] == case_id]
 
             with open(f"{current_path}/observations.json", "r") as fp:
                 observations_template = json.load(fp)
