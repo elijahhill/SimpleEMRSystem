@@ -1,5 +1,6 @@
 {
     "hospitalrisk_path": "",
     "output_path": "",
-    "hospitalrisk_demo_path": ""
+    "hospitalrisk_demo_path": "",
+    "progress_note_cases_path": ""
 }
