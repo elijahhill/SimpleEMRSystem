@@ -1,6 +1,8 @@
 import json
 import re
+
 from pathlib import Path
+from docx import Document
 
 from os import listdir as os_listdir
 from os.path import isdir as os_isdir
