@@ -200,7 +200,7 @@ class StudyCreator:
         '''
         Creates a study
         '''
-        print("Fetching data")
+        print("Fill out the file path window to continue")
         current_path = path.dirname(__file__)
         data_paths = self.__get_data_paths(current_path=current_path)
         hospitalrisk_path = data_paths.get_hospitalrisk_path()
