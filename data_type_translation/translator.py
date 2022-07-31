@@ -6,10 +6,9 @@ from pandas.core.frame import DataFrame
 from os import path
 import PySimpleGUI as sg
 from docx import Document
-from os.path import isdir as os_isdir
-from os import listdir as os_listdir
 import re
 
+from notes import Notes
 from demographics import Demographics
 
 
@@ -208,18 +207,9 @@ class StudyCreator:
         hospitalrisk_path = data_paths.get_hospitalrisk_path()
         output_folder_path = data_paths.get_output_path()
         progress_notes_path = data_paths.get_progress_note_cases()
-        patient_folder_paths = {}
+        
 
-        # TODO: Need to list all of the directories and then stick them in the patient_folder_paths
-        overall_note_folder = os_listdir(progress_notes_path)
-        id_matcher = re.compile("\d{4,}")
-        for case_note_folder in overall_note_folder:
-            potential_case_folder = Path(progress_notes_path) / case_note_folder
-            if os_isdir(potential_case_folder):
-                patient_id_match = id_matcher.search(potential_case_folder.stem)
-                if patient_id_match != None:
-                    patient_id = int(patient_id_match.group(0))
-                    patient_folder_paths[patient_id] = potential_case_folder
+        
 
         df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
 
@@ -287,47 +277,18 @@ class StudyCreator:
         translation = self.__get_translation(current_path=current_path)
 
         demographics_creator = Demographics()
+        note_creator = Notes(progress_notes_path=progress_notes_path)
         # Need to grab all of the potential user id's, those will be the keys
         for case_id in case_ids:
             patient_path = cases_path / str(case_id)
             patient_path.mkdir(parents=False, exist_ok=True)
 
             demographics_creator.create_demographics(case_id=case_id, patient_path=patient_path, hospitalrisk_df=hospitalrisk_df)
+            note_creator.create_notes(patient_path=patient_path, data_layout=data_layout)
 
-            # TODO: Need to create a note panel
+            
 
-            # Create a patient : folder_path index
-
-            # Take the documents from the folder, loop over them, and then stick the text in the "note text" area
-            all_notes_dict = {}
-
-            note_date = "11/11"
-            note_text = "This is text for a note"
-            note_time = 1352687800000.0
-            note_headers = data_layout["notes"]
-
-            for note_header in note_headers:
-                all_notes_dict[note_header] = []
-
-            note_dict = {
-                "date": note_date,
-                "text": note_text,
-                "js_time": note_time,
-                "upk": 0,
-                "type": note_headers[0]
-            }
-
-            all_notes_dict[note_dict["type"]].append(note_dict)
-
-            try:
-                note_panel_path = patient_path / "note_panel_data.json"
-                note_panel_path.touch(exist_ok=True)
-            except PermissionError:
-                raise PermissionError(
-                    "Permission denied when creating notes file")
-
-            with open(note_panel_path, "w+") as fp:
-                json.dump(obj=all_notes_dict, fp=fp, indent=4)
+            
 
             # Creating an observations file by modifying the observations.json template created
 
