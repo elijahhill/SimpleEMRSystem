@@ -5,9 +5,8 @@ from pathlib import Path
 from pandas.core.frame import DataFrame
 from os import path
 import PySimpleGUI as sg
-from docx import Document
-import re
 
+from observations import Observations
 from notes import Notes
 from demographics import Demographics
 
@@ -111,16 +110,6 @@ class StudyCreator:
         df["EWS percentile"] = df["ecart percentile"].round(1)
         return df
 
-    def __get_translation(self, current_path: str) -> dict:
-        translation = None
-        with open(f"{current_path}/stat_lookup.json") as f:
-            translation = json.load(f)
-
-        if(translation != None):
-            return translation
-        else:
-            raise Exception("Translation file is empty")
-
     def __create_user_details(self, user_names: list, patients: list) -> Dict:
         print("creating user details")
         all_user_details = {}
@@ -179,24 +168,6 @@ class StudyCreator:
         # Return
         return total_ms
 
-    def __get_new_data(self, hospitalrisk_key: str, one_patient: DataFrame):
-        # TODO : Make this method work correctly time wise.
-        hours_and_other = one_patient[[
-            "hours_since_first_vitals", hospitalrisk_key]]
-
-        hours_and_other_no_nan = hours_and_other.dropna(
-            subset=[hospitalrisk_key]).reset_index(drop=True)
-
-        # Converts js to unix time
-        hours_and_other_no_nan["hours_since_first_vitals"] = list(map(
-            lambda hours: self.__add_to_start_time(
-                hours), hours_and_other_no_nan["hours_since_first_vitals"]
-        ))
-
-        new_data = hours_and_other_no_nan.values.tolist()
-
-        return new_data
-
     def create_study(self):
         '''
         Creates a study
@@ -211,9 +182,9 @@ class StudyCreator:
 
         
 
-        df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
+        hospitalrisk_df = self.__get_hospitalrisk_df(excel_path=hospitalrisk_path)
 
-        df.dropna(subset=["patient_id"], inplace=True)
+        hospitalrisk_df.dropna(subset=["patient_id"], inplace=True)
 
         case_ids = set([
             1065120,
@@ -247,9 +218,8 @@ class StudyCreator:
         with open(f"{output_folder_path}/user_details.json", "w+") as fp:
             json.dump(obj=user_details, fp=fp, indent=4)
 
-        # case_ids = set(df["patient_id"])
         case_details = self.__create_case_details(
-            case_ids=case_ids_str_list, case_times=df[["patient_id", "hours_since_first_vitals"]])
+            case_ids=case_ids_str_list, case_times=hospitalrisk_df[["patient_id", "hours_since_first_vitals"]])
         with open(f"{output_folder_path}/case_details.json", "w+") as fp:
             json.dump(obj=case_details, fp=fp, indent=4)
 
@@ -271,47 +241,22 @@ class StudyCreator:
         except:
             pass
 
-        hospitalrisk_path = data_paths.get_hospitalrisk_demo()
-        hospitalrisk_df = pd.read_csv(hospitalrisk_path)
-
-        translation = self.__get_translation(current_path=current_path)
+        hospitalrisk_demo_path = data_paths.get_hospitalrisk_demo()
+        hospitalrisk_demo_df = pd.read_csv(hospitalrisk_demo_path)
 
         demographics_creator = Demographics()
         note_creator = Notes(progress_notes_path=progress_notes_path)
-        # Need to grab all of the potential user id's, those will be the keys
+        observation_creator = Observations(current_path=current_path)
+
         for case_id in case_ids:
             patient_path = cases_path / str(case_id)
             patient_path.mkdir(parents=False, exist_ok=True)
 
-            demographics_creator.create_demographics(case_id=case_id, patient_path=patient_path, hospitalrisk_df=hospitalrisk_df)
+            demographics_creator.create_demographics(
+                case_id=case_id, patient_path=patient_path, hospitalrisk_demo_df=hospitalrisk_demo_df)
             note_creator.create_notes(patient_path=patient_path, data_layout=data_layout)
-
+            observation_creator.create_observations(patient_path=patient_path, hospitalrisk_df=hospitalrisk_df, case_id=case_id)
             
-
-            
-
-            # Creating an observations file by modifying the observations.json template created
-
-            hospitalrisk_keys = translation.keys()
-            one_patient = df[df["patient_id"] == case_id]
-
-            with open(f"{current_path}/observations.json", "r") as fp:
-                observations_template = json.load(fp)
-
-            for hospitalrisk_key in hospitalrisk_keys:
-                observation_key = translation[hospitalrisk_key]["internal_name"]
-
-                if observation_key == "VTDIAV":
-                    observations_template[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
-                        "dbp", one_patient)
-                    observations_template[observation_key]["numeric_lab_data"][1]["data"] = self.__get_new_data(
-                        "sbp", one_patient)
-                else:
-                    observations_template[observation_key]["numeric_lab_data"][0]["data"] = self.__get_new_data(
-                        hospitalrisk_key, one_patient)
-
-            with open(f"{patient_path}/observations.json", "w") as fp:
-                json.dump(observations_template, fp, indent=4)
 
 
 creator = StudyCreator()

@@ -5,11 +5,11 @@ class Demographics:
     def __init__(self):
         pass
 
-    def create_demographics(self, case_id, patient_path, hospitalrisk_df):
+    def create_demographics(self, case_id, patient_path, hospitalrisk_demo_df):
         print(f"Creating case: {case_id}")
 
         # Will need to create demographics for each user
-        demographics_info = hospitalrisk_df[hospitalrisk_df["patient_id"] == case_id]
+        demographics_info = hospitalrisk_demo_df[hospitalrisk_demo_df["patient_id"] == case_id]
         # TODO: Need - Weight, Height, and BMI
         # Getting iloc[0] as not doing so returns a series with the index and value
         demographics_dict = {
