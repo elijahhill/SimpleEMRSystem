@@ -10,6 +10,8 @@ from os.path import isdir as os_isdir
 from os import listdir as os_listdir
 import re
 
+from demographics import Demographics
+
 
 class PathContainer:
     def __init__(self):
@@ -284,39 +286,13 @@ class StudyCreator:
 
         translation = self.__get_translation(current_path=current_path)
 
+        demographics_creator = Demographics()
         # Need to grab all of the potential user id's, those will be the keys
         for case_id in case_ids:
-            print(f"Creating case: {case_id}")
-            # Create id folder
-            try:
-                patient_path = cases_path / str(case_id)
-                patient_path.mkdir(parents=False, exist_ok=False)
-            except:
-                pass
+            patient_path = cases_path / str(case_id)
+            patient_path.mkdir(parents=False, exist_ok=True)
 
-            # Will need to create demographics for each user
-            demographics_info = hospitalrisk_df[hospitalrisk_df["patient_id"] == case_id]
-            # TODO: Need - Weight, Height, and BMI
-            # Getting iloc[0] as not doing so returns a series with the index and value
-            demographics_dict = {
-                "weight": 0,
-                "age": int(demographics_info["age"].iloc[0]),
-                "bmi": 0,
-                "sex": demographics_info["sex"].iloc[0],
-                "race": demographics_info["race"].iloc[0],
-                "height": 0,
-                "id": case_id
-            }
-
-            try:
-                demographics_path = patient_path / "demographics.json"
-                demographics_path.touch(exist_ok=True)
-            except PermissionError:
-                raise PermissionError(
-                    "Permission denied when creating demograhpics file")
-
-            with open(demographics_path, "w+") as fp:
-                json.dump(obj=demographics_dict, fp=fp, indent=4)
+            demographics_creator.create_demographics(case_id=case_id, patient_path=patient_path, hospitalrisk_df=hospitalrisk_df)
 
             # TODO: Need to create a note panel
 
