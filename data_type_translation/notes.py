@@ -12,42 +12,109 @@ class Notes:
 
     def __init__(self, progress_notes_path):
         self.patient_folder_paths = {}
+        self.id_matcher = re.compile("\d{4,}")
         self.__init_patient_folder_paths__(progress_notes_path=progress_notes_path)
+        self.history_and_physical = re.compile(
+            "((h|H)\s*(&)\s*(p|P))|(History\s(&|And)\sPhysical)")
+        self.day_matcher = re.compile("(day)(\s*)(\d)")
 
     def __init_patient_folder_paths__(self, progress_notes_path: str):
         overall_note_folder = os_listdir(progress_notes_path)
-        id_matcher = re.compile("\d{4,}")
         for case_note_folder in overall_note_folder:
             potential_case_folder = Path(
                 progress_notes_path) / case_note_folder
             if os_isdir(potential_case_folder):
-                patient_id_match = id_matcher.search(
+                patient_id_match = self.id_matcher.search(
                     potential_case_folder.stem)
                 if patient_id_match != None:
                     patient_id = int(patient_id_match.group(0))
                     self.patient_folder_paths[patient_id] = potential_case_folder
 
 
-    def create_notes(self, data_layout, patient_path):
+    def create_notes(self, data_layout, patient_path, case_id):
         all_notes_dict = {}
 
         note_date = "11/11"
-        note_text = "This is text for a note"
+        note_text = "DEFAULT TEXT"
         note_time = 1352687800000.0
         note_headers = data_layout["notes"]
 
-        for note_header in note_headers:
-            all_notes_dict[note_header] = []
+        if case_id in self.patient_folder_paths:
 
-            note_dict = {
-                "date": note_date,
-                "text": note_text,
-                "js_time": note_time,
-                "upk": 0,
-                "type": note_headers[0]
-            }
+            doc_files = []
+            
+            # Filter out document files
+            folder_path = self.patient_folder_paths[case_id]
+            for potential_note in os_listdir(folder_path):
+                if potential_note.endswith(".docx"):
+                    doc_files.append(potential_note)
 
-        all_notes_dict[note_dict["type"]].append(note_dict)
+            h_and_p = ''
+            entry_two = ''
+            entry_three = ''
+
+            # Assign searched items to their particular slots
+            for doc_file in doc_files:
+                h_and_p_search = self.history_and_physical.search(doc_file)
+                if h_and_p_search != None:
+                    h_and_p = h_and_p_search
+                day_search = self.day_matcher.search(doc_file)
+                if day_search != None:
+                    if entry_two == '':
+                        entry_two = day_search
+                    else:
+                        entry_three = day_search
+
+
+
+            if h_and_p != '':
+                h_and_p_type = "H&P"
+                note_dict = {
+                    "date": note_date,
+                    "text": note_text,
+                    "js_time": note_time,
+                    "upk": 0,
+                    "type": h_and_p_type
+                }
+
+                with open(f'{self.patient_folder_paths[case_id]}/{h_and_p.string}', 'rb') as fp:
+                    document = Document(fp)
+                    note_dict['text'] = '\n'.join([paragraph.text for paragraph in document.paragraphs])
+
+                all_notes_dict[h_and_p_type] = note_dict
+
+            if entry_two != '':
+                second_entry_type = f'Day{entry_two.group(len(entry_two.groups()))}'
+                note_dict = {
+                    "date": note_date,
+                    "text": note_text,
+                    "js_time": note_time,
+                    "upk": 0,
+                    "type": second_entry_type
+                }
+                with open(f'{self.patient_folder_paths[case_id]}/{entry_two.string}', 'rb') as fp:
+                    document = Document(fp)
+                    note_dict['text'] = '\n'.join(
+                        [paragraph.text for paragraph in document.paragraphs])
+
+                all_notes_dict[second_entry_type] = note_dict
+            
+            if entry_three != '':
+                third_entry_type = f'Day{entry_three.group(len(entry_three.groups()))}'
+                note_dict = {
+                    "date": note_date,
+                    "text": note_text,
+                    "js_time": note_time,
+                    "upk": 0,
+                    "type": third_entry_type
+                }
+
+                with open(f'{self.patient_folder_paths[case_id]}/{entry_three.string}', 'rb') as fp:
+                    document = Document(fp)
+                    note_dict['text'] = '\n'.join(
+                        [paragraph.text for paragraph in document.paragraphs])
+
+                all_notes_dict[third_entry_type] = note_dict
 
         try:
             note_panel_path = patient_path / "note_panel_data.json"
