@@ -15,8 +15,8 @@ class Notes:
         self.id_matcher = re.compile("\d{4,}")
         self.__init_patient_folder_paths__(progress_notes_path=progress_notes_path)
         self.history_and_physical = re.compile(
-            "((h|H)\s*(&)\s*(p|P))|(History\s(&|And)\sPhysical)")
-        self.day_matcher = re.compile("(day)(\s*)(\d)")
+            "((h|H)\s*(&)\s*(p|P))|(History\s(&|And)\sPhysical)", flags=re.IGNORECASE)
+        self.day_matcher = re.compile("(day)(\s*)(\d)", re.IGNORECASE)
 
     def __init_patient_folder_paths__(self, progress_notes_path: str):
         overall_note_folder = os_listdir(progress_notes_path)
@@ -29,7 +29,6 @@ class Notes:
                 if patient_id_match != None:
                     patient_id = int(patient_id_match.group(0))
                     self.patient_folder_paths[patient_id] = potential_case_folder
-
 
     def create_notes(self, data_layout, patient_path, case_id):
         all_notes_dict = {}
@@ -54,16 +53,31 @@ class Notes:
             entry_three = ''
 
             # Assign searched items to their particular slots
+            added = set()
             for doc_file in doc_files:
                 h_and_p_search = self.history_and_physical.search(doc_file)
                 if h_and_p_search != None:
                     h_and_p = h_and_p_search
+                    added.add(h_and_p.string)
                 day_search = self.day_matcher.search(doc_file)
-                if day_search != None:
-                    if entry_two == '':
-                        entry_two = day_search
-                    else:
-                        entry_three = day_search
+
+                day_search_exists = day_search != None
+                if day_search_exists:
+                    already_added = day_search.string in added
+                    if day_search_exists and not already_added:
+                        for index, entry in enumerate([h_and_p, entry_two, entry_three]):
+                            # Place the new search entry in the first available blank variable
+                            if entry == '':
+                                if index == 0:
+                                    h_and_p = day_search
+                                    added.add(day_search.string)
+                                elif index == 1:
+                                    entry_two = day_search
+                                    added.add(day_search.string)
+                                elif index == 2:
+                                    entry_three = day_search
+                                    added.add(day_search.string)
+                                break
 
 
 
