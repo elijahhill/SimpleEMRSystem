@@ -9,7 +9,7 @@ class Observations:
 
     def __get_translation(self) -> dict:
         translation = None
-        with open(f"{self.current_path}/stat_lookup.json") as f:
+        with open(f"{self.current_path}/data_translation_paths/stat_lookup.json") as f:
             translation = json.load(f)
 
         if(translation != None):
@@ -47,7 +47,7 @@ class Observations:
         hospitalrisk_keys = self.translation.keys()
         one_patient = hospitalrisk_df[hospitalrisk_df["patient_id"] == case_id]
 
-        with open(f"{self.current_path}/observations.json", "r") as fp:
+        with open(f"{self.current_path}/data_translation_files/observations.json", "r") as fp:
             observations_template = json.load(fp)
 
         for hospitalrisk_key in hospitalrisk_keys:

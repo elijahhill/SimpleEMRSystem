@@ -8,7 +8,7 @@ class VariableDetails():
 
     def write_variable_details(self):
         print("Creating variable details")
-        with open(f"{self.current_path}/variable_details.json") as fp:
+        with open(f"{self.current_path}/data_translation_files/variable_details.json") as fp:
             variable_details = json.load(fp=fp)
 
         with open(f"{self.output_folder_path}/variable_details.json", "w+") as fp:
