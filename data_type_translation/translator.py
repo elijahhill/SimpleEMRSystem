@@ -4,6 +4,7 @@ from os import path
 
 from case_details import CaseDetails
 from data_layout import DataLayout
+from admitting_diagnoses import AdmittingDiagnoses
 from gui import Gui
 from variable_details import VariableDetails
 from user_details import UserDetails
@@ -75,6 +76,10 @@ class StudyCreator:
 
         variable_details = VariableDetails(output_folder_path=output_folder_path, current_path=current_path)
         variable_details.write_variable_details()
+
+        admitting_diagnoses = AdmittingDiagnoses(
+            output_folder_path=output_folder_path, current_path=current_path)
+        admitting_diagnoses.write_admitting_diagnoses()
 
         try:
             cases_path = Path(f"{output_folder_path}/cases_all")

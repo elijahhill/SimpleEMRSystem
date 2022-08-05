@@ -9,7 +9,7 @@ class Observations:
 
     def __get_translation(self) -> dict:
         translation = None
-        with open(f"{self.current_path}/data_translation_paths/stat_lookup.json") as f:
+        with open(f"{self.current_path}/data_translation_files/stat_lookup.json") as f:
             translation = json.load(f)
 
         if(translation != None):
