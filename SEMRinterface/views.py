@@ -87,7 +87,7 @@ def select_case(request, study_id, user_id):
         patient_demographics = os.path.join(patient_dir.path, "demographics.json")
         with open(patient_demographics) as fp:
             demographics = json.load(fp)
-            patient_ages[int(patient_dir.name)] = demographics["age"]
+            patient_ages[patient_dir.name] = demographics["age"]
 
     list_cases_assigned = dict_user_2_details[user_id]['cases_assigned']
     list_cases_completed = dict_user_2_details[user_id]['cases_completed']

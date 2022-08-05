@@ -94,7 +94,7 @@
                         {{ patient_ages|get_value:case_id }}
                     </td>
                     <td>
-                        {{ admitting_diagnoses.case_id }}
+                        {{ admitting_diagnoses|get_value:case_id }}
                     </td>
                     <td>Yes</td>
                     <td> 				
@@ -110,10 +110,10 @@
                         </a>
                     </td>
                     <td>
-                        {{ patient_ages.case_id }}
+                        {{ patient_ages|get_value:case_id }}
                     </td>
                     <td>
-                        {{ admitting_diagnoses.case_id }}
+                        {{ admitting_diagnoses|get_value:case_id }}
                     </td>
                     <td>No</td>
                     <td> 
