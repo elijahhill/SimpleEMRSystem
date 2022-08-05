@@ -27,7 +27,6 @@ from django.template import loader
 from django.views.decorators.csrf import ensure_csrf_cookie
 import os.path
 import json
-import datetime
 
 # Global variables
 dir_local = os.getcwd()
@@ -74,6 +73,21 @@ def select_case(request, study_id, user_id):
         dir_resources, study_id, 'user_details.json')
     with open(dir_study_user_details) as f:
         dict_user_2_details = json.load(f)
+    
+    dir_study_admitting_diagnoses = os.path.join(
+        dir_resources, study_id, 'admitting_diagnoses.json')
+    with open(dir_study_admitting_diagnoses) as fp:
+        admitting_diagnoses_dict = json.load(fp)
+
+    patient_ages = {}
+    studies = os.path.join(
+        dir_resources, study_id, 'cases_all')
+    patient_dirs = os.scandir(studies)
+    for patient_dir in patient_dirs:
+        patient_demographics = os.path.join(patient_dir.path, "demographics.json")
+        with open(patient_demographics) as fp:
+            demographics = json.load(fp)
+            patient_ages[int(patient_dir.name)] = demographics["age"]
 
     list_cases_assigned = dict_user_2_details[user_id]['cases_assigned']
     list_cases_completed = dict_user_2_details[user_id]['cases_completed']
@@ -82,6 +96,8 @@ def select_case(request, study_id, user_id):
     context_dict = {
         'list_cases_assigned': list_cases_assigned,
         'list_cases_completed': list_cases_completed,
+        'admitting_diagnoses': admitting_diagnoses_dict,
+        'patient_ages': patient_ages,
         'user_id': user_id,
         'study_id': study_id,
         'test': 'test'

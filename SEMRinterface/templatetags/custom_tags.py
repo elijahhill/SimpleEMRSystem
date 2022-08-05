@@ -1,6 +1,5 @@
 from django import template
 import html
-import json
 
 register = template.Library()
 
@@ -35,6 +34,11 @@ def get_recent_value(recent, lab):
         return recent[lab]
     else:
         return "Never"
+
+
+@register.filter
+def get_value(dictionary, key):
+    return dictionary.get(key)
 
 @register.simple_tag
 def note_count(arg_dict, arg_key):

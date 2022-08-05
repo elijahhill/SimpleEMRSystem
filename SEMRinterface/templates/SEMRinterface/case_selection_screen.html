@@ -1,4 +1,5 @@
 {% load static %}
+{% load custom_tags %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,29 +72,57 @@
 	<p> 
 		Please select a case from the table below:
 	</p>
-	<table width="50%" border="1"><tr><th>Case Id</th><th>Case Completed</th><th>Actions</tr>
-    {% for case_id in list_cases_assigned %}
+	<table border="1">
+        <tr>
+            <th>Case Id</th>
+            <th>Patient Age</th>
+            <th>Admitting Diagnosis</th>
+            <th>Case Completed</th>
+            <th>Actions</th>  
+        </tr>
+        {{ patient_ages }}
+        {% for case_id in list_cases_assigned %}
+            {{ case_id }}
             {% if case_id in list_cases_completed %}
-				<tr><th><a href="{{ case_id }}/">
-					<button id="select{{ case_id }}" disabled>{{ case_id }}</button></a> </th>
-				<th>Yes</th>
-				<th> 				
-					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Reset</button> 
-					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Mark Complete</button> 
-				</th>	
-			{% else %}
-				<tr><th><a href="{{ case_id }}/">
-					<button id="select{{ case_id }}">{{ case_id }}</button></a> </th>
-				<th>No</th>
-				<th> 
-					<button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Mark Complete</button> 
-					
-					<button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'casereset/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Reset</button> 				
-					
-				</th>	
-			{% endif %}
-			</tr>
-    {% endfor %}
+                <tr>
+                    <td>
+                        <a href="{{ case_id }}/">
+                            <button id="select{{ case_id }}" disabled>{{ case_id }}</button>
+                        </a> 
+                    </td>
+                    <td>
+                        {{ patient_ages|get_value:case_id }}
+                    </td>
+                    <td>
+                        {{ admitting_diagnoses.case_id }}
+                    </td>
+                    <td>Yes</td>
+                    <td> 				
+                        <button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Reset</button> 
+                        <button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Mark Complete</button> 
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td>
+                        <a href="{{ case_id }}/">
+                            <button id="select{{ case_id }}">{{ case_id }}</button>
+                        </a>
+                    </td>
+                    <td>
+                        {{ patient_ages.case_id }}
+                    </td>
+                    <td>
+                        {{ admitting_diagnoses.case_id }}
+                    </td>
+                    <td>No</td>
+                    <td> 
+                        <button id="complete{{ case_id }}" onclick="markComplete('{{ case_id }}', 'markcomplete/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')">Mark Complete</button> 
+                        <button id="reset{{ case_id }}" onclick="caseReset('{{ case_id }}', 'casereset/?study_id={{ study_id }}&user_id={{ user_id }}&case_id={{ case_id }}')" style="display:none;">Reset</button> 				
+                    </td>	
+                </tr>
+            {% endif %}
+        {% endfor %}
     </table>
 
 </div>
