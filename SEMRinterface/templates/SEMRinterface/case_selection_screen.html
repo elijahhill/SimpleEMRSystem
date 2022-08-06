@@ -80,9 +80,7 @@
             <th>Case Completed</th>
             <th>Actions</th>  
         </tr>
-        {{ patient_ages }}
         {% for case_id in list_cases_assigned %}
-            {{ case_id }}
             {% if case_id in list_cases_completed %}
                 <tr>
                     <td>
