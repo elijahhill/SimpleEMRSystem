@@ -581,7 +581,7 @@ function get_lab_chart(chart_container_id, observation_details, variable_details
             },
             formatter: function () {
                 if (this.series.name === "numeric_values") {
-                    return '<p style="font-size:12px">' + this.y + "</p>";
+                    return '<p style="font-size:12px">' + (Math.round(this.y * 100) / 100) + "</p>";
                 } else if (
                     this.series.name === "dias" ||
                     this.series.name === "syst"
