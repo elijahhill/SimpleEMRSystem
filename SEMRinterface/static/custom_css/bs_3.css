@@ -395,3 +395,7 @@ textarea {
 p.thick {
     font-weight: 900 !important;
 }
+
+.fill-width {
+    width: 100%;
+}
