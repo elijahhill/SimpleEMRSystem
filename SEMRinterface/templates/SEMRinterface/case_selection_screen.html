@@ -76,6 +76,7 @@
         <tr>
             <th>Case Id</th>
             <th>Patient Age</th>
+            <th>Patient Gender</th>
             <th>Admitting Diagnosis</th>
             <th>Case Completed</th>
             <th>Actions</th>  
@@ -90,6 +91,9 @@
                     </td>
                     <td>
                         {{ patient_ages|get_value:case_id }}
+                    </td>
+                    <td>
+                        {{ patient_genders|get_value:case_id }}
                     </td>
                     <td>
                         {{ admitting_diagnoses|get_value:case_id }}
@@ -109,6 +113,9 @@
                     </td>
                     <td>
                         {{ patient_ages|get_value:case_id }}
+                    </td>
+                    <td>
+                        {{ patient_genders|get_value:case_id }}
                     </td>
                     <td>
                         {{ admitting_diagnoses|get_value:case_id }}
