@@ -161,10 +161,6 @@ ul {
     padding-right: 15px;
     padding-left: 0px;
     background: #808080;
-  /*  position:absolute fixed;
-    left:0px;
-    top:0px;
-    z-index: 10;*/
 }
 
 a:active {
@@ -373,15 +369,9 @@ textarea {
     width: 85%;
 }
 
-.units{
-
-}
-
 .shower{
     display: none;
 }
-
-
 
 .highcharts-container{width:100% !important; height:100% !important;}
 
@@ -404,4 +394,8 @@ textarea {
 
 p.thick {
     font-weight: 900 !important;
+}
+
+.fill-width {
+    width: 100%;
 }
