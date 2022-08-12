@@ -21,16 +21,7 @@
     <script src="{% static 'js/emr_3.js' %}"></script>
 </head>
 <body>
-<div class="glyphicon glyphicon-refresh" id="loading_new_patient"></div> <!-- this glyphicon blurrs the screen on loading -->
 <div class="container" id="case_body">
-	<!-- Introduction popup -->
-	<div id="directions" class="center-div"><h4>Patient: {{ case_id }}.
-	</h4><h4>{% date_line dict_case_details time_step %}
-	</h4><h4> '{{ instructions }}'
-	</h4>
-		<input id="directions_button" type="button"  value="Okay" onclick="remove_directions()" disabled>
-	</div>
-	<!-- end of Introduction popup -->
 
 	<!-- Demographics bar -->
 	<div class="row h-8">
@@ -172,15 +163,6 @@
                         </div>
                     {% endfor %}
                 </div>
-			</div>
-
-			<div class="col-lg-12 taskbox no-pad t-border" id="continue-area">
-				<p class="continue-margin">{{ instructions }}</p>
-                <hr>
-                <p class="continue-margin">Then click
-                    <input id='next_screen_button' type="button" value="continue" onclick="link_advance();"></input>
-                </p>
-				</div>
 			</div>
 		</div>
 		<!-- end of Note Panel -->
