@@ -49,10 +49,11 @@ function setDivHeights() {
     var totalHeight = $(document).height();
     var topNavHeight = $("#top-nav").outerHeight();
     var notesTabHeight = $("#notes-tab").outerHeight();
+    var continueAreaHeight = $("#continue-area").outerHeight();
 
     $("#graphs-box").height(totalHeight - topNavHeight);
     $(".note-content").outerHeight(
-        totalHeight - (topNavHeight + notesTabHeight)
+        totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
     );
 }
 
@@ -76,6 +77,12 @@ const csrftoken = getCookie('csrftoken');
 // Shows loading screen after navigation buttons have been clicked // 
 function show_loading(){
     $('#loading_new_patient').show();
+}
+
+// Removes directions div and hides loading text // 
+function remove_directions(){
+    $('#directions').hide();
+    $('#loading_new_patient').hide();
 }
 
 // function to save case detials //
