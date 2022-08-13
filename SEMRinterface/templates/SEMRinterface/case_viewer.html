@@ -145,22 +145,44 @@
 			<div class="col-lg-12 notebox no-pad">
                 <ul class="nav nav-tabs" id="notes-tab" role="tablist">
                     {% for group in dict_notes %}
-                        <li class="nav-item" tabindex="{{forloop.counter}}">
-                            <a 
-                                class="nav-link" 
-                                data-toggle="tab" 
-                                href="#tab{{forloop.counter}}" 
-                                role="tab"
-                                id="#nav-tab{{forloop.counter}}"
-                            >{{ group }}</a>
+                        {% if forloop.first %}
+                            <li class="nav-item active" tabindex="{{forloop.counter}}">
+                                <a 
+                                    class="nav-link"
+                                    data-toggle="tab" 
+                                    href="#tab{{forloop.counter}}" 
+                                    role="tab"
+                                    id="#nav-tab{{forloop.counter}}"
+                                    aria-expanded="true"
+                                    >{{ group }}
+                                </a>
+                            </li>
+                            {% else %}     
+                            <li class="nav-item" tabindex="{{forloop.counter}}">
+                                <a 
+                                    class="nav-link" 
+                                    data-toggle="tab" 
+                                    href="#tab{{forloop.counter}}" 
+                                    role="tab"
+                                    id="#nav-tab{{forloop.counter}}"
+                                >{{ group }}</a>
+                            </li>
+                            {% endif %}
                         </li>
                     {% endfor %}
                 </ul>
                 <div class="contentArea tab-content">
                     {% for key, val in dict_notes.items %}
-                        <div class="tab-pane fade scroll-box note-content" id="tab{{forloop.counter}}" role="tabpanel">
-                            <div>{{ val.text|linebreaks }}</div>
-                        </div>
+                        {% if forloop.first %}
+                            <div class="tab-pane fade scroll-box note-content active in" id="tab{{forloop.counter}}" role="tabpanel">
+                                <div>{{ val.text|linebreaks }}</div>
+                            </div>
+                        {% else %}
+                            <div class="tab-pane fade scroll-box note-content" id="tab{{forloop.counter}}"
+                                role="tabpanel">
+                                <div>{{ val.text|linebreaks }}</div>
+                            </div>
+                        {% endif %}
                     {% endfor %}
                 </div>
 			</div>
