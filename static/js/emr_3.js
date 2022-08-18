@@ -41,8 +41,9 @@ $(document).ready(function () {
     $('#nav-tab1').trigger('click');
 });
 
-$(window).resize(
-    setDivHeights()
+$(window).resize(function(){
+        setDivHeights();
+    }
 );
 
 function setDivHeights() {
@@ -55,6 +56,28 @@ function setDivHeights() {
     $(".note-content").outerHeight(
         totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
     );
+}
+
+function getSelectorWidth() {
+    var topNavWidth = $("#top-nav").outerWidth(true);
+    console.log(`topNavWidth: ${topNavWidth}`);
+
+    var bulletedListWidth = $("#bulleted-demographics").outerWidth(true);
+    console.log(`bulletedListWidth: ${bulletedListWidth}`);
+
+    var selectedTimesWidth = $("#selected-times").outerWidth(true);
+    // SelectedTimes get initalized when the chart is initalized, thus this is a placeholder for when they're not
+    if (selectedTimesWidth < 100) {
+        selectedTimesWidth = 204;
+    }
+    console.log(`selectedTimesWidth: ${selectedTimesWidth}`);
+
+    var timeSelectorWidth =
+        topNavWidth - (bulletedListWidth + selectedTimesWidth + 10);
+
+    console.log(`timeSelectorWidth: ${timeSelectorWidth}`);
+
+    return timeSelectorWidth;
 }
 
 function getCookie(name) {
@@ -174,7 +197,7 @@ function get_max_point(series, selectedMax){
 // 	Updates the min and max time for each chart on change of the time selector //
 function updateExtremes(){
     //update time axes
-    $("#selectedTimes").text(get_formatted_date(selectedMin) + ' to ' + get_formatted_date(selectedMax));
+    $("#selected-times").text(get_formatted_date(selectedMin) + ' to ' + get_formatted_date(selectedMax));
     try {
         $("#lab-time1").highcharts().xAxis[0].setExtremes(selectedMin, selectedMax);
         $("#lab-time2").highcharts().xAxis[0].setExtremes(selectedMin, selectedMax);
@@ -810,42 +833,78 @@ function getchartT(id) {
 }
 
 // Creates the time selector chart //
-function getchartTS(id,case_details,time_step=0, width) {
-    $(id).highcharts('StockChart', {
-            chart: {
-                height:35,
-                width: width,
-                spacingLeft:5,
-                spacingBottom:2,
-                spacingTop:2,
-                spacingRight:5,
-                events: {load: function () {
+function getchartTS(id,case_details,time_step=0) {
+    $(id).highcharts("StockChart", {
+        chart: {
+            height: 35,
+            width: getSelectorWidth(),
+            spacingLeft: 5,
+            spacingBottom: 2,
+            spacingTop: 2,
+            spacingRight: 5,
+            events: {
+                load: function () {
                     var range = this.xAxis[0].getExtremes();
-                    this.xAxis[0].setExtremes(Math.max(range.min, range.max-216000000), range.max);
-                }} // On load update selected range // 2.5 days
+                    this.xAxis[0].setExtremes(
+                        Math.max(range.min, range.max - 216000000),
+                        range.max
+                    );
                 },
-            scrollbar: {enabled: false},
-            navigator: {enabled: true, height: 35, top:0},
-            //navigator: {enabled: true, height: 500, top:40},
-            rangeSelector : {
-                enabled: false,
-                selected : 1,
-                inputEnabled: true,
-                buttons: [{type: 'day',count: 1,text: '1d'},{type: 'day',count: 2,text: '2d'},{type: 'week',count: 1,text: '1w'},{type: 'all',text:'All'}]},
-            series:
-                [
-                {type: 'scatter',name:'min_max',data: [[case_details[time_step].min_t,0],[case_details[time_step].max_t,0]], visible: false,tooltip: {enabled: false}}
+            }, // On load update selected range // 2.5 days
+        },
+        scrollbar: { enabled: false },
+        navigator: { enabled: true, height: 35, top: 0 },
+        //navigator: {enabled: true, height: 500, top:40},
+        rangeSelector: {
+            enabled: false,
+            selected: 1,
+            inputEnabled: true,
+            buttons: [
+                { type: "day", count: 1, text: "1d" },
+                { type: "day", count: 2, text: "2d" },
+                { type: "week", count: 1, text: "1w" },
+                { type: "all", text: "All" },
+            ],
+        },
+        series: [
+            {
+                type: "scatter",
+                name: "min_max",
+                data: [
+                    [case_details[time_step].min_t, 0],
+                    [case_details[time_step].max_t, 0],
                 ],
-            tooltip:{enabled: false},
-            title: {text: null},
-            legend: { enabled: false},
-            credits: { enabled:false},
-            xAxis: {top: -10,labels: {enabled: false}, min: case_details[time_step].min_t, max: case_details[time_step].max_t,
-                events: {afterSetExtremes: function (e) {selectedMin = e.min;selectedMax = e.max;updateExtremes();}}},
-            yAxis:{ labels: { enabled:false }, title: { text: null}} // top is what flips the navigator
+                visible: false,
+                tooltip: { enabled: false },
+            },
+        ],
+        tooltip: { enabled: false },
+        title: { text: null },
+        legend: { enabled: false },
+        credits: { enabled: false },
+        xAxis: {
+            top: -10,
+            labels: { enabled: false },
+            min: case_details[time_step].min_t,
+            max: case_details[time_step].max_t,
+            events: {
+                afterSetExtremes: function (e) {
+                    selectedMin = e.min;
+                    selectedMax = e.max;
+                    updateExtremes();
+                },
+            },
+        },
+        yAxis: { labels: { enabled: false }, title: { text: null } }, // top is what flips the navigator
     });
-	displayed_min_t = case_details[time_step].min_t;
-	displayed_max_t = case_details[time_step].max_t;
+    displayed_min_t = case_details[time_step].min_t;
+    displayed_max_t = case_details[time_step].max_t;
+
+    // Also set the outside container width of time selector to be equal,
+
+    var timeSelectorWidth = getSelectorWidth();
+
+    $("#time_selector").outerWidth(timeSelectorWidth);
 }
 
 
