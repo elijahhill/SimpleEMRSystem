@@ -13,7 +13,8 @@ ul {
 }
 
 #selected-times {
-    margin-left: 20px;
+    margin-left: 25px;
+    margin-right: 5px;
 }
 
 #time_selector {

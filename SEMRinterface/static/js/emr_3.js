@@ -59,25 +59,25 @@ function setDivHeights() {
 }
 
 function getSelectorWidth() {
-    var topNavWidth = $("#top-nav").width();
-    console.log(topNavWidth);
+    var topNavWidth = $("#top-nav").outerWidth(true);
+    console.log(`topNavWidth: ${topNavWidth}`);
 
-    var bulletedListWidth = $("#bulleted-demographics").outerWidth();
-    console.log(bulletedListWidth);
+    var bulletedListWidth = $("#bulleted-demographics").outerWidth(true);
+    console.log(`bulletedListWidth: ${bulletedListWidth}`);
 
-    var selectedTimesWidth = $("#selected-times").outerWidth();
-    console.log(selectedTimesWidth);
+    var selectedTimesWidth = $("#selected-times").outerWidth(true);
+    // SelectedTimes get initalized when the chart is initalized, thus this is a placeholder for when they're not
+    if (selectedTimesWidth < 100) {
+        selectedTimesWidth = 204;
+    }
+    console.log(`selectedTimesWidth: ${selectedTimesWidth}`);
 
-    var selectorTextWidth = $("#selector-text").outerWidth();
-    console.log(selectorTextWidth);
+    var timeSelectorWidth =
+        topNavWidth - (bulletedListWidth + selectedTimesWidth + 10);
 
-    var selectedTimesWidth =
-        topNavWidth -
-        (bulletedListWidth + selectedTimesWidth + selectorTextWidth);
+    console.log(`timeSelectorWidth: ${timeSelectorWidth}`);
 
-    console.log(selectedTimesWidth);
-
-    return selectedTimesWidth;
+    return timeSelectorWidth;
 }
 
 function getCookie(name) {
@@ -834,47 +834,77 @@ function getchartT(id) {
 
 // Creates the time selector chart //
 function getchartTS(id,case_details,time_step=0) {
+    $(id).highcharts("StockChart", {
+        chart: {
+            height: 35,
+            width: getSelectorWidth(),
+            spacingLeft: 5,
+            spacingBottom: 2,
+            spacingTop: 2,
+            spacingRight: 5,
+            events: {
+                load: function () {
+                    var range = this.xAxis[0].getExtremes();
+                    this.xAxis[0].setExtremes(
+                        Math.max(range.min, range.max - 216000000),
+                        range.max
+                    );
+                },
+            }, // On load update selected range // 2.5 days
+        },
+        scrollbar: { enabled: false },
+        navigator: { enabled: true, height: 35, top: 0 },
+        //navigator: {enabled: true, height: 500, top:40},
+        rangeSelector: {
+            enabled: false,
+            selected: 1,
+            inputEnabled: true,
+            buttons: [
+                { type: "day", count: 1, text: "1d" },
+                { type: "day", count: 2, text: "2d" },
+                { type: "week", count: 1, text: "1w" },
+                { type: "all", text: "All" },
+            ],
+        },
+        series: [
+            {
+                type: "scatter",
+                name: "min_max",
+                data: [
+                    [case_details[time_step].min_t, 0],
+                    [case_details[time_step].max_t, 0],
+                ],
+                visible: false,
+                tooltip: { enabled: false },
+            },
+        ],
+        tooltip: { enabled: false },
+        title: { text: null },
+        legend: { enabled: false },
+        credits: { enabled: false },
+        xAxis: {
+            top: -10,
+            labels: { enabled: false },
+            min: case_details[time_step].min_t,
+            max: case_details[time_step].max_t,
+            events: {
+                afterSetExtremes: function (e) {
+                    selectedMin = e.min;
+                    selectedMax = e.max;
+                    updateExtremes();
+                },
+            },
+        },
+        yAxis: { labels: { enabled: false }, title: { text: null } }, // top is what flips the navigator
+    });
+    displayed_min_t = case_details[time_step].min_t;
+    displayed_max_t = case_details[time_step].max_t;
+
     // Also set the outside container width of time selector to be equal,
 
     var timeSelectorWidth = getSelectorWidth();
 
     $("#time_selector").outerWidth(timeSelectorWidth);
-
-    $(id).highcharts('StockChart', {
-            chart: {
-                height:35,
-                width: timeSelectorWidth,
-                spacingLeft:5,
-                spacingBottom:2,
-                spacingTop:2,
-                spacingRight:5,
-                events: {load: function () {
-                    var range = this.xAxis[0].getExtremes();
-                    this.xAxis[0].setExtremes(Math.max(range.min, range.max-216000000), range.max);
-                }} // On load update selected range // 2.5 days
-                },
-            scrollbar: {enabled: false},
-            navigator: {enabled: true, height: 35, top:0},
-            //navigator: {enabled: true, height: 500, top:40},
-            rangeSelector : {
-                enabled: false,
-                selected : 1,
-                inputEnabled: true,
-                buttons: [{type: 'day',count: 1,text: '1d'},{type: 'day',count: 2,text: '2d'},{type: 'week',count: 1,text: '1w'},{type: 'all',text:'All'}]},
-            series:
-                [
-                {type: 'scatter',name:'min_max',data: [[case_details[time_step].min_t,0],[case_details[time_step].max_t,0]], visible: false,tooltip: {enabled: false}}
-                ],
-            tooltip:{enabled: false},
-            title: {text: null},
-            legend: { enabled: false},
-            credits: { enabled:false},
-            xAxis: {top: -10,labels: {enabled: false}, min: case_details[time_step].min_t, max: case_details[time_step].max_t,
-                events: {afterSetExtremes: function (e) {selectedMin = e.min;selectedMax = e.max;updateExtremes();}}},
-            yAxis:{ labels: { enabled:false }, title: { text: null}} // top is what flips the navigator
-    });
-	displayed_min_t = case_details[time_step].min_t;
-	displayed_max_t = case_details[time_step].max_t;
 }
 
 
