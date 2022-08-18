@@ -81,7 +81,7 @@ ul {
 }
 
 .scroll-box{
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .taskbox{
