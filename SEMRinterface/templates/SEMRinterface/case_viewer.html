@@ -38,7 +38,7 @@
                 {% endfor %}
             </ul> 
             
-            <div class="separator"> </div>
+            <!-- <div class="separator"> </div> -->
 
             <!-- TODO: Shift the displayed times to the right -->
             <div>
@@ -46,16 +46,15 @@
                     <li class="navbar-text" id="selected-times"></li>
                 </ul>
             </div>
-            <ul class="navbar-nav un-bulleted">
+            <ul class="navbar-nav un-bulleted" id="selector-text">
                 <li class="navbar-text">Selector: </li>
             </ul>
             <div class="chartcolTS" id="time_selector">
                 <script>
                 {% autoescape off %}
-                var width = document.getElementById("time_selector").offsetWidth;
                 set_case_details({{dict_case_details}}, '{{study_id}}', '{{user_id}}', '{{case_id}}', {{time_step}});
                 set_next_step_url();
-                getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}}, width);
+                getchartTS("div[id='time_selector']", {{dict_case_details}}, {{time_step}});
                 {% endautoescape %}
                 </script>
             </div>

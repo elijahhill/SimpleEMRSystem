@@ -41,8 +41,9 @@ $(document).ready(function () {
     $('#nav-tab1').trigger('click');
 });
 
-$(window).resize(
-    setDivHeights()
+$(window).resize(function(){
+        setDivHeights();
+    }
 );
 
 function setDivHeights() {
@@ -55,6 +56,28 @@ function setDivHeights() {
     $(".note-content").outerHeight(
         totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
     );
+}
+
+function getSelectorWidth() {
+    var topNavWidth = $("#top-nav").width();
+    console.log(topNavWidth);
+
+    var bulletedListWidth = $("#bulleted-demographics").outerWidth();
+    console.log(bulletedListWidth);
+
+    var selectedTimesWidth = $("#selected-times").outerWidth();
+    console.log(selectedTimesWidth);
+
+    var selectorTextWidth = $("#selector-text").outerWidth();
+    console.log(selectorTextWidth);
+
+    var selectedTimesWidth =
+        topNavWidth -
+        (bulletedListWidth + selectedTimesWidth + selectorTextWidth);
+
+    console.log(selectedTimesWidth);
+
+    return selectedTimesWidth;
 }
 
 function getCookie(name) {
@@ -174,7 +197,7 @@ function get_max_point(series, selectedMax){
 // 	Updates the min and max time for each chart on change of the time selector //
 function updateExtremes(){
     //update time axes
-    $("#selectedTimes").text(get_formatted_date(selectedMin) + ' to ' + get_formatted_date(selectedMax));
+    $("#selected-times").text(get_formatted_date(selectedMin) + ' to ' + get_formatted_date(selectedMax));
     try {
         $("#lab-time1").highcharts().xAxis[0].setExtremes(selectedMin, selectedMax);
         $("#lab-time2").highcharts().xAxis[0].setExtremes(selectedMin, selectedMax);
@@ -810,11 +833,17 @@ function getchartT(id) {
 }
 
 // Creates the time selector chart //
-function getchartTS(id,case_details,time_step=0, width) {
+function getchartTS(id,case_details,time_step=0) {
+    // Also set the outside container width of time selector to be equal,
+
+    var timeSelectorWidth = getSelectorWidth();
+
+    $("#time_selector").outerWidth(timeSelectorWidth);
+
     $(id).highcharts('StockChart', {
             chart: {
                 height:35,
-                width: width,
+                width: timeSelectorWidth,
                 spacingLeft:5,
                 spacingBottom:2,
                 spacingTop:2,

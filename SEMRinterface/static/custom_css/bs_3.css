@@ -12,7 +12,7 @@ ul {
     height: 1px;
 }
 
-#selectedTimes {
+#selected-times {
     margin-left: 20px;
 }
 
@@ -53,6 +53,7 @@ ul {
     padding: 0;
     margin-bottom: 0;
     border-radius: 0;
+    border: 0;
 }
 
 #loading_new_patient {
