@@ -82,7 +82,7 @@ class Notes:
 
 
             if h_and_p != '':
-                h_and_p_type = "H&P"
+                h_and_p_type = "History and Physical"
                 note_dict = {
                     "date": note_date,
                     "text": note_text,
@@ -98,7 +98,7 @@ class Notes:
                 all_notes_dict[h_and_p_type] = note_dict
 
             if entry_two != '':
-                second_entry_type = f'Day{entry_two.group(len(entry_two.groups()))}'
+                second_entry_type = 'Progress Notes 1'
                 note_dict = {
                     "date": note_date,
                     "text": note_text,
@@ -114,7 +114,7 @@ class Notes:
                 all_notes_dict[second_entry_type] = note_dict
             
             if entry_three != '':
-                third_entry_type = f'Day{entry_three.group(len(entry_three.groups()))}'
+                third_entry_type = 'Progress Notes 2'
                 note_dict = {
                     "date": note_date,
                     "text": note_text,
