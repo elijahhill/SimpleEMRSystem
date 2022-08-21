@@ -80,7 +80,6 @@ def select_case(request, study_id, user_id):
         admitting_diagnoses_dict = json.load(fp)
 
     patient_ages = {}
-    patient_genders = {}
 
     studies = os.path.join(
         dir_resources, study_id, 'cases_all')
@@ -90,7 +89,6 @@ def select_case(request, study_id, user_id):
         with open(patient_demographics) as fp:
             demographics = json.load(fp)
             patient_ages[patient_dir.name] = demographics["age"]
-            patient_genders[patient_dir.name] = demographics["sex"]
 
     list_cases_assigned = dict_user_2_details[user_id]['cases_assigned']
     list_cases_completed = dict_user_2_details[user_id]['cases_completed']
@@ -100,7 +98,6 @@ def select_case(request, study_id, user_id):
         'list_cases_assigned': list_cases_assigned,
         'list_cases_completed': list_cases_completed,
         'admitting_diagnoses': admitting_diagnoses_dict,
-        'patient_genders': patient_genders,
         'patient_ages': patient_ages,
         'user_id': user_id,
         'study_id': study_id,
