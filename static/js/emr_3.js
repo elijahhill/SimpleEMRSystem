@@ -36,46 +36,39 @@ $(document).ready(function () {
 
     $('#directions_button').removeAttr("disabled");
     $('#break_button').removeAttr("disabled");
-    setDivHeights();
 
-    $('#nav-tab1').trigger('click');
+    setNoteDivHeights();
 });
 
 $(window).resize(function(){
-        setDivHeights();
+        setNoteDivHeights();
     }
 );
 
-function setDivHeights() {
+function setNoteDivHeights() {
     var totalHeight = $(document).height();
     var topNavHeight = $("#top-nav").outerHeight();
     var notesTabHeight = $("#notes-tab").outerHeight();
-    var continueAreaHeight = $("#continue-area").outerHeight();
 
     $("#graphs-box").height(totalHeight - topNavHeight);
     $(".note-content").outerHeight(
-        totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
+        totalHeight - (topNavHeight + notesTabHeight)
     );
 }
 
 function getSelectorWidth() {
     var topNavWidth = $("#top-nav").outerWidth(true);
-    console.log(`topNavWidth: ${topNavWidth}`);
 
     var bulletedListWidth = $("#bulleted-demographics").outerWidth(true);
-    console.log(`bulletedListWidth: ${bulletedListWidth}`);
 
     var selectedTimesWidth = $("#selected-times").outerWidth(true);
     // SelectedTimes get initalized when the chart is initalized, thus this is a placeholder for when they're not
     if (selectedTimesWidth < 100) {
-        selectedTimesWidth = 204;
+        selectedTimesWidth = 250;
     }
-    console.log(`selectedTimesWidth: ${selectedTimesWidth}`);
 
     var timeSelectorWidth =
         topNavWidth - (bulletedListWidth + selectedTimesWidth + 10);
-
-    console.log(`timeSelectorWidth: ${timeSelectorWidth}`);
 
     return timeSelectorWidth;
 }
