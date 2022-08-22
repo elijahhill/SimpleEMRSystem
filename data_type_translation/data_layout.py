@@ -23,6 +23,3 @@ class DataLayout:
         data_layout = self.__create_data_layout()
         with open(f"{self.output_folder_path}/data_layout.json", "w+") as fp:
             json.dump(obj=data_layout, fp=fp, indent=4)
-
-    def get_data_layout(self) -> Dict[str, List[str]]:
-        return self.data_layout

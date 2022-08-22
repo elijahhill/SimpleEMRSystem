@@ -30,13 +30,12 @@ class Notes:
                     patient_id = int(patient_id_match.group(0))
                     self.patient_folder_paths[patient_id] = potential_case_folder
 
-    def create_notes(self, data_layout, patient_path, case_id):
+    def create_notes(self, patient_path, case_id):
         all_notes_dict = {}
 
         note_date = "11/11"
         note_text = "DEFAULT TEXT"
         note_time = 1352687800000.0
-        note_headers = data_layout["notes"]
 
         if case_id in self.patient_folder_paths:
 

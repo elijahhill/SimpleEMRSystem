@@ -91,7 +91,7 @@ class StudyCreator:
             demographics_creator.create_demographics(
                 case_id=case_id, patient_path=patient_path, hospitalrisk_demo_df=hospitalrisk_demo_df)
             note_creator.create_notes(
-                patient_path=patient_path, data_layout=data_layout.get_data_layout(), case_id=case_id)
+                patient_path=patient_path, case_id=case_id)
             observation_creator.create_observations(
                 patient_path=patient_path, hospitalrisk_df=hospitalrisk_df, case_id=case_id)
 
