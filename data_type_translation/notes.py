@@ -16,7 +16,7 @@ class Notes:
         self.__init_patient_folder_paths__(progress_notes_path=progress_notes_path)
         self.history_and_physical = re.compile(
             "((h|H)\s*(&)\s*(p|P))|(History\s(&|And)\sPhysical)", flags=re.IGNORECASE)
-        self.day_matcher = re.compile("(day)(\s*)(\d)", re.IGNORECASE)
+        self.day_matcher = re.compile("(day)((\s*)|_*)(\d)", re.IGNORECASE)
 
     def __init_patient_folder_paths__(self, progress_notes_path: str):
         overall_note_folder = os_listdir(progress_notes_path)
@@ -64,16 +64,13 @@ class Notes:
                 if day_search_exists:
                     already_added = day_search.string in added
                     if day_search_exists and not already_added:
-                        for index, entry in enumerate([h_and_p, entry_two, entry_three]):
+                        for index, entry in enumerate([entry_two, entry_three]):
                             # Place the new search entry in the first available blank variable
                             if entry == '':
                                 if index == 0:
-                                    h_and_p = day_search
-                                    added.add(day_search.string)
-                                elif index == 1:
                                     entry_two = day_search
                                     added.add(day_search.string)
-                                elif index == 2:
+                                elif index == 1:
                                     entry_three = day_search
                                     added.add(day_search.string)
                                 break
