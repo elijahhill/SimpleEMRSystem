@@ -95,6 +95,11 @@ ul {
     overflow-x: hidden;
 }
 
+.note-content {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
 .vitmedbox{
     overflow-y: hidden;
     overflow-x: hidden;
