@@ -63,5 +63,8 @@
     },
     "calcium": {
         "internal_name": "CA"
+    },
+    "lactate": {
+        "internal_name": "LACT"
     }
 }
