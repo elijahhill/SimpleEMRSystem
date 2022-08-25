@@ -57,6 +57,10 @@ function setNoteDivHeights() {
 }
 
 function getSelectorWidth() {
+    $("#selected-times").text(
+        "00/00 00:00 to 00/00 00:00" 
+    );
+
     var topNavWidth = $("#top-nav").outerWidth(true);
 
     var bulletedListWidth = $("#bulleted-demographics").outerWidth(true);
@@ -827,10 +831,12 @@ function getchartT(id) {
 
 // Creates the time selector chart //
 function getchartTS(id,case_details,time_step=0) {
+    var initalSelectorWidth = getSelectorWidth();
+    
     $(id).highcharts("StockChart", {
         chart: {
             height: 35,
-            width: getSelectorWidth(),
+            width: initalSelectorWidth,
             spacingLeft: 5,
             spacingBottom: 2,
             spacingTop: 2,
