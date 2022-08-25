@@ -34,7 +34,14 @@
                     </a>
                 </li>
                 {% for item in dict_data_layout.title_bar %}
-                <li class="bootstrap_margin_override navbar-text">{{ item }}: {{ dict_demographics|keyvalue:item }}</li>
+                    {% if item == "height" %}
+                        {% with height=dict_demographics|keyvalue:item%}
+                        <li class="bootstrap_margin_override navbar-text">{{ item }}:
+                            {{ height.0 }}ft {{ height.1 }}in</li>
+                        {% endwith %}
+                    {% else %}
+                        <li class="bootstrap_margin_override navbar-text">{{ item }}: {{ dict_demographics|keyvalue:item }}</li>
+                {% endif %}
                 {% endfor %}
             </ul> 
             
