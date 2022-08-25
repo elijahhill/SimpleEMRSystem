@@ -36,9 +36,8 @@ $(document).ready(function () {
 
     $('#directions_button').removeAttr("disabled");
     $('#break_button').removeAttr("disabled");
-    setNoteDivHeights();
 
-    // $('#nav-tab1').trigger('click');
+    setNoteDivHeights();
 });
 
 $(window).resize(function(){
@@ -50,11 +49,10 @@ function setNoteDivHeights() {
     var totalHeight = $(document).height();
     var topNavHeight = $("#top-nav").outerHeight();
     var notesTabHeight = $("#notes-tab").outerHeight();
-    var continueAreaHeight = $("#continue-area").outerHeight();
 
     $("#graphs-box").height(totalHeight - topNavHeight);
     $(".note-content").outerHeight(
-        totalHeight - (topNavHeight + notesTabHeight + continueAreaHeight)
+        totalHeight - (topNavHeight + notesTabHeight)
     );
 }
 
@@ -66,11 +64,11 @@ function getSelectorWidth() {
     var selectedTimesWidth = $("#selected-times").outerWidth(true);
     // SelectedTimes get initalized when the chart is initalized, thus this is a placeholder for when they're not
     if (selectedTimesWidth < 100) {
-        selectedTimesWidth = 204;
+        selectedTimesWidth = 250;
     }
 
     var timeSelectorWidth =
-        topNavWidth - (bulletedListWidth + selectedTimesWidth + 10);
+        topNavWidth - (bulletedListWidth + selectedTimesWidth + 50);
 
     return timeSelectorWidth;
 }
