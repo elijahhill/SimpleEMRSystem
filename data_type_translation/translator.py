@@ -48,7 +48,9 @@ class StudyCreator:
             2259947,
             182065,
             741698,
-            2799629
+            2799629,
+            1802864,
+            2821216
         ])
 
         case_ids_str_list = list(map(lambda elem: str(elem), case_ids))
