@@ -18,7 +18,7 @@ class StudyCreator:
 
     def __get_hospitalrisk_df(self, excel_path: str):
         df = pd.read_excel(excel_path, engine="openpyxl",
-                           sheet_name='hosp_risk_ecart_8_of_10_cases')
+                           sheet_name='10_of_10_cases')
         df["EWS percentile"] = df["ecart percentile"].round(1)
         return df
 
