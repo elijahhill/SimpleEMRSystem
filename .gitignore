@@ -196,3 +196,11 @@ resources/aai_demo_study/cases_all/741698/observations.json
 resources/aai_demo_study/cases_all/864861/demographics.json
 resources/aai_demo_study/cases_all/864861/note_panel_data.json
 resources/aai_demo_study/cases_all/864861/observations.json
+resources/color_test_study/admitting_diagnoses.json
+resources/color_test_study/case_details.json
+resources/color_test_study/data_layout.json
+resources/color_test_study/user_details.json
+resources/color_test_study/variable_details.json
+resources/color_test_study/cases_all/610044/demographics.json
+resources/color_test_study/cases_all/610044/note_panel_data.json
+resources/color_test_study/cases_all/610044/observations.json
