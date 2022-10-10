@@ -3,13 +3,24 @@
         "display_text": "\"CO2\"",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#000000"
+                "color": "#BF0B23",
+                "value": 11
+            }, {
+                "color": "#FF8000",
+                "value": 23
+            }, {
+                "color": "#33CC33",
+                "value": 31
+            }, {
+                "color": "#FF8000",
+                "value": 40
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -21,19 +32,18 @@
         "display_text": "AVPU",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 0.0
-            }, {
                 "color": "#33CC33",
-                "value": 1.0
+                "value": 0.9999
+            }, {
+                "color": "#FF8000",
+                "value": 2.9999
             }, {
                 "color": "#BF0B23"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -46,18 +56,17 @@
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",
-                "value": 97.6
+                "value": 21
             }, {
                 "color": "#FF8000",
-                "value": 99.5
+                "value": 75
             }, {
                 "color": "#BF0B23"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -72,19 +81,23 @@
         "discrete_nominal_to_yIndex": [],
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 60.0
-            }, {
-                "color": "#33CC33",
-                "value": 100.0
-            }, {
-                "color": "#BF0B23"
-            }],
+                    "color": "#FF8001",
+                    "value": 60
+                }, {
+                    "color": "#33CC33",
+                    "value": 91
+                },
+                {
+                    "color": "#FF8000",
+                    "value": 100
+                }, {
+                    "color": "#BF0B23"
+                }
+            ],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [{
@@ -103,19 +116,27 @@
         "discrete_nominal_to_yIndex": [],
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 12.0
-            }, {
-                "color": "#33CC33",
-                "value": 20.0
-            }, {
-                "color": "#BF0B23"
-            }],
+                    "color": "#BF0023",
+                    "value": 9
+                }, {
+                    "color": "#FF8000",
+                    "value": 12
+                }, {
+                    "color": "#33CC33",
+                    "value": 20.0001
+                },
+                {
+                    "color": "#FF8000",
+                    "value": 23.9999
+                },
+                {
+                    "color": "#BF0B23"
+                }
+            ],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [{
@@ -133,20 +154,40 @@
         "units": "",
         "discrete_nominal_to_yIndex": [0, 0],
         "numeric_lab_data": [{
-            "color": "#FF8C00",
+            "zones": [{
+                    "color": "#BF0023",
+                    "value": 100
+                } ,
+                {
+                    "color": "#33CC33",
+                    "value": 140
+                },
+                {
+                    "color": "#FF8000"
+                }
+            ],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "dias"
         }, {
-            "color": "#A0522D",
+            "zones": [{
+                    "color": "#33CC33",
+                    "value": 140
+                },
+                {
+                    "color": "#FF8000",
+                    "value": 180
+                },
+                {
+                    "color": "#BF0023"
+                }
+            ],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "syst"
         }],
         "discrete_lab_data": []
@@ -158,19 +199,18 @@
         "discrete_nominal_to_yIndex": [],
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 95.0
+                "color": "#BF0023",
+                "value": 90
             }, {
-                "color": "#33CC33",
-                "value": 100.1
+                "color": "#FF8000",
+                "value": 95
             }, {
-                "color": "#BF0B23"
+                "color": "#33CC33"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [{
@@ -189,19 +229,27 @@
         "discrete_nominal_to_yIndex": [],
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 36.1
-            }, {
-                "color": "#33CC33",
-                "value": 37.2
-            }, {
-                "color": "#BF0B23"
-            }],
+                    "color": "#BF0023",
+                    "value": 35.5
+                }, {
+                    "color": "#FF8000",
+                    "value": 36.1
+                }, {
+                    "color": "#33CC33",
+                    "value": 37.3
+                },
+                {
+                    "color": "#FF8000",
+                    "value": 37.8
+                },
+                {
+                    "color": "#BF0B23"
+                }
+            ],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [{
@@ -217,19 +265,24 @@
         "display_text": "Hgb",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 12.9
+                "color": "#BF0B23",
+                "value": 8.0001
+            }, {
+                "color": "#FF8000",
+                "value": 12
             }, {
                 "color": "#33CC33",
-                "value": 16.9
+                "value": 17
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 20.9999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -241,19 +294,24 @@
         "display_text": "White Blood Cell Count",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 3.8
+                "color": "#BF0B23",
+                "value": 2.1
+            }, {
+                "color": "#FF8000",
+                "value": 4.5
             }, {
                 "color": "#33CC33",
-                "value": 10.6
+                "value": 11.1
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 39.9999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -265,19 +323,24 @@
         "display_text": "Platelets",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 156.0
+                "color": "#BF0B23",
+                "value": 50.00001
+            }, {
+                "color": "#FF8000",
+                "value": 150
             }, {
                 "color": "#33CC33",
-                "value": 369.0
+                "value": 450.9999
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 749.9999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -289,19 +352,18 @@
         "display_text": "Lactate",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 0.5
-            }, {
                 "color": "#33CC33",
-                "value": 1.6
+                "value": 2
+            }, {
+                "color": "#FF8000",
+                "value": 3.9999
             }, {
                 "color": "#BF0B23"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -313,19 +375,24 @@
         "display_text": "Sodium",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 136.0
+                "color": "#BF0B23",
+                "value": 121
+            }, {
+                "color": "#FF8000",
+                "value": 135
             }, {
                 "color": "#33CC33",
-                "value": 146.0
+                "value": 146
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 160
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -337,19 +404,24 @@
         "display_text": "Potassium",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 3.5
+                "color": "#BF0B23",
+                "value": 3
+            }, {
+                "color": "#FF8000",
+                "value": 3.6
             }, {
                 "color": "#33CC33",
-                "value": 5.0
+                "value": 5.2
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 5.999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -361,19 +433,24 @@
         "display_text": "Chloride",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 98.0
+                "color": "#BF0B23",
+                "value": 92
+            }, {
+                "color": "#FF8000",
+                "value": 98
             }, {
                 "color": "#33CC33",
-                "value": 107.0
+                "value": 107
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 112.999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -385,19 +462,24 @@
         "display_text": "Anion Gap",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 7.0
+                "color": "#BF0B23",
+                "value": 3.9999
+            }, {
+                "color": "#FF8000",
+                "value": 6
             }, {
                 "color": "#33CC33",
-                "value": 15.0
+                "value": 12.00001
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 15.999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -409,13 +491,24 @@
         "display_text": "Glucose",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#000000"
+                "color": "#BF0B23",
+                "value": 56
+            }, {
+                "color": "#FF8000",
+                "value": 70
+            }, {
+                "color": "#33CC33",
+                "value": 101
+            }, {
+                "color": "#FF8000",
+                "value": 179.9999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -427,19 +520,21 @@
         "display_text": "BUN",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 8.0
+                "color": "#FF8000",
+                "value": 6
             }, {
                 "color": "#33CC33",
-                "value": 26.0
+                "value": 21
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 49.999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -451,19 +546,21 @@
         "display_text": "Creatinine",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 0.5
+                "color": "#FF8000",
+                "value": 0.699999
             }, {
                 "color": "#33CC33",
-                "value": 1.4
+                "value": 1.29999
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 3.0999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -475,13 +572,21 @@
         "display_text": "BUN Creatine Ratio",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#000000"
+                "color": "#FF8000",
+                "value": 10
+            }, {
+                "color": "#33CC33",
+                "value": 21
+            }, {
+                "color": "#FF8000",
+                "value": 39.999
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
@@ -493,19 +598,24 @@
         "display_text": "Calcium",
         "numeric_lab_data": [{
             "zones": [{
-                "color": "#00CCFF",
-                "value": 8.4
+                "color": "#BF0B23",
+                "value": 6.1
+            }, {
+                "color": "#FF8000",
+                "value": 8.5
             }, {
                 "color": "#33CC33",
-                "value": 10.2
+                "value": 10.3
             }, {
-                "color": "#BF0B23"
+                "color": "#FF8000",
+                "value": 13
+            }, {
+                "color": "#BF0023"
             }],
             "marker": {
                 "symbol": "circle"
             },
-            "data": [
-            ],
+            "data": [],
             "name": "numeric_values"
         }],
         "discrete_lab_data": [],
