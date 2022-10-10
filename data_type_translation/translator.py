@@ -17,6 +17,8 @@ class StudyCreator:
     
 
     def __get_hospitalrisk_df(self, excel_path: str):
+        # df = pd.read_excel(excel_path, engine="openpyxl",
+        #                    sheet_name='color_test')
         df = pd.read_excel(excel_path, engine="openpyxl",
                            sheet_name='10_of_10_cases')
         df["EWS percentile"] = df["ecart percentile"].round(1)
@@ -52,6 +54,10 @@ class StudyCreator:
             1802864,
             2821216
         ])
+
+        # case_ids = set([
+        #     610044
+        # ])
 
         case_ids_str_list = list(map(lambda elem: str(elem), case_ids))
 
