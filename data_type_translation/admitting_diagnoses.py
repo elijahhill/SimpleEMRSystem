@@ -12,5 +12,8 @@ class AdmittingDiagnoses():
         with open(f"{self.current_path}/data_translation_files/admitting_diagnoses.json") as fp:
             variable_details = json.load(fp=fp)
 
+        # with open(f"{self.current_path}/data_translation_files/admitting_diagnoses_color_test.json") as fp:
+        #     variable_details = json.load(fp=fp)
+
         with open(f"{self.output_folder_path}/admitting_diagnoses.json", "w+") as fp:
             json.dump(obj=variable_details, fp=fp, indent=4)
