@@ -706,8 +706,8 @@ function get_blood_pressure_lab_chart(
             if (!systolicColorZone.hasOwnProperty("value")) {
                 coloredDiastolicData.push(
                     create_datapoint(
-                        systolicDatapoint[0],
-                        systolicDatapoint[1],
+                        systolicDatapoint[0], // Time will still be the same
+                        diastolicMap[systolicDatapoint[0]],
                         systolicColorZone.color
                     )
                 );
@@ -723,8 +723,8 @@ function get_blood_pressure_lab_chart(
                 if(systolicDatapoint[1] < systolicColorZone.value){
                     coloredDiastolicData.push(
                         create_datapoint(
-                            systolicDatapoint[0],
-                            systolicDatapoint[1],
+                            systolicDatapoint[0], // Time will still be the same
+                            diastolicMap[systolicDatapoint[0]],
                             systolicColorZone.color
                         )
                     );
