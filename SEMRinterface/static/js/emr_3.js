@@ -568,9 +568,9 @@ function getYMaxData(chart_data, chart_container_id, variable_details) {
     } else if (chart_container_id === "chartVTDIAV") {
         // Systolic is contained in index 1
 
-        // Getting data that is less than the max time
+        // Getting data that is less than or equal to the selected max
         const filteredDataSystolic = chart_data[1].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
 
         // Even with integers, by default the sort method uses lexographic sorting rather
@@ -623,9 +623,9 @@ function getYMinData(chart_data, chart_container_id, variable_details) {
     } else if (chart_container_id === "chartVTDIAV") {
         // Diastolic is contained in index 0
 
-        // Getting data that is less than the max time
+        // Getting data that is less than or equal to the max time
         const filteredDataDiastolic = chart_data[0].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
 
         // Even with integers, by default the sort method uses lexographic sorting rather
