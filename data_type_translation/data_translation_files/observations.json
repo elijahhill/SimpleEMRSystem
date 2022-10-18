@@ -154,18 +154,6 @@
         "units": "",
         "discrete_nominal_to_yIndex": [0, 0],
         "numeric_lab_data": [{
-            "zones": [{
-                    "color": "#BF0023",
-                    "value": 100
-                } ,
-                {
-                    "color": "#33CC33",
-                    "value": 140
-                },
-                {
-                    "color": "#FF8000"
-                }
-            ],
             "marker": {
                 "symbol": "circle"
             },
@@ -173,15 +161,21 @@
             "name": "dias"
         }, {
             "zones": [{
+                    "color": "#BF0023",
+                    "value": 100
+                }, {
+                    "color": "#FF8000",
+                    "value": 110
+                }, {
                     "color": "#33CC33",
-                    "value": 140
+                    "value": 140.0001
                 },
                 {
                     "color": "#FF8000",
-                    "value": 180
+                    "value": 180.0001
                 },
                 {
-                    "color": "#BF0023"
+                    "color": "#BF0B23"
                 }
             ],
             "marker": {
