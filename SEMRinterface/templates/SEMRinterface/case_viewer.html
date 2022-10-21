@@ -73,7 +73,9 @@
 					{% for group in dict_data_layout.risk_score_and_vitals %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-							{{group}}
+							{% with observation=dict_observations|keyvalue:group%}
+							    {{ observation.display_text }}
+							{% endwith %}
 						</div>
 						<!-- chart rows will be added here via js -->
 					</div>
@@ -105,7 +107,9 @@
 					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-							{{group}}
+							{% with observation=dict_observations|keyvalue:group%}
+							    {{ observation.display_text }}
+							{% endwith %}
 						</div>
 						<!-- chart rows will be added here via js -->
 					</div>
@@ -120,7 +124,9 @@
 					{% for group in dict_data_layout.chemistry %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-							{{group}}
+							{% with observation=dict_observations|keyvalue:group%}
+							    {{ observation.display_text }}
+							{% endwith %}
 						</div>
 						<!-- chart rows will be added here via js -->
 					</div>
