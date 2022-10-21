@@ -7,10 +7,10 @@ class DataLayout:
         self.output_folder_path = output_folder_path
         self.data_layout = {
             "title_bar": ["id", "age", "sex", "height", "weight", "bmi", "race"],
-            "risk_score_and_vitals": ["EWS", "HR", "BP", "RR", "SaO2", "Temperature"],
-            "neurology": ["AVPU", "Lactate", "Calcium"],
-            "chemistry": ["Sodium", "Potassium", "Chloride", "CO2", "Anion_Gap", "BUN", "Creatinine", "BUN-Creatinine_ratio", "Glucose"],
-            "blood_gas_cbc_lactate": ["HgB", "WBC", "Platelets"],
+            "risk_score_and_vitals": ["EWS", "VTHR", "VTDIAV", "VTRR", "VTSO2A", "VTTEMA"],
+            "neurology": ["AVPU", "LACT", "CA"],
+            "chemistry": ["NA", "K", "CL", "CO2", "AGAP", "BUN", "CREAT", "BCR", "GLU"],
+            "blood_gas_cbc_lactate": ["HGB", "WBC", "PLT"],
             "notes": ["note section 1", "note section 2", "note section 3"]
         }
 

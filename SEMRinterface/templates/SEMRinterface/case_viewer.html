@@ -88,7 +88,9 @@
 					{% for group in dict_data_layout.neurology %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
-							{{group}}
+							{% with observation=dict_observations|keyvalue:group%}
+							    {{ observation.display_text }}
+							{% endwith %}
 						</div>
 						<!-- chart rows will be added here via js -->
 					</div>

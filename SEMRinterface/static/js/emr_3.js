@@ -461,42 +461,32 @@ function add_observation_chart(
 		observation_details is from observations.json
 		variable_details is from variable_details.json
 	*/
-    var chart_container_id = "chart" + obs_id;
+    const obs_id_text = obs_id.innerText
+    var chart_container_id = "chart" + obs_id_text;
     if (panel_1_groups.includes(variable_details.display_group)) {
         div_str =
             '<div class="vitalrow" id="row' +
-            obs_id +
+            obs_id_text +
             '" onclick="activate(row' +
-            obs_id +
-            ')">';
-    } else if (obs_id == "IO") {
-        div_str =
-            '<div class="iorow" id="row' +
-            obs_id +
-            '" onclick="activate(row' +
-            obs_id +
+            obs_id_text +
             ')">';
     } else {
         div_str =
             '<div class="chartrow" id="row' +
-            obs_id +
+            obs_id_text +
             '" onclick="activate(row' +
-            obs_id +
+            obs_id_text +
             ')">';
     }
     div_str += '<div class="chartcol1 shower"> </div>';
     div_str +=
         '<div class="chartcol3" id="' + chart_container_id + '"></div></div>';
     $("#" + variable_details.display_group).append(div_str);
-    if (obs_id == "IO") {
-        get_io_chart(chart_container_id, observation_details, variable_details);
-    } else {
-        get_lab_chart(
-            chart_container_id,
-            observation_details,
-            variable_details
-        );
-    }
+    get_lab_chart(
+        chart_container_id,
+        observation_details,
+        variable_details
+    );
 }
 
 function determine_chart_min(chart_data, chart_container_id, variable_details) {

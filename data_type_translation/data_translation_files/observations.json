@@ -52,7 +52,7 @@
         "discrete_nominal_to_yIndex": []
     },
     "EWS": {
-        "display_text": "EWS",
+        "display_text": "EWS (0-100%)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",
@@ -75,7 +75,7 @@
         "discrete_nominal_to_yIndex": []
     },
     "VTHR": {
-        "display_text": "HR",
+        "display_text": "Heart Rate (BPM)",
         "y_axis_ranges": [0, 0],
         "units": "bpm",
         "discrete_nominal_to_yIndex": [],
@@ -110,7 +110,7 @@
         }]
     },
     "VTRR": {
-        "display_text": "RR",
+        "display_text": "Respiratory Rate (RPM)",
         "y_axis_ranges": [0, 0],
         "units": "bpm",
         "discrete_nominal_to_yIndex": [],
@@ -187,7 +187,7 @@
         "discrete_lab_data": []
     },
     "VTSO2A": {
-        "display_text": "SaO2",
+        "display_text": "SaO2 (%)",
         "y_axis_ranges": [0, 0],
         "units": "%",
         "discrete_nominal_to_yIndex": [],
@@ -217,7 +217,7 @@
         }]
     },
     "VTTEMA": {
-        "display_text": "Temperature",
+        "display_text": "Temperature (C)",
         "y_axis_ranges": [0, 0],
         "units": "Deg Celsius",
         "discrete_nominal_to_yIndex": [],
