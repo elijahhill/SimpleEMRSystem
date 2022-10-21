@@ -461,21 +461,21 @@ function add_observation_chart(
 		observation_details is from observations.json
 		variable_details is from variable_details.json
 	*/
-    const obs_id_text = obs_id.innerText
-    var chart_container_id = "chart" + obs_id_text;
+    var chart_container_id = "chart" + obs_id;
+    // var chart_container_id = obs_id;
     if (panel_1_groups.includes(variable_details.display_group)) {
         div_str =
             '<div class="vitalrow" id="row' +
-            obs_id_text +
+            obs_id +
             '" onclick="activate(row' +
-            obs_id_text +
+            obs_id +
             ')">';
     } else {
         div_str =
             '<div class="chartrow" id="row' +
-            obs_id_text +
+            obs_id +
             '" onclick="activate(row' +
-            obs_id_text +
+            obs_id +
             ')">';
     }
     div_str += '<div class="chartcol1 shower"> </div>';
