@@ -462,7 +462,6 @@ function add_observation_chart(
 		variable_details is from variable_details.json
 	*/
     var chart_container_id = "chart" + obs_id;
-    // var chart_container_id = obs_id;
     if (panel_1_groups.includes(variable_details.display_group)) {
         div_str =
             '<div class="vitalrow" id="row' +
@@ -481,7 +480,7 @@ function add_observation_chart(
     div_str += '<div class="chartcol1 shower"> </div>';
     div_str +=
         '<div class="chartcol3" id="' + chart_container_id + '"></div></div>';
-    $("#" + variable_details.display_group).append(div_str);
+    $("#" + obs_id).append(div_str);
     get_lab_chart(
         chart_container_id,
         observation_details,
