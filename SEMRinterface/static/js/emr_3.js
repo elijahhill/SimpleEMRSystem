@@ -224,7 +224,7 @@ function get_formatted_date(ms_date) {
 
 // A way to get the maximum x value within the graph data
 function get_max_point(series, selectedMax) {
-    const filtered = series.filter((point) => point.x < selectedMax);
+    const filtered = series.filter((point) => point.x <= selectedMax);
     const finalElement = filtered.length - 1;
     return filtered[finalElement].y;
 }
@@ -766,7 +766,7 @@ function get_blood_pressure_lab_chart(
             },
         },
         credits: {
-            text: "test value",
+            text: "0",
             href: "",
             zIndex: 0,
             position: {
@@ -963,7 +963,7 @@ function get_lab_chart(
                 },
             },
             credits: {
-                text: "test value",
+                text: "0",
                 href: "",
                 zIndex: 0,
                 position: {
