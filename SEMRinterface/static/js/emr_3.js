@@ -6,6 +6,7 @@ var selectedMin; // The min time currently displayed across all charts
 var selectedMax; // The max time currently displayed across all charts
 var displayed_min_t = null; // The min time of the current time step
 var displayed_max_t = null; // The max time of the current time step
+var rounding_decimals = {};
 var step = 0; // The step in case_details.json
 var case_details; // the case details
 var case_complete_url; // url runs when case if finished
@@ -223,10 +224,12 @@ function get_formatted_date(ms_date) {
 }
 
 // A way to get the maximum x value within the graph data
-function get_max_point(series, selectedMax) {
+function get_max_point(series, selectedMax, rounding_decimals) {
     const filtered = series.filter((point) => point.x <= selectedMax);
     const finalElement = filtered.length - 1;
-    return filtered[finalElement].y;
+    const yFiltered = filtered[finalElement].y;
+    const yFilteredRounded = yFiltered.toFixed(rounding_decimals);
+    return yFilteredRounded;
 }
 
 // 	Updates the min and max time for each chart on change of the time selector //
@@ -299,11 +302,10 @@ function updateExtremes() {
             if (currentChart.renderTo.id !== "chartVTDIAV") {
                 currentChart.update({
                     credits: {
-                        text: Math.round(
-                            get_max_point(
+                        text: get_max_point(
                                 currentChart.series[0].data,
-                                selectedMax
-                            )
+                                selectedMax,
+                                rounding_decimals[currentChart.renderTo.id]
                         ),
                     },
                 });
@@ -312,10 +314,12 @@ function updateExtremes() {
                     credits: {
                         text: `${get_max_point(
                             currentChart.series[1].data,
-                            selectedMax
+                            selectedMax,
+                            rounding_decimals[currentChart.renderTo.id]
                         )} / ${get_max_point(
                             currentChart.series[0].data,
-                            selectedMax
+                            selectedMax,
+                            rounding_decimals[currentChart.renderTo.id]
                         )}`,
                     },
                 });
@@ -685,7 +689,6 @@ function get_blood_pressure_lab_chart(
     for (const datapoint of diastolicData) {
         diastolicMap[datapoint[0]] = datapoint[1];
     }
-    console.log(diastolicMap);
 
     const systolicColorZones = chart_data[1].zones;
 
@@ -924,6 +927,7 @@ function get_lab_chart(
             A different way of finding min / max for data points
     */
     var currChart;
+    rounding_decimals[chart_container_id] = observation_details.num_decimals;
     if (chart_container_id === "chartVTDIAV") {
         currChart = get_blood_pressure_lab_chart(
             chart_container_id,
@@ -1066,7 +1070,8 @@ function get_lab_chart(
                     if (this.series.name === "numeric_values") {
                         return (
                             '<p style="font-size:12px">' +
-                            Math.round(this.y * 100) / 100 +
+                            // Math.round(this.y * 100) / 100 +
+                            this.y.toFixed(observation_details.num_decimals) +
                             "</p>"
                         );
                     } else if (
