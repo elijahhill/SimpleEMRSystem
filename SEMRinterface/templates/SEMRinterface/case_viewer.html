@@ -67,8 +67,9 @@
 	<div class="row" id="panels-container">
 		<!-- Risk Scores, Vitals, Neurology, Blood Gas, CBC, Lactate, and Chemistry Panels --> 
 		<div class="col-lg-8 no-pad scroll-box" id="graphs-box">
-			<!-- Risk Score and Vitals Panel -->
+			<!-- Early Warning Score Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
+                <div class="charttitlerow group_subheading">Early Warning Score</div>
 				<div class="col-lg-12 half-vitmedbox no-pad" id="vit_tracking">
 					{% for group in dict_data_layout.risk_score_and_vitals %}
 					<div class="lab-group col-md-12" id="{{group}}">
@@ -82,10 +83,11 @@
 					{% endfor %}
 				</div>
 			</div>
-			<!-- End of Risk Score and Vitals Panel -->
+			<!-- Early Warning Score Panel -->
 			
-			<!-- Neurology Panel -->
+			<!-- Vital Signs Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
+                <div class="charttitlerow group_subheading">Vital Signs</div>
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.neurology %}
 					<div class="lab-group col-md-12" id="{{group}}">
@@ -99,11 +101,12 @@
 					{% endfor %}
 				</div>
 			</div>
-			<!-- End of Neurology Panel -->
+			<!-- End of Vital Signs Panel -->
 
-			<!-- Blood Gas CBC Lactate Panel -->
+			<!-- Neurological Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
+                    <div class="charttitlerow group_subheading">Neurological</div>
 					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -116,11 +119,12 @@
 					{% endfor %}
 				</div>
 			</div>
-			<!-- End of Blood Gas CBC Lactate Panel -->
+			<!-- End of Neurological Panel -->
 
-			<!-- Chemistry Panel -->
+			<!-- Laboratory Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
+                    <div class="charttitlerow group_subheading">Laboratory</div>
 					{% for group in dict_data_layout.chemistry %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -133,7 +137,7 @@
 					{% endfor %}
 				</div>
 			</div>
-			<!-- End of Chemistry Panel -->
+			<!-- End of Laboratory Panel -->
 
 		</div>
 		<!-- end of Physio, Med, and Lab Panels --> 
