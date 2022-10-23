@@ -1,6 +1,6 @@
 {
     "CO2": {
-        "display_text": "\"CO2\"",
+        "display_text": "\"CO2\"(mEq/L)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -26,10 +26,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [27.0, 68.0],
         "units": "mm",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "AVPU": {
-        "display_text": "AVPU",
+        "display_text": "AVPU (0-4)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",
@@ -49,7 +50,8 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [27.0, 68.0],
         "units": "",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "EWS": {
         "display_text": "EWS (0-100%)",
@@ -72,13 +74,15 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [27.0, 68.0],
         "units": "",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 2
     },
     "VTHR": {
         "display_text": "Heart Rate (BPM)",
         "y_axis_ranges": [0, 0],
         "units": "bpm",
         "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0,
         "numeric_lab_data": [{
             "zones": [{
                     "color": "#FF8001",
@@ -114,6 +118,7 @@
         "y_axis_ranges": [0, 0],
         "units": "bpm",
         "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0,
         "numeric_lab_data": [{
             "zones": [{
                     "color": "#BF0023",
@@ -149,10 +154,11 @@
         }]
     },
     "VTDIAV": {
-        "display_text": "Diastolic BP",
+        "display_text": "Blood Pressure",
         "y_axis_ranges": [34.0, 131.0],
         "units": "",
         "discrete_nominal_to_yIndex": [0, 0],
+        "num_decimals": 0,
         "numeric_lab_data": [{
             "marker": {
                 "symbol": "circle"
@@ -191,6 +197,7 @@
         "y_axis_ranges": [0, 0],
         "units": "%",
         "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0,
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0023",
@@ -221,6 +228,7 @@
         "y_axis_ranges": [0, 0],
         "units": "Deg Celsius",
         "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1,
         "numeric_lab_data": [{
             "zones": [{
                     "color": "#BF0023",
@@ -256,7 +264,7 @@
         }]
     },
     "HGB": {
-        "display_text": "Hgb",
+        "display_text": "Hemoglobin (g/dl)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -282,10 +290,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [6.2, 12.2],
         "units": "g/dL",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1
     },
     "WBC": {
-        "display_text": "White Blood Cell Count",
+        "display_text": "WBC (10^9/L)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -311,10 +320,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [4.0, 19.0],
         "units": "X10E+09/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1
     },
     "PLT": {
-        "display_text": "Platelets",
+        "display_text": "Platelet (10^3/ul)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -340,10 +350,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [36.0, 340.0],
         "units": "X10E+09/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "LACT": {
-        "display_text": "Lactate",
+        "display_text": "Lactate (mmol/L)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",
@@ -363,10 +374,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [0.6, 5.2],
         "units": "mmol/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1
     },
     "NA": {
-        "display_text": "Sodium",
+        "display_text": "Sodium (mEq/L)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -392,10 +404,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [109.0, 172.0],
         "units": "mmol/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "K": {
-        "display_text": "Potassium",
+        "display_text": "Potassium (mEq/l)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -421,10 +434,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [2.7, 5.3],
         "units": "mmol/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1
     },
     "CL": {
-        "display_text": "Chloride",
+        "display_text": "Chloride (mEq/L)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -450,7 +464,8 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [80.0, 134.0],
         "units": "mmol/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "AGAP": {
         "display_text": "Anion Gap",
@@ -479,7 +494,8 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [7.0, 17.0],
         "units": "mEq/L",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "GLU": {
         "display_text": "Glucose",
@@ -508,10 +524,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [27.0, 68.0],
         "units": "",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "BUN": {
-        "display_text": "BUN",
+        "display_text": "BUN (mg/dl)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#FF8000",
@@ -534,10 +551,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [6.0, 69.0],
         "units": "mg/dL",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 0
     },
     "CREAT": {
-        "display_text": "Creatinine",
+        "display_text": "Creatinine (mg/dl)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#FF8000",
@@ -560,7 +578,8 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [0.3, 5.2],
         "units": "mg/dL",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 2
     },
     "BCR": {
         "display_text": "BUN Creatine Ratio",
@@ -586,10 +605,11 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [27.0, 68.0],
         "units": "",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 2
     },
     "CA": {
-        "display_text": "Calcium",
+        "display_text": "Calcium (mg/dl)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#BF0B23",
@@ -615,6 +635,7 @@
         "discrete_lab_data": [],
         "y_axis_ranges": [5.8, 10.3],
         "units": "mg/dL",
-        "discrete_nominal_to_yIndex": []
+        "discrete_nominal_to_yIndex": [],
+        "num_decimals": 1
     }
 }
