@@ -541,7 +541,7 @@ function getYMaxData(chart_data, chart_container_id, variable_details) {
     if (chart_container_id !== "chartVTDIAV") {
         // Getting data that is less than the max time
         const filteredData = chart_data[0].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
         // Even with integers, by default the sort method uses lexographic sorting rather
         // sorting by value, sorting like this sorts by value.
@@ -596,7 +596,7 @@ function getYMinData(chart_data, chart_container_id, variable_details) {
     if (chart_container_id !== "chartVTDIAV") {
         // Getting data that is less than the max time
         const filteredData = chart_data[0].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
         // Even with integers, by default the sort method uses lexographic sorting rather
         // sorting by value, sorting like this sorts by value.
