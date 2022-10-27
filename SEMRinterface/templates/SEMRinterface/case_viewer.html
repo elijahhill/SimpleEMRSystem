@@ -87,7 +87,7 @@
 			
 			<!-- Vital Signs Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
-                <div class="charttitlerow group_subheading">Vital Signs</div>
+                <div class="charttitlerow group_subheading">Neurological</div>
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.neurology %}
 					<div class="lab-group col-md-12" id="{{group}}">
@@ -106,7 +106,7 @@
 			<!-- Neurological Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
-                    <div class="charttitlerow group_subheading">Neurological</div>
+                    <div class="charttitlerow group_subheading">Hematological</div>
 					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
@@ -124,7 +124,7 @@
 			<!-- Laboratory Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
-                    <div class="charttitlerow group_subheading">Laboratory</div>
+                    <div class="charttitlerow group_subheading">Chemistry</div>
 					{% for group in dict_data_layout.chemistry %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">
