@@ -83,7 +83,7 @@
         "display_group": "WBC",
         "display_name": "WBC",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 22],
+        "dflt_y_axis_ranges": [0, null],
         "original_name": "WBC",
         "units": ""
     },
