@@ -147,7 +147,7 @@
         "display_group": "BUN",
         "display_name": "BUN",
         "dflt_normal_ranges": [0, 0],
-        "dflt_y_axis_ranges": [0, 50],
+        "dflt_y_axis_ranges": [null, null],
         "original_name": "BUN",
         "units": ""
     },

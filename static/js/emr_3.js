@@ -6,6 +6,7 @@ var selectedMin; // The min time currently displayed across all charts
 var selectedMax; // The max time currently displayed across all charts
 var displayed_min_t = null; // The min time of the current time step
 var displayed_max_t = null; // The max time of the current time step
+var rounding_decimals = {};
 var step = 0; // The step in case_details.json
 var case_details; // the case details
 var case_complete_url; // url runs when case if finished
@@ -223,10 +224,12 @@ function get_formatted_date(ms_date) {
 }
 
 // A way to get the maximum x value within the graph data
-function get_max_point(series, selectedMax) {
-    const filtered = series.filter((point) => point.x < selectedMax);
+function get_max_point(series, selectedMax, rounding_decimals) {
+    const filtered = series.filter((point) => point.x <= selectedMax);
     const finalElement = filtered.length - 1;
-    return filtered[finalElement].y;
+    const yFiltered = filtered[finalElement].y;
+    const yFilteredRounded = yFiltered.toFixed(rounding_decimals);
+    return yFilteredRounded;
 }
 
 // 	Updates the min and max time for each chart on change of the time selector //
@@ -299,11 +302,10 @@ function updateExtremes() {
             if (currentChart.renderTo.id !== "chartVTDIAV") {
                 currentChart.update({
                     credits: {
-                        text: Math.round(
-                            get_max_point(
+                        text: get_max_point(
                                 currentChart.series[0].data,
-                                selectedMax
-                            )
+                                selectedMax,
+                                rounding_decimals[currentChart.renderTo.id]
                         ),
                     },
                 });
@@ -312,10 +314,12 @@ function updateExtremes() {
                     credits: {
                         text: `${get_max_point(
                             currentChart.series[1].data,
-                            selectedMax
+                            selectedMax,
+                            rounding_decimals[currentChart.renderTo.id]
                         )} / ${get_max_point(
                             currentChart.series[0].data,
-                            selectedMax
+                            selectedMax,
+                            rounding_decimals[currentChart.renderTo.id]
                         )}`,
                     },
                 });
@@ -469,13 +473,6 @@ function add_observation_chart(
             '" onclick="activate(row' +
             obs_id +
             ')">';
-    } else if (obs_id == "IO") {
-        div_str =
-            '<div class="iorow" id="row' +
-            obs_id +
-            '" onclick="activate(row' +
-            obs_id +
-            ')">';
     } else {
         div_str =
             '<div class="chartrow" id="row' +
@@ -487,16 +484,12 @@ function add_observation_chart(
     div_str += '<div class="chartcol1 shower"> </div>';
     div_str +=
         '<div class="chartcol3" id="' + chart_container_id + '"></div></div>';
-    $("#" + variable_details.display_group).append(div_str);
-    if (obs_id == "IO") {
-        get_io_chart(chart_container_id, observation_details, variable_details);
-    } else {
-        get_lab_chart(
-            chart_container_id,
-            observation_details,
-            variable_details
-        );
-    }
+    $("#" + obs_id).append(div_str);
+    get_lab_chart(
+        chart_container_id,
+        observation_details,
+        variable_details
+    );
 }
 
 function determine_chart_min(chart_data, chart_container_id, variable_details) {
@@ -548,7 +541,7 @@ function getYMaxData(chart_data, chart_container_id, variable_details) {
     if (chart_container_id !== "chartVTDIAV") {
         // Getting data that is less than the max time
         const filteredData = chart_data[0].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
         // Even with integers, by default the sort method uses lexographic sorting rather
         // sorting by value, sorting like this sorts by value.
@@ -603,7 +596,7 @@ function getYMinData(chart_data, chart_container_id, variable_details) {
     if (chart_container_id !== "chartVTDIAV") {
         // Getting data that is less than the max time
         const filteredData = chart_data[0].data.filter(
-            (elem) => elem[0] < selectedMax
+            (elem) => elem[0] <= selectedMax
         );
         // Even with integers, by default the sort method uses lexographic sorting rather
         // sorting by value, sorting like this sorts by value.
@@ -696,7 +689,6 @@ function get_blood_pressure_lab_chart(
     for (const datapoint of diastolicData) {
         diastolicMap[datapoint[0]] = datapoint[1];
     }
-    console.log(diastolicMap);
 
     const systolicColorZones = chart_data[1].zones;
 
@@ -777,7 +769,7 @@ function get_blood_pressure_lab_chart(
             },
         },
         credits: {
-            text: "test value",
+            text: "0",
             href: "",
             zIndex: 0,
             position: {
@@ -935,6 +927,7 @@ function get_lab_chart(
             A different way of finding min / max for data points
     */
     var currChart;
+    rounding_decimals[chart_container_id] = observation_details.num_decimals;
     if (chart_container_id === "chartVTDIAV") {
         currChart = get_blood_pressure_lab_chart(
             chart_container_id,
@@ -974,7 +967,7 @@ function get_lab_chart(
                 },
             },
             credits: {
-                text: "test value",
+                text: "0",
                 href: "",
                 zIndex: 0,
                 position: {
@@ -1077,7 +1070,8 @@ function get_lab_chart(
                     if (this.series.name === "numeric_values") {
                         return (
                             '<p style="font-size:12px">' +
-                            Math.round(this.y * 100) / 100 +
+                            // Math.round(this.y * 100) / 100 +
+                            this.y.toFixed(observation_details.num_decimals) +
                             "</p>"
                         );
                     } else if (
@@ -1111,271 +1105,6 @@ function get_lab_chart(
     chartrowids.push(chart_container_id);
 }
 
-// Creat med chart helper //
-function add_medication_chart(obs_id, medication_details, med_details) {
-    /*
-		medication_details is from observations.json
-		med_details is from variable_details.json
-	*/
-    var chart_container_id = "chart" + obs_id;
-    div_str =
-        '<div class="medrow" id="row' +
-        obs_id +
-        '" onclick="activate(row' +
-        obs_id +
-        ')">';
-    div_str += '<div class="chartcol1 shower"> </div>';
-    div_str +=
-        '<div class="chartcol3" id="' + chart_container_id + '"></div></div>';
-    $("#" + med_details.med_route).append(div_str);
-    get_med_chart(chart_container_id, medication_details, med_details);
-}
-
-// Create med chart //
-function get_med_chart(chart_container_id, medication_details, med_details) {
-    var chart_height =
-        60 + 15 * Math.floor(med_details.display_name.length / 30);
-    var chart_data = medication_details.med_data;
-
-    // find most recent value that is < displayed_max_t (within the time that is displayed on the chart)
-    var most_recent_val = "";
-    for (var i = chart_data[0].data.length - 1; i >= 0; i--) {
-        if (chart_data[0].data[i][0] <= displayed_max_t) {
-            most_recent_val = chart_data[0].data[i][1];
-            break;
-        }
-    }
-
-    // Create chart
-    var currChart = new Highcharts.Chart({
-        chart: {
-            renderTo: chart_container_id,
-            height: chart_height,
-            spacingLeft: 6,
-            spacingBottom: 6,
-            spacingTop: 6,
-            spacingRight: 6,
-            type: "scatter",
-            events: {
-                click: function () {
-                    this.tooltip.hide();
-                },
-            },
-        },
-        credits: {
-            text:
-                '<p style="font-size:13px">' +
-                math.round(most_recent_val) +
-                "</p>",
-            href: "",
-            zIndex: 0,
-            position: {
-                align: "right",
-                verticalAlign: "bottom",
-                x: -8,
-                y: -chart_height + 14,
-            },
-            style: { fontSize: "14px", color: "black", cursor: "default" },
-        },
-        title: {
-            text: med_details.display_name,
-            margin: 5,
-            style: { fontSize: "12px" },
-            align: "left",
-        },
-        legend: { enabled: false },
-        yAxis: {
-            labels: { enabled: true },
-            title: { text: null },
-            gridLineColor: "grey",
-        },
-        xAxis: [
-            {
-                tickLength: 0,
-                labels: { enabled: false },
-                min: selectedMin,
-                max: selectedMax,
-                lineWidth: 0,
-                plotBands: [
-                    {
-                        from: displayed_max_t - 86400000,
-                        to: displayed_max_t,
-                        color: "#fce1c9",
-                        id: "plot-line-1",
-                    },
-                ],
-            },
-        ],
-        series: chart_data,
-        plotOptions: {
-            series: {
-                point: {
-                    events: {
-                        click: function () {
-                            add_vertical_point(this.x);
-                        },
-                    },
-                },
-            },
-        },
-        tooltip: {
-            positioner: function (labelWidth, labelHeight, point) {
-                return { x: currChart.chartWidth / 2 - (labelWidth + 2), y: 0 };
-            },
-            formatter: function () {
-                return this.y;
-            },
-            padding: 4,
-            crosshairs: [false, false],
-        },
-    });
-    chartsContainers.push(currChart);
-    chartrowids.push(chart_container_id);
-}
-
-function get_io_chart(
-    chart_container_id,
-    observation_details,
-    variable_details
-) {
-    var currChart = new Highcharts.Chart({
-        chart: {
-            renderTo: chart_container_id,
-            height: 150,
-            spacingLeft: 6,
-            spacingBottom: 6,
-            spacingTop: 6,
-            spacingRight: 10,
-            type: "column",
-            events: {
-                click: function () {
-                    this.tooltip.hide();
-                },
-            },
-        },
-        credits: { enabled: false },
-        title: {
-            text: '<div style="float:right">Daily Intake and Output</div>',
-            margin: 5,
-            style: { fontSize: "12px" },
-            align: "left",
-        },
-        legend: { enabled: false },
-        yAxis: {
-            labels: { enabled: true },
-            title: { text: null },
-            tickPixelInterval: 50,
-            plotLines: [{ color: "black", width: 1, value: 0 }], //,
-            //max: Math.min(5000, post_data[2][1]),
-            //min: Math.max(-5000, post_data[2][0])
-        },
-        xAxis: [
-            {
-                tickLength: 0,
-                labels: {
-                    enabled: false,
-                    formatter: function () {
-                        return Highcharts.dateFormat(
-                            "%b %e %H:%M:%S",
-                            this.value
-                        );
-                    },
-                },
-                min: selectedMin,
-                max: selectedMax,
-                lineWidth: 0,
-                plotBands: [
-                    {
-                        from: displayed_max_t - 86400000,
-                        to: displayed_max_t,
-                        color: "#fce1c9",
-                        id: "plot-line-1",
-                    },
-                ],
-            },
-        ],
-        series: observation_details.numeric_lab_data,
-        plotOptions: {
-            series: {
-                point: {
-                    events: {
-                        click: function () {
-                            add_vertical_point(this.x);
-                        },
-                    },
-                },
-            },
-            column: { stacking: "normal" },
-        },
-        tooltip: {
-            positioner: function (labelWidth, labelHeight, point) {
-                return { x: currChart.chartWidth / 2 - labelWidth / 2, y: 0 };
-            },
-            formatter: function () {
-                return this.series.name + " | " + Math.round(this.y);
-            },
-            crosshairs: [false, false],
-        },
-    });
-
-    // discrete values
-    chartsContainers.push(currChart);
-    chartrowids.push(chart_container_id);
-}
-
-// Creates the time chart //
-function getchartT(id) {
-    $(id).highcharts("StockChart", {
-        chart: {
-            height: 25,
-            spacingLeft: 40,
-            spacingBottom: 0,
-            spacingTop: 2,
-            spacingRight: 6,
-            events: {
-                load: function () {
-                    var range = this.xAxis[0].getExtremes();
-                    this.xAxis[0].setExtremes(
-                        Math.max(range.min, range.max - 216000000),
-                        range.max
-                    );
-                },
-            }, // On load update selected range // 2.5 days
-        },
-        scrollbar: { enabled: false },
-        navigator: { enabled: false, height: 1, top: 4 },
-        //navigator: {enabled: true, height: 500, top:40},
-        rangeSelector: {
-            enabled: false,
-            selected: 1,
-            inputEnabled: true,
-        },
-        series: [
-            {
-                type: "scatter",
-                name: "min_max",
-                data: [
-                    [displayed_min_t, 0],
-                    [displayed_max_t, 0],
-                ],
-                visible: false,
-                tooltip: { enabled: false },
-            },
-        ],
-        tooltip: { enabled: false },
-        title: { text: null },
-        legend: { enabled: false },
-        credits: { enabled: false },
-        xAxis: {
-            top: 2,
-            labels: { format: "{value:%m/%d}", padding: 1 },
-            //tickPixelInterval: 25,
-            min: displayed_min_t,
-            max: displayed_max_t,
-        },
-        yAxis: { labels: { enabled: false }, title: { text: null }, top: 40 }, // top is what flips the navigator
-    });
-}
 
 // Creates the time selector chart //
 function getchartTS(id, case_details, time_step = 0) {

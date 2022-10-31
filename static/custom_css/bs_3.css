@@ -70,6 +70,13 @@ ul {
     background-position: center;
 }
 
+.group_subheading {
+    border-right: solid;
+    border-left: solid;
+    font-size: 18px;
+    border-width: 1px;
+}
+
 .continue-margin {
     margin-left: 15px;
     margin-right: 15px;
