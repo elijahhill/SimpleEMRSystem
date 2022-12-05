@@ -69,7 +69,7 @@
 		<div class="col-lg-8 no-pad scroll-box" id="graphs-box">
 			<!-- Early Warning Score Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
-                <div class="charttitlerow group_subheading">Early Warning Score</div>
+                <div class="charttitlerow group_subheading">Early Warning Score / Vitals</div>
 				<div class="col-lg-12 half-vitmedbox no-pad" id="vit_tracking">
 					{% for group in dict_data_layout.risk_score_and_vitals %}
 					<div class="lab-group col-md-12" id="{{group}}">
@@ -87,7 +87,7 @@
 			
 			<!-- Vital Signs Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
-                <div class="charttitlerow group_subheading">Neurological</div>
+                <div class="charttitlerow group_subheading">Neurological / Labs</div>
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
 					{% for group in dict_data_layout.neurology %}
 					<div class="lab-group col-md-12" id="{{group}}">
@@ -106,7 +106,7 @@
 			<!-- Neurological Panel -->
 			<div class="col-lg-3 vitmedbox no-pad">
 				<div class="col-lg-12 medbox no-pad" id="med_tracking">
-                    <div class="charttitlerow group_subheading">Hematological</div>
+                    <div class="charttitlerow group_subheading">Hematology</div>
 					{% for group in dict_data_layout.blood_gas_cbc_lactate %}
 					<div class="lab-group col-md-12" id="{{group}}">
 						<div class="charttitlerow"  onclick="remove_vertical_point(true)">

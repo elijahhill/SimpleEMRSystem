@@ -54,7 +54,7 @@
         "num_decimals": 0
     },
     "EWS": {
-        "display_text": "EWS (0-100%)",
+        "display_text": "EWS (0-100)",
         "numeric_lab_data": [{
             "zones": [{
                 "color": "#33CC33",
