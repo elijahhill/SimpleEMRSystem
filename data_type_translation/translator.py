@@ -30,7 +30,8 @@ class StudyCreator:
         Creates a study
         '''
         print("Fill out the file path window to continue")
-        current_path = path.dirname(__file__)
+        # current_path = path.dirname(__file__)
+        current_path = Path().absolute() / "data_type_translation"
         psg = Gui()
         data_paths = psg.get_data_paths(current_path=current_path)
         hospitalrisk_path = data_paths.get_hospitalrisk_path()
