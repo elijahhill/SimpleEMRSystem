@@ -218,8 +218,11 @@ CSRF_TRUSTED_ORIGINS = [
 ALLOWED_HOSTS = [
     '127.0.0.1',
     'https://*.simplifiedsemr.com',
+    'http://*.simplifiedsemr.com',
     'simplifiedsemr.com',
     'https://simplifiedsemr.com',
+    'www.simplifiedsemr.com',
+    'https://www.simplifiedsemr.com',
     'www.simplifiedsemr.com',
     'https://www.simplifiedsemr.com'
 ]
