@@ -217,6 +217,7 @@ CSRF_TRUSTED_ORIGINS = [
 # See https://docs.djangoproject.com/en/1.4/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
     '127.0.0.1',
+    '*.simplifiedsemr.com',
     'https://*.simplifiedsemr.com',
     'http://*.simplifiedsemr.com',
     'simplifiedsemr.com',
